@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dataset privacy and takedown procedure — INDUS-AD</title><link rel="stylesheet" href="../styles.css"></head><body><main class="doc-page"><a href="../index.html#resources">Back to INDUS-AD resources</a><p class="doc-source">Publisher reference, retrieved 21 November 2026. Dataset source revision: <code>4b414d527a2971ee9baebe2745447f95ac1fc535</code>. <a href="DATASET_PRIVACY_AND_TAKEDOWN.md">Download Markdown</a>.</p><h1 id="dataset-privacy-and-takedown-procedure">Dataset privacy and takedown procedure</h1>
+<p>This document applies to the standalone <code>gagandeepreehal/indus-ad</code> dataset release.</p>
+<h2 id="public-notice">Public notice</h2>
+<p>The dataset contains recordings made on public roads. At immutable video-content revision <code>4ef41cd594234980f416136a543e3374be01735a</code>, all 9,927 INDUS-AD MP4s are recorded as face/plate blurred in the release manifests. Automated blur can miss or over-blur content, and recordings may still contain people, faces, registration plates, homes, businesses, signs, and other identifying details. INDUS-AD publishes global ENU and latitude/longitude at approximately 1 m horizontal resolution while retaining precise local ENU, height, timing, and sensor-quality fields. This reduces exposure but does not make trajectories anonymous or remove linkage risk.</p>
+<p>Do not use the datasets to identify or track a person, infer sensitive personal information, expose sensitive locations, or combine the recordings with external data in a way that increases privacy risk. Dataset access does not remove the user's obligation to comply with applicable privacy, data-protection, publicity, recording, and research-ethics requirements.</p>
+<h2 id="how-to-report-a-concern">How to report a concern</h2>
+<p>INDUS-AD is published by Gagandeep Reehal. Submit a private report by email to <a href="mailto:indus-ad@gagandeepreehal.com">indus-ad@gagandeepreehal.com</a> with the subject <code>Dataset privacy or takedown request</code>.</p>
+<p>Include, when available:</p>
+<ul>
+<li>the Hugging Face dataset repository;</li>
+<li>the <code>recording_id</code>, file path, or approximate video position;</li>
+<li>a concise description of the concern;</li>
+<li>whether the request concerns a person, vehicle, property, or sensitive location; and</li>
+<li>a private way to contact the requester for clarification.</li>
+</ul>
+<p>Do not post identifying evidence in a public Hugging Face discussion.</p>
+<h2 id="response-and-withdrawal-process">Response and withdrawal process</h2>
+<ol>
+<li>Acknowledge the report privately.</li>
+<li>Resolve the exact recording and every representation derived from it.</li>
+<li>If the report is credible and continued exposure may increase harm, restrict the affected material while the review is in progress.</li>
+<li>Review the request with the designated privacy/legal owner and document the decision.</li>
+<li>For an approved withdrawal, remove or gate the recording in the source repository, INDUS-AD videos and tables, Viewer metadata, manifests, caches controlled by the publisher, and all future versions.</li>
+<li>Publish a non-identifying changelog entry containing the affected <code>recording_id</code> and withdrawal revision, unless doing so would itself increase privacy risk.</li>
+<li>Verify the result anonymously against immutable repository revisions and notify the requester of the outcome.</li>
+<li>Prevent withdrawn recordings from being reintroduced in later releases.</li>
+</ol>
+<p>The publisher cannot erase copies already downloaded by third parties, but an approved withdrawal notice should instruct downstream users to stop using and redistributing the affected recording.</p>
+<h2 id="publisher-and-manual-withdrawal-operation">Publisher and manual withdrawal operation</h2>
+<p>Gagandeep Reehal handles privacy reports and recording withdrawals manually.
+Send requests privately to <a href="mailto:indus-ad@gagandeepreehal.com">indus-ad@gagandeepreehal.com</a>.
+The publisher reviews the report and carries out any required restriction or removal
+using the response and withdrawal process above.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Publisher record</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Publisher and intake/withdrawal owner</td>
+<td><strong>Gagandeep Reehal</strong></td>
+</tr>
+<tr>
+<td>Access configuration</td>
+<td><strong>Public repository with manual gated access; no raw launch</strong></td>
+</tr>
+<tr>
+<td>Privacy and takedown contact</td>
+<td><strong>indus-ad@gagandeepreehal.com</strong></td>
+</tr>
+<tr>
+<td>Acknowledgement target</td>
+<td><strong>Within 2 business days</strong></td>
+</tr>
+<tr>
+<td>Resolution/review target</td>
+<td><strong>Within 7 business days; urgent credible reports receive temporary restriction during review</strong></td>
+</tr>
+<tr>
+<td>Representative final-clip privacy review</td>
+<td><strong>Completed, as confirmed by the publisher on 24 October 2026</strong></td>
+</tr>
+</tbody>
+</table>
+<p>On 24 October 2026, the publisher confirmed manual email-based withdrawal handling
+and removed the requirement for a pre-launch withdrawal drill or a separate launch
+approval gate. The privacy review completion is publisher-confirmed; no new
+independent inspection or numerical detector-recall result is asserted here.
+The access decision, response targets, public contact route, and responsibility
+for responding to concerns remain in effect.</p>
+</main></body></html>

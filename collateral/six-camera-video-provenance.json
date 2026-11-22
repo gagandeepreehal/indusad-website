@@ -1,0 +1,66 @@
+{
+  "repo": "gagandeepreehal/indus-ad-sample",
+  "revision": "c322b8646962f3ee5ff3cb1cc4e25ab99beaf79a",
+  "recording_id": "15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7",
+  "cameras": [
+    "cam_front_left",
+    "cam_front",
+    "cam_front_right",
+    "cam_rear_left",
+    "cam_rear",
+    "cam_rear_right"
+  ],
+  "table_paths": [
+    "data/tables/camera-frames/camera=cam_front_left/bucket=ec/part-15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.parquet",
+    "data/tables/camera-frames/camera=cam_front/bucket=ec/part-15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.parquet",
+    "data/tables/camera-frames/camera=cam_front_right/bucket=ec/part-15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.parquet",
+    "data/tables/camera-frames/camera=cam_rear_left/bucket=ec/part-15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.parquet",
+    "data/tables/camera-frames/camera=cam_rear/bucket=ec/part-15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.parquet",
+    "data/tables/camera-frames/camera=cam_rear_right/bucket=ec/part-15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.parquet"
+  ],
+  "duration_seconds": 15,
+  "output_fps": 10,
+  "first_rec_frame_id": 18683,
+  "last_rec_frame_id": 18832,
+  "source_rec_start_s": 5.028666887,
+  "source_rec_end_s": 19.928613009,
+  "method": "Match the same 150 rec_frame_id values across all six cameras; decode matching frame positions; present at 10 fps. Frames retain published blur. Mosaic is a visualization, not a calibrated projection.",
+  "sources": [
+    {
+      "camera": "cam_front_left",
+      "path": "data/videos/cam_front_left/ec/15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.mp4",
+      "start_frame_index": 50,
+      "frame_count": 150
+    },
+    {
+      "camera": "cam_front",
+      "path": "data/videos/cam_front/ec/15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.mp4",
+      "start_frame_index": 50,
+      "frame_count": 150
+    },
+    {
+      "camera": "cam_front_right",
+      "path": "data/videos/cam_front_right/ec/15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.mp4",
+      "start_frame_index": 50,
+      "frame_count": 150
+    },
+    {
+      "camera": "cam_rear_left",
+      "path": "data/videos/cam_rear_left/ec/15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.mp4",
+      "start_frame_index": 50,
+      "frame_count": 150
+    },
+    {
+      "camera": "cam_rear",
+      "path": "data/videos/cam_rear/ec/15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.mp4",
+      "start_frame_index": 50,
+      "frame_count": 150
+    },
+    {
+      "camera": "cam_rear_right",
+      "path": "data/videos/cam_rear_right/ec/15-04-30.906-aaa83e5e82fabb1caa4d8a3aff0bb0b7.mp4",
+      "start_frame_index": 50,
+      "frame_count": 150
+    }
+  ]
+}

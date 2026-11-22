@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Published camera intrinsics and distortion coefficients — INDUS-AD</title><link rel="stylesheet" href="../styles.css"></head><body><main class="doc-page"><a href="../index.html#resources">Back to INDUS-AD resources</a><p class="doc-source">Publisher reference, retrieved 21 November 2026. Dataset source revision: <code>4b414d527a2971ee9baebe2745447f95ac1fc535</code>. <a href="CAMERA_INTRINSICS.md">Download Markdown</a>.</p><h1 id="published-camera-intrinsics-and-distortion-coefficients">Published camera intrinsics and distortion coefficients</h1>
+<p>This readable reference transcribes the camera intrinsics stored in the INDUS-AD calibration tables. These are source-reported values; independent per-camera calibration accuracy has not been established.</p>
+<h2 id="intrinsic-parameters">Intrinsic parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: right;">Published value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>width</code></td>
+<td style="text-align: right;"><code>1920.0</code></td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td style="text-align: right;"><code>1080.0</code></td>
+</tr>
+<tr>
+<td><code>focal_length_x</code></td>
+<td style="text-align: right;"><code>1018.4666137695312</code></td>
+</tr>
+<tr>
+<td><code>focal_length_y</code></td>
+<td style="text-align: right;"><code>1018.491943359375</code></td>
+</tr>
+<tr>
+<td><code>optical_center_x</code></td>
+<td style="text-align: right;"><code>961.8368530273438</code></td>
+</tr>
+<tr>
+<td><code>optical_center_y</code></td>
+<td style="text-align: right;"><code>539.9344482421875</code></td>
+</tr>
+<tr>
+<td><code>skew</code></td>
+<td style="text-align: right;"><code>0.0</code></td>
+</tr>
+<tr>
+<td><code>rmse</code></td>
+<td style="text-align: right;"><code>0.006899999920278788</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="distortion-coefficients">Distortion coefficients</h2>
+<p>The coefficient order below is exactly the published array order. The table does not establish a distortion-model convention or assign coefficient names.</p>
+<pre><code class="language-json">[
+  25.8650601396,
+  12.657001442,
+  -7.02086e-05,
+  1.94319e-05,
+  0.5069227052,
+  26.2723717293,
+  22.7056487856,
+  3.1677229543
+]
+</code></pre>
+<h2 id="camera-coverage">Camera coverage</h2>
+<p>The inspected source table contains the same intrinsic values for these cameras:</p>
+<ul>
+<li><code>cam_front</code></li>
+<li><code>cam_front_left</code></li>
+<li><code>cam_front_right</code></li>
+<li><code>cam_front_tilted</code></li>
+<li><code>cam_rear</code></li>
+<li><code>cam_rear_left</code></li>
+<li><code>cam_rear_right</code></li>
+</ul>
+<p>An earlier random sample of 10 additional recording tables at revision <code>24c2a4c8da16d3bd12814830b6a0ea90059807c4</code> contained the same values across 69,542 calibration rows. This is sampled evidence, not a full-corpus calibration audit.</p>
+<h2 id="resolution-and-geometric-use">Resolution and geometric use</h2>
+<p>The calibration declares 1920 x 1080. The inspected recording has 1280 x 720 camera media. For the current devkit workflow, the publisher confirmed pure 1920×1080-to-1280×720 resizing without cropping on 23 October 2026. The adapter requires the explicit <code>intrinsic_image_transform: "resize"</code> policy and scales focal lengths, principal point and skew while retaining dimensionless distortion coefficients. See <a href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/016ac6a9a38da70e1dc4d2251517f3af963f4551/docs/published-sensor-acceptance.md">published sensor acceptance</a>. This is producer-supplied pipeline information, not independent per-camera accuracy validation; the coefficient order/model limitation above remains. The reported RMSE has no verified unit or evaluation procedure in this reference.</p>
+<p>These values alone do not establish camera-to-ego, IMU-to-camera, or camera-to-LiDAR extrinsics.</p>
+<h2 id="historical-inspection-and-current-source">Historical inspection and current source</h2>
+<ul>
+<li>Dataset revision: <code>051887c71328ef4a5263e07aa1d03c36f5b5b712</code></li>
+<li>Recording: <code>13-54-05.989-ef644bcba8d2e75a927420ae450726ee</code></li>
+<li><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad/blob/4b414d527a2971ee9baebe2745447f95ac1fc535/data/tables/calibrations/bucket=55/part-13-54-05.989-ef644bcba8d2e75a927420ae450726ee.parquet">Calibration Parquet (Hugging Face access required)</a></li>
+<li>Source Parquet SHA-256: <code>7b7084d57d5157eb194ffd7408eb2d529ced438a0b429256ac5cc4f165643841</code></li>
+<li>Inspected calibration rows: 1,428</li>
+<li>Verified on 22 October 2026 (Asia/Kolkata).</li>
+</ul>
+<p>The revision and hash above describe the historical inspection. The relative Parquet link opens the current table, including the later calibration overlay; its bytes differ from that earlier inspected source. Historical revision identifiers are retained as provenance and are not current download pins.</p></main></body></html>

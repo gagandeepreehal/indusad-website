@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sensor and timing conventions — INDUS-AD</title><link rel="stylesheet" href="../styles.css"></head><body><main class="doc-page"><a href="../index.html#resources">Back to INDUS-AD resources</a><p class="doc-source">Publisher reference, retrieved 21 November 2026. Dataset source revision: <code>4b414d527a2971ee9baebe2745447f95ac1fc535</code>. <a href="SENSOR_AND_TIMING_CONVENTIONS.md">Download Markdown</a>.</p><h1 id="sensor-and-timing-conventions">Sensor and timing conventions</h1>
+<p>This reference describes sensor and timing conventions for the decoded INDUS-AD release.</p>
+<h2 id="cameras">Cameras</h2>
+<p>The observed camera identities are <code>cam_front</code>, <code>cam_front_left</code>, <code>cam_front_right</code>, <code>cam_front_tilted</code>, <code>cam_rear</code>, <code>cam_rear_left</code>, and <code>cam_rear_right</code>. In INDUS-AD, the six non-tilted identities are present for all 1,469 recordings; <code>cam_front_tilted</code> is present for 1,113 recordings and is null for 356.</p>
+<p>Raw camera payloads are H.265/HEVC Annex-B access units in MCAP messages. INDUS-AD provides one MP4 per available recording-camera pair and publishes codec, width, height, timescale, frame counts, keyframes, timestamp bounds, missing-frame estimates, discontinuities, and maximum gaps in its tables. Byte sizes and SHA-256 identities remain in the integrity manifest outside the Dataset Viewer.</p>
+<p>Camera identity must come from the decoded schema field. Do not infer it from protobuf array position, filename ordering, or frame number.</p>
+<h2 id="timing-and-synchronization">Timing and synchronization</h2>
+<p>Camera cadence is variable data, not an assumed constant. Across the preserved 9,927 recording-camera streams, per-camera median cadence is approximately 10.0007–10.0008 FPS.</p>
+<p>Synchronization is measured within decoded producer batches as the range between the earliest and latest distinct camera timestamps. Across 3,028,347 groups, median spread is 0.020 ms and p95 spread is 0.025 ms. A discrete tail of 40,689 groups (1.3436%) exceeds 20 ms, entirely in the seven-camera topology.</p>
+<p>Hardware triggering and synchronization are confirmed by the producer. These values separately describe timestamp alignment; they do not independently measure trigger jitter, exposure simultaneity, calibrated clock domains, or end-to-end latency. Use the per-recording fields in <code>recording_quality_summary.parquet</code> to set a task-specific tolerance.</p>
+<h2 id="gnss-publication-and-joins">GNSS publication and joins</h2>
+<p>INDUS-AD keeps nanosecond time-of-day values and per-recording nanosecond offsets. Precise local ENU and height are retained; global ENU and global latitude/longitude are published at approximately 1 m horizontal resolution. Missing source coordinate objects remain null and invalid. An invalid row may still contain sensor-reported coordinates; validity must be checked independently of coordinate presence. Local ENU is per recording: do not concatenate local coordinate frames into one global trajectory without verified origins/transforms. Use <code>recording_id</code> plus published timing fields to join GNSS, camera, and pseudo-label tables.</p>
+<h2 id="calibration-and-coordinate-systems">Calibration and coordinate systems</h2>
+<p>Use the per-recording calibration tables and their additive <code>calibrated_extrinsics</code> struct for producer-confirmed seven-camera mounting geometry. The legacy <code>fields_json.extrinsic</code> vectors are preserved source evidence with no verified convention. See <a href="CAMERA_EXTRINSICS.html">camera extrinsics</a> for rig versus front-reference frames, units, signed angles and transform direction. Do not treat the launch sensor illustration as a geometric reference: it is conceptual and not to scale.</p>
+<h2 id="published-camera-and-gnss-hardware">Published camera and GNSS hardware</h2>
+<p>Gagandeep Reehal, the dataset author and publisher, confirmed hardware triggering and synchronization on 16 October 2026. This is producer-supplied system information. The timestamp statistics above describe observed alignment; they do not independently measure exposure simultaneity, trigger jitter, clock calibration, or end-to-end latency.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Producer-supplied specification / published evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera family</td>
+<td>Sensing SG2-AR0233C-5200-G2A, onsemi AR0233 color sensor</td>
+</tr>
+<tr>
+<td>Manufacturer capability</td>
+<td>1920×1080, up to 30 FPS, GMSL2, rolling shutter; released cadence is approximately 10 FPS</td>
+</tr>
+<tr>
+<td>Nominal field of view</td>
+<td>Approximately 118° horizontal, as supplied in the dataset specification; exact per-camera lens suffix is not asserted</td>
+</tr>
+<tr>
+<td>Intrinsics/extrinsics</td>
+<td>Intrinsics and legacy source vectors remain inside <code>fields_json</code>; the added <code>calibrated_extrinsics</code> struct carries producer-confirmed mounting geometry. See <a href="CAMERA_EXTRINSICS.html">camera extrinsics</a>.</td>
+</tr>
+<tr>
+<td>GNSS/INS receiver</td>
+<td>Trimble BX992 dual-antenna GNSS receiver with integrated inertial navigation, identified in the producer-supplied specification</td>
+</tr>
+<tr>
+<td>Trigger/synchronization</td>
+<td>Hardware-triggered and hardware-synchronized, confirmed by the producer</td>
+</tr>
+<tr>
+<td>Coordinate geometry</td>
+<td>Use the published calibration transforms; the conceptual camera diagram is not a calibrated mounting plan</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://wiki.sensing-world.com/docs/1_1_Serdes_Camera/GMSL_Camera/Camera_Selection">manufacturer selection guide</a> lists the SG2-AR0233C family. Manufacturer capability is not a guarantee of every recording's dimensions, rate, lens variant, or achieved GNSS accuracy. Producer-supplied camera mounting coordinates are documented in <a href="CAMERA_EXTRINSICS.html">camera extrinsics</a>. Exact lens suffixes, trigger wiring/clock-source details and independently surveyed accuracy are not supplied here. This INDUS-AD camera/GNSS release does not include a LiDAR payload.</p>
+<p>To read calibration, use <code>pyarrow.parquet.ParquetFile(path).read()</code> and parse <code>fields_json</code> as JSON. The inspected calibration schema has <code>recording_id</code>, <code>kind</code>, <code>key</code>, <code>time_of_day_ns</code>, <code>time_offset_ns</code>, and <code>fields_json</code>; calibration rows contain both <code>intrinsic</code> and <code>extrinsic</code>. For corrected mounting geometry, read <code>calibrated_extrinsics</code> instead of the legacy vectors in <code>fields_json.extrinsic</code>. Its explicit frame names, millimetres and matrix direction are defined in <a href="CAMERA_EXTRINSICS.html">camera extrinsics</a>. The original vectors do not establish these conventions. Camera identity comes from the <code>key</code> prefix, never array position.</p>
+<h2 id="gnss-timestamps-and-stream-interpretation">GNSS timestamps and stream interpretation</h2>
+<p>The owner-authenticated GNSS Viewer schema observed on 2026-10-16 exposes these timestamp pairs:</p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Time of day</th>
+<th>Offset</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logging</td>
+<td><code>log_time_of_day_ns</code></td>
+<td><code>log_time_offset_ns</code></td>
+</tr>
+<tr>
+<td>Publishing</td>
+<td><code>publish_time_of_day_ns</code></td>
+<td><code>publish_time_offset_ns</code></td>
+</tr>
+<tr>
+<td>Sensor message</td>
+<td><code>time_of_day_ns</code></td>
+<td><code>time_offset_ns</code></td>
+</tr>
+<tr>
+<td>UTC field</td>
+<td><code>utc_time_of_day_ns</code></td>
+<td><code>utc_time_offset_ns</code></td>
+</tr>
+<tr>
+<td>Receiver field</td>
+<td><code>rec_time_of_day_ns</code></td>
+<td><code>rec_time_offset_ns</code></td>
+</tr>
+</tbody>
+</table>
+<p>These are distinct field namespaces, not evidence of separate physical receivers, a calibrated common clock, or a verified receiver rate. The Viewer also exposes <code>frame_id</code>, <code>rec_frame_id</code>, and <code>local_enu_origin_offset_ns</code>; it does not expose a source topic or stream-ID column. Do not infer source streams from row order or frame identifiers. The normalized GNSS table retains the source <code>channel</code> values <code>gnss</code> and <code>rec_gnss</code>; their clock relationships must be checked separately. Validate timestamp monotonicity, duplicates, validity, and gaps within each recording before interpolation. Time-of-day values can wrap; do not treat them as globally unique timestamps.</p>
+<p>The Viewer flattens local coordinates into <code>local_east_m</code>, <code>local_north_m</code>, and <code>local_up_m</code>; source-table schemas can use nested coordinate objects. Inspect the table schema before choosing column paths. Preserve per-recording frames and use exact published timing keys. Do not assume that logging, publishing, sensor, UTC, and receiver offsets are interchangeable.</p>
+<h2 id="annotation-coverage">Annotation coverage</h2>
+<p>Camera annotations cover sampled frames. File counts and Viewer row counts do not establish per-camera or per-recording completeness. Consult the dense index for archive members and exact keys. Missing annotations must remain missing. See <a href="DATASET_SCHEMA.html">dataset schema and coverage</a>.</p>
+<h2 id="the-two-gnss-paths">The two GNSS paths</h2>
+<p>The 18,373,026-row GNSS Viewer is a combined representation of two paths that share <code>autonome.Pose</code>: <code>gnss</code> (live pose output, 15,317,896 messages) and <code>rec_gnss</code> (recorded pose path, 3,055,130 messages). The counts are documented in the source archive and sum exactly to the combined published count. A bounded inspection of the normalized table confirms that both channel names are preserved. A new full-corpus channel recount was not performed for this documentation update.</p>
+<p>Do not treat the sum as unique physical position samples or use it to infer one receiver rate. The existing flattened <code>gnss</code> Viewer lacks a channel column and is retained for browsing compatibility. For trajectories, rates, deduplication or joins, use <code>data/tables/gnss/</code> and explicitly filter its <code>channel</code> before parsing <code>fields_json</code>. Do not infer the channel from null fields, row order, frame IDs or timestamp namespaces.</p>
+<pre><code class="language-python">import pyarrow as pa
+import pyarrow.compute as pc
+import pyarrow.parquet as pq
+
+messages = pq.ParquetFile(&quot;selected-gnss.parquet&quot;).read()
+live = messages.filter(pc.equal(messages[&quot;channel&quot;], pa.scalar(&quot;gnss&quot;)))
+recorded = messages.filter(pc.equal(messages[&quot;channel&quot;], pa.scalar(&quot;rec_gnss&quot;)))
+</code></pre>
+<p>Validate monotonicity, duplicate timestamps and gaps within the chosen recording and channel. Do not merge the two paths into a denser trajectory without an explicit source-aware policy.</p>
+<h2 id="current-devkit-image-resize-policy">Current devkit image-resize policy</h2>
+<p>The publisher confirmed pure 1920×1080-to-1280×720 resizing without cropping on 23 October 2026 for the integrated devkit workflow. Use explicit <code>intrinsic_image_transform: "resize"</code>; the adapter scales pixel-valued intrinsics and retains dimensionless distortion coefficients. See <a href="CAMERA_INTRINSICS.html">intrinsics</a> and <a href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/main/docs/published-sensor-acceptance.md">published sensor acceptance</a>. This producer confirmation does not establish independent calibration accuracy.</p>
+<h2 id="devkit-camera-timing-and-partial-recordings">Devkit camera timing and partial recordings</h2>
+<p>For every recording, the devkit defaults to camera payload <code>rec_timestamp</code> (<code>rec_time_offset_ns</code>) for camera selection, synchronization and exported times, and main <code>gnss</code> payload <code>timestamp</code> (<code>time_offset_ns</code>) for GNSS. Untimed quality-flagged GNSS messages define excluded gaps; leading portions can be trimmed from an export without rejecting the whole recording. Raw table fields and annotation source identities are unchanged. See <a href="DEVKIT_TIMING_POLICY.html">exact fields and trimming policy</a>.</p></main></body></html>

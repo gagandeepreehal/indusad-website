@@ -1,0 +1,104 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Owner-confirmed sensor mounting geometry — INDUS-AD</title><link rel="stylesheet" href="../styles.css"></head><body><main class="doc-page"><a href="../index.html#resources">Back to INDUS-AD resources</a><p class="doc-source">Publisher reference, retrieved 21 November 2026. Dataset source revision: <code>4b414d527a2971ee9baebe2745447f95ac1fc535</code>. <a href="SENSOR_MOUNTING_GEOMETRY.md">Download Markdown</a>.</p><h1 id="owner-confirmed-sensor-mounting-geometry">Owner-confirmed sensor mounting geometry</h1>
+<p>Owner-confirmed by Gagandeep Reehal on 22 October 2026. The <a href="sensor_mounting_geometry.json">machine-readable geometry</a> accompanies this reference. These are physical mounting coordinates and source rotation parameters, separate from camera optical-frame projection matrices and recorded calibration payloads.</p>
+<h2 id="mounting-coordinate-convention">Mounting coordinate convention</h2>
+<p>Positions are in <strong>metres</strong>, relative to the normal front camera (<code>cam_front</code>). <strong>Y is forward and Z is up</strong>. Preserve the source X signs: named left cameras have positive X; named right cameras have negative X. The normal-front reference rotation is 0°. The rig IMU shares this origin; its rotation is unspecified.</p>
+<table>
+<thead>
+<tr>
+<th>Sensor</th>
+<th>Position [X, Y, Z] (m)</th>
+<th>Source rotation parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cam_front</code></td>
+<td>[0.000, 0.000, 0.000]</td>
+<td>Reference rotation 0°</td>
+</tr>
+<tr>
+<td><code>cam_front_tilted</code></td>
+<td>[0.000, 0.000, -0.046]</td>
+<td>Rx(+5°)</td>
+</tr>
+<tr>
+<td><code>cam_front_right</code></td>
+<td>[-0.651, -0.050, 0.000]</td>
+<td>Rz(+62.5°)</td>
+</tr>
+<tr>
+<td><code>cam_front_left</code></td>
+<td>[0.651, -0.050, 0.000]</td>
+<td>Rz(-62.5°)</td>
+</tr>
+<tr>
+<td><code>cam_rear</code></td>
+<td>[0.000, -2.133, 0.000]</td>
+<td>Rz(+180°)</td>
+</tr>
+<tr>
+<td><code>cam_rear_left</code></td>
+<td>[0.651, -0.090, 0.000]</td>
+<td>Rz(-117.5°)</td>
+</tr>
+<tr>
+<td><code>cam_rear_right</code></td>
+<td>[-0.651, -0.090, 0.000]</td>
+<td>Rz(+118.5°); later owner alternative Rz(+117.5°), both retained</td>
+</tr>
+<tr>
+<td>Rig IMU</td>
+<td>[0, 0, 0]</td>
+<td>Unspecified</td>
+</tr>
+<tr>
+<td>OS1-128 LiDAR</td>
+<td>[0, -0.545, +0.334]</td>
+<td>Pitch magnitude approximately 4°; sign unspecified</td>
+</tr>
+</tbody>
+</table>
+<p>The rear-right <strong>Rz(+118.5°)</strong> comes from the camera source below. <strong>Rz(+117.5°)</strong> is a later owner-supplied alternative. Both are preserved with provenance; no single value is selected. Unspecified rotation components are not filled in.</p>
+<h2 id="ground-heights-and-lidar-offsets">Ground heights and LiDAR offsets</h2>
+<ul>
+<li>Normal front camera: <strong>1.546 m</strong> above ground.</li>
+<li>Tilted front camera: <strong>1.500 m</strong> above ground (<code>1.546 - 0.046</code>).</li>
+<li>LiDAR: <strong>1.880 m</strong> above ground, derived from <strong>0.380 m above the tilted camera</strong> (<code>1.500 + 0.380</code>). Its rebased Z is <code>1.880 - 1.546 = 0.334 m</code>.</li>
+<li>LiDAR is <strong>0.545 m behind the tilted camera</strong> (negative Y); its X offset is explicitly <strong>0 m</strong>. Relative to the tilted camera it is <code>[0, -0.545, +0.380] m</code>.</li>
+</ul>
+<h2 id="camera-source-provenance-and-rebasing">Camera-source provenance and rebasing</h2>
+
+<p>Source positions were converted from millimetres to metres, then rebased by subtracting <code>[0, 0, 1.546] m</code>:</p>
+<pre><code class="language-text">position_m = source_position_mm * 0.001 - [0, 0, 1.546]
+</code></pre>
+<p>The normal-front reference, co-origin rig IMU, and explicit LiDAR X=0 are owner-provided. LiDAR mounting offsets, heights, approximate pitch magnitude, and the later rear-right alternative are also owner-supplied. Rotations are retained as source Rx/Rz parameters, in degrees. No optical-frame matrices are generated: axis mapping and transform direction must first be established. These mounting values do not overwrite or reinterpret the <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad/tree/4b414d527a2971ee9baebe2745447f95ac1fc535/data/tables/calibrations/">recorded calibration tables (Hugging Face access required)</a>.</p>
+<h2 id="embedded-lidar-internal-transforms">Embedded LiDAR internal transforms</h2>
+<p>These are internal transforms, <strong>not vehicle mounting transforms</strong>. All translations in this section are <strong>MILLIMETRES</strong>, unlike the metre-valued mounting coordinates above. Directions are retained as supplied.</p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>R</th>
+<th>Translation (mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beam → LiDAR</td>
+<td>identity</td>
+<td>[16.721, 0, 0]</td>
+</tr>
+<tr>
+<td>LiDAR → sensor</td>
+<td>diag(-1, -1, 1)</td>
+<td>[0, 0, 38.195]</td>
+</tr>
+<tr>
+<td>Internal IMU → sensor</td>
+<td>identity</td>
+<td>[-2.441, -9.725, 7.533]</td>
+</tr>
+</tbody>
+</table>
+<p>The LiDAR internal IMU is distinct from the rig IMU at the front-camera origin. Do not substitute internal transforms for mounting transforms. Documenting the OS1-128 mounting geometry does not imply that LiDAR payloads are included in this camera/GNSS release.</p>
+<p>The <a href="SENSOR_AND_TIMING_CONVENTIONS.html">sensor and timing conventions</a> describe the recorded tables and timing. This owner-confirmed mounting reference supplies the heights and mounting offsets separately from those existing conventions.</p></main></body></html>

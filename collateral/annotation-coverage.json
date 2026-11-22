@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "repository": "gagandeepreehal/indus-ad",
+  "source_revision": "ed3f724e75527b5c888c1ad52787d5e82949328e",
+  "scope": "verified camera-annotation Viewer and dense indexes; not a full source-table/frame or payload audit",
+  "recordings": 1469,
+  "video_streams": 9927,
+  "annotation_rows": 34306,
+  "distinct_frame_ids": 34306,
+  "duplicate_counts": {
+    "frame_id": 0,
+    "camera_offset": 0,
+    "camera_frame_index": 0
+  },
+  "orphan_annotation_streams": 0,
+  "streams_with_annotations": 3169,
+  "streams_without_annotations": 6758,
+  "dense_reference_counts": {
+    "depth": 34306,
+    "semantic": 34306
+  },
+  "per_camera": {
+    "cam_front": {
+      "video_streams": 1469,
+      "annotated_streams": 1469,
+      "annotation_rows": 31434
+    },
+    "cam_front_left": {
+      "video_streams": 1469,
+      "annotated_streams": 295,
+      "annotation_rows": 497
+    },
+    "cam_front_right": {
+      "video_streams": 1469,
+      "annotated_streams": 295,
+      "annotation_rows": 497
+    },
+    "cam_front_tilted": {
+      "video_streams": 1113,
+      "annotated_streams": 225,
+      "annotation_rows": 387
+    },
+    "cam_rear": {
+      "video_streams": 1469,
+      "annotated_streams": 295,
+      "annotation_rows": 497
+    },
+    "cam_rear_left": {
+      "video_streams": 1469,
+      "annotated_streams": 295,
+      "annotation_rows": 497
+    },
+    "cam_rear_right": {
+      "video_streams": 1469,
+      "annotated_streams": 295,
+      "annotation_rows": 497
+    }
+  },
+  "inputs": {
+    "data/annotations/camera/dense-index/part-shard-0153c796105695e336f6f136046da2f002c09423d4f743e83ace14413215cb33.parquet": {
+      "bytes": 46493,
+      "sha256": "84cea03b03320fd605947859432e62231445158f53db89dc0c765f971fffc5bc"
+    },
+    "data/annotations/camera/dense-index/part-shard-03683be4b332f6195e9b536075b4483e8ae11afb85b69d1366d6a9959a017488.parquet": {
+      "bytes": 41086,
+      "sha256": "285e6286431e460cc413dfff77e6addf5bbda6b1ae3cbfbff08e80cfc96145f5"
+    },
+    "data/annotations/camera/dense-index/part-shard-048d5b93fae4c7634ac2bc504996b17d7bca433330ce29d8c67b79d4ad9dc6c5.parquet": {
+      "bytes": 42265,
+      "sha256": "3e822276d2ca9d3686b77eb6262f0cfe9828e8a23dcae1b591bbab2f41ec7165"
+    },
+    "data/annotations/camera/dense-index/part-shard-0571e82721abb2d29c8d0083e6e707ec8314be69299585d3ecb6bf3ab558f8bc.parquet": {
+      "bytes": 41844,
+      "sha256": "c8cceb5536c75e2b9c7e00137359d8caefcb351bf5e941dbc375814c719a4715"
+    },
+    "data/annotations/camera/dense-index/part-shard-05df2514d5081f2e852883cd2e569a60890289a9e96ea3ed2e751665c9fe21d7.parquet": {
+      "bytes": 41551,
+      "sha256": "5dbedd951e34cd8084f2b28ce89bccea3b53f24a19acd2eb24355ff4fda0e0c5"
+    },
+    "data/annotations/camera/dense-index/part-shard-05f763cc4b23e779030721113b7f3595d98a84825bee8ffaa6067b9686da2333.parquet": {
+      "bytes": 41451,
+      "sha256": "50f52060120955ab607e32031b84076ccc235ab9141760eef080ed30f296487c"
+    },
+    "data/annotations/camera/dense-index/part-shard-07d70e4157da8dc2d3285dfe78a3e29225dfa111459d72b2bfb09220a4ae3264.parquet": {
+      "bytes": 42777,
+      "sha256": "0955c56d703a1004a2279c4b1063979934a34a883b8b7db8287d2e7d4f1084d0"
+    },
+    "data/annotations/camera/dense-index/part-shard-09eead4133e583737aaa038c899d013844e85a3f4e93f322d5e2cf8dca81f867.parquet": {
+      "bytes": 42010,
+      "sha256": "3fbcdbba72dc390c2a564e9586322212e6c2044973e1441b1d3473cbae5d295f"
+    },
+    "data/annotations/camera/dense-index/part-shard-0cc2d7339e3811fb19bb996a4b7a2be905503e4a3fadd3a9505b36ac7afd5334.parquet": {
+      "bytes": 41499,
+      "sha256": "88219cbb7e47b3c7f9b1926b20e40a4895ae59577f8692b6c1f3e5c8cdd98c38"
+    },
+    "data/annotations/camera/dense-index/part-shard-0d1167fbd4726f011d0b203d1ff5372d45a603169e235c1763a9125ae1be44a9.parquet": {
+      "bytes": 41802,
+      "sha256": "14cb1339704d54078a80eea76a0183f40d09fe128b78d2d848d61d7c9cf3d9f3"
+    },
+    "data/annotations/camera/dense-index/part-shard-12208043f3c2e4384b2465226cc2111eb401b01ee265b205155acb9a80591096.parquet": {
+      "bytes": 41504,
+      "sha256": "a9f3b1966b7e75ac266f4dc94204f84decd5cf13e879917f2308748e02fa28bb"
+    },
+    "data/annotations/camera/dense-index/part-shard-128f5b85ea28d1ea8c8dbdb7fc60eb45a1950c40396b70ccc8a67ecbd7848ec6.parquet": {
+      "bytes": 42610,
+      "sha256": "0aec2fa6127ada0e4e9a9a5e818cf9cd7be64706bae40b769f9ab704966cf652"
+    },
+    "data/annotations/camera/dense-index/part-shard-16e9bc731fcd76b1c04236e80dce9a5b78ff04d455c6ed20f3536351f30dd048.parquet": {
+      "bytes": 41845,
+      "sha256": "362bbb66f39079082d22ac3910ec7cf8f5f0647ccd206688646400349237c30f"
+    },
+    "data/annotations/camera/dense-index/part-shard-1d5677a2c30051df282e80e527df8818c013d1d35cc391ec88d5e2d29d0fb7eb.parquet": {
+      "bytes": 41531,
+      "sha256": "b0b466841f41dbfff611d63eef22eb6d5702d8d4b428e7e03e68790bcacadbcc"
+    },
+    "data/annotations/camera/dense-index/part-shard-2a1971c61950bdfd09a4a9a67f82c6082e073a95dd7d01bc71fa79f6b17f2fcf.parquet": {
+      "bytes": 46722,
+      "sha256": "f841cab5e463db460da26ad97341138cb90bc2340b75c39d3401fe4745b3084a"
+    },
+    "data/annotations/camera/dense-index/part-shard-35982bff7ef77f4802aaafb640d3c9ebe71440b7d690f1e8fcecdc7f810fc090.parquet": {
+      "bytes": 40744,
+      "sha256": "5a25b800a05bc03d078e9f77ab2099fb82d780d33be087a630be60829a2830b0"
+    },
+    "data/annotations/camera/dense-index/part-shard-3ca6bef2bfbcf1d9d497978cebde2c7985da9f64f8fe0e57ba52ed23abe893f1.parquet": {
+      "bytes": 40430,
+      "sha256": "bb4a09913c1ec0d9e5408ca072abbe259b65863f7e56baca9bf74b02cb03a34a"
+    },
+    "data/annotations/camera/dense-index/part-shard-3d29adb824d75c6cf3d1fe3e8b800d6a6bd93fea577293dce14f46d538b62556.parquet": {
+      "bytes": 41409,
+      "sha256": "8660da46a2353dc65d9cb5d95f69b2a4535f0500be46180697f8b5d96a87d80b"
+    },
+    "data/annotations/camera/dense-index/part-shard-40d372aaf91b1a08948be13a7526e744420453e4d725a484411965d6ec141a6e.parquet": {
+      "bytes": 42143,
+      "sha256": "0400c3080a1ff93f83e1153c0a13eec983bf9bb110b54b1c24021b4b36e2c733"
+    },
+    "data/annotations/camera/dense-index/part-shard-4822c77f67d8c94d645607bd45f35aa7720b0c587818458452f19606118baaa5.parquet": {
+      "bytes": 41146,
+      "sha256": "831c99d98c53acf53979278b9dc338aa364f9e14f7dc8a59c29cc0c24588732c"
+    },
+    "data/annotations/camera/dense-index/part-shard-4b6b72db0ca09a4b3d3a7da43b2bda81cb58ea4902898336d5856d64b2db5848.parquet": {
+      "bytes": 41254,
+      "sha256": "477a7050636ad5a54b50824aaf0cf02010cf85ff80a8b3b6c00b829436b8d461"
+    },
+    "data/annotations/camera/dense-index/part-shard-4f58c6ccb5131e1751d7592896fc1d6ffd486fa037041d742ce35164e7e82152.parquet": {
+      "bytes": 41321,
+      "sha256": "883d9756c682e8c036ae43bdbbaa17f1085af19502d25cf708655d3447f41ff5"
+    },
+    "data/annotations/camera/dense-index/part-shard-5197280fce3c03392a1f0dd5901a4f976c251b766029212f92748aa90f1fb234.parquet": {
+      "bytes": 41934,
+      "sha256": "4bd2052eeec124bd321c1d581b531906aa81dcf1e1578cb31bc3741fef01bac3"
+    },
+    "data/annotations/camera/dense-index/part-shard-588a685f9cbf1bf6d969919af490559d5a6b0f64049d150898a55ee7ad520a39.parquet": {
+      "bytes": 41923,
+      "sha256": "3b0c7016a3fa5e0ac480c82274fe280d92c87373497051effda8cf7f9e57fa22"
+    },
+    "data/annotations/camera/dense-index/part-shard-59fcb8d0243960bc6f1eda633cb073655a71d5387530570b099ea3d46c096104.parquet": {
+      "bytes": 41597,
+      "sha256": "0cc707a3032ede31ef368a6e40e46c5ad4f2c4b0566b2e8aee42b8ac8cd2bb23"
+    },
+    "data/annotations/camera/dense-index/part-shard-5c8419df8a1a05ab5f7c7e194732c4e8b7964c910b041eb4242059110dcf370e.parquet": {
+      "bytes": 40684,
+      "sha256": "3b2309872051557c1bfff7fcc292e2e29cb9a0fed228d80643c55ea6a45eed7d"
+    },
+    "data/annotations/camera/dense-index/part-shard-5d507608e94e90c059972c5e16c54543204903282a3727ca325a5c2982bdd154.parquet": {
+      "bytes": 41667,
+      "sha256": "fd4e864038c3691423ea7dbd24f9c0bf8926133504394eba04a129d0ecdfbe7a"
+    },
+    "data/annotations/camera/dense-index/part-shard-6025e201f3af24cee9ea7f35443a103f1d9ea5c2e5ac1874f5e94622a2fd67d7.parquet": {
+      "bytes": 42752,
+      "sha256": "1f539fc6abc21103dfcf96c1ecacfb1db0f65d430a576e3a7fbec3140548f759"
+    },
+    "data/annotations/camera/dense-index/part-shard-6375c67b0a1a3bbb9f8b54c4ba9d7ed8b79257d38b0c0c5009095be6a54fe1df.parquet": {
+      "bytes": 42363,
+      "sha256": "239b0aaf277ee65676fe93b8ddc63cb3952b53f7fc0ca01f4b2191d099451871"
+    },
+    "data/annotations/camera/dense-index/part-shard-65dedee857f1da91f69acfebb8d721c0fceca121af802fd76f028376b1ebc382.parquet": {
+      "bytes": 40814,
+      "sha256": "842e76404c6bc4ddd0e239564fadf69dd36999a0d1230e2abe27d8514689ec07"
+    },
+    "data/annotations/camera/dense-index/part-shard-6a28e3000f96d0a07aa33af15f5dc1dcfa014f309445077e5dbcc52990df7c58.parquet": {
+      "bytes": 41674,
+      "sha256": "ff03623cab45287bf77851206ab0003432b5b63295b39f1e849d522e5f58171a"
+    },
+    "data/annotations/camera/dense-index/part-shard-6cc455be9f6d1e93bcedda214b46ec38b91f6f75cd7d28f2de844600d496c621.parquet": {
+      "bytes": 41109,
+      "sha256": "76192eeea80b0fbaf828d45da5135b5586264ff2475a4c985677269e17d4ab69"
+    },
+    "data/annotations/camera/dense-index/part-shard-741ef8c9376bcb55c1eda06daa2763c8c6b2fd26200446b9a74e16d8504e7eba.parquet": {
+      "bytes": 41280,
+      "sha256": "37c131b2824cd772aad5ff0f5372731f4ff77c0adb933dd697cca924ced3cdb8"
+    },
+    "data/annotations/camera/dense-index/part-shard-742172a6e88086cefe6a8bcc1fb9fcf34788453091c6c923dda5113b44c218fc.parquet": {
+      "bytes": 40845,
+      "sha256": "d7d6fae521bf8169d033076c30260bec3c29488c52ab4bd3a2ef59b33db4c2d2"
+    },
+    "data/annotations/camera/dense-index/part-shard-7c2b629d0013711b51cc0bf6e7575364aca88410856b925fe3aed317afd6c3f4.parquet": {
+      "bytes": 41453,
+      "sha256": "bb2ccead1e198f289fb7125209b2ac3ea221d073b80457e5535b0c81e8f7d05d"
+    },
+    "data/annotations/camera/dense-index/part-shard-8132596f6890f38b9f1051e6abcaf3b923488a14a62ebd9e766b5d72958b6243.parquet": {
+      "bytes": 41734,
+      "sha256": "64504cefa49cde6dc108e06ef8d86c47080b4396986d581f96c3633c5c3dc39e"
+    },
+    "data/annotations/camera/dense-index/part-shard-88e9d96da14925e4856e8b5f67a2457c1e4c742dc704238a45ebcb0face3d498.parquet": {
+      "bytes": 41139,
+      "sha256": "c88d892645519455782ccdd99af03cdf547d8b3ecbbe1dff06edb0ea912be324"
+    },
+    "data/annotations/camera/dense-index/part-shard-8f458bb82ac0593c4cc6ef406acf227b78c072bacd2b3c315dc6de148e0e740e.parquet": {
+      "bytes": 40850,
+      "sha256": "d8aceed86dc268fa7dd5c40325d7a6ec1f798635e41ff06c53d18dc768c76732"
+    },
+    "data/annotations/camera/dense-index/part-shard-90fc375ad1047f0fd67fb4c95dd6053222daf54259df813304c55afc82f7f565.parquet": {
+      "bytes": 41152,
+      "sha256": "cf5480e867caa6476dfd218721e56e43aaf2940e45b1369175fa513d0e34ba1a"
+    },
+    "data/annotations/camera/dense-index/part-shard-9170a45559b095e7b8963d9a344d51d4733d858431a48d7fa91fffe1cfc33121.parquet": {
+      "bytes": 40680,
+      "sha256": "ccabaf90e85fc17d2428416ed78918b1980c78f72099a08716aab0640c775c1a"
+    },
+    "data/annotations/camera/dense-index/part-shard-a381be21ce84f1ebed490b41dc695b84f62aaa02d08041ef33f71cf70daaf2e5.parquet": {
+      "bytes": 1978213,
+      "sha256": "204f240575b3bf7e15094970cf8a1d8115488eadc0fbf2b43ac47b5bbffac9bb"
+    },
+    "data/annotations/camera/dense-index/part-shard-a5792c145cee852c2a284de736f1dbfe0d51e44d2a5b321a54e0aaf1863b9dad.parquet": {
+      "bytes": 40956,
+      "sha256": "27bc9ef034e4831f9b75190792bb94940795a6c09fc0b4b72e031c49d915a80d"
+    },
+    "data/annotations/camera/dense-index/part-shard-a7f7099a5a0bdd33e6baef63690cdb8f1253d85c318d5c5807955a82f5e7cdf5.parquet": {
+      "bytes": 40997,
+      "sha256": "17e9ed4b83037d4f4699b0684e5e90c09ee7ce171769a58fe36853ba1e3187a5"
+    },
+    "data/annotations/camera/dense-index/part-shard-a88afbbf43b1a1d8e6b289798b71a2948ffd6d5eaf641bcaee1e76602b1cb85f.parquet": {
+      "bytes": 40375,
+      "sha256": "3cbc645434e4dc5da2f6036c459af403bd5d0efc0a7f4846cc1001d88f59abd9"
+    },
+    "data/annotations/camera/dense-index/part-shard-af39c4d5fd383d90134852fcf1eb7c022ee8f4ba10aeb6b79036e813c68d5913.parquet": {
+      "bytes": 40759,
+      "sha256": "1cceaac7d878acb2900ccbc3ae0b5052dbf64f255201d3be1a060796ce66e8c2"
+    },
+    "data/annotations/camera/dense-index/part-shard-b0e5e385f444775db1f3990f8d095dd70120352b608602c6f6a10e617bd741e1.parquet": {
+      "bytes": 40035,
+      "sha256": "e526bfe15fd89660d0242f4c5dc5d6afa03c724c24939a3061a44233b02262c9"
+    },
+    "data/annotations/camera/dense-index/part-shard-b430d7f58f893b80ad03c31b256a0ab685a8162814ae641a08355d57a8ff04c4.parquet": {
+      "bytes": 41963,
+      "sha256": "8ffe5da826c3cb7b7edc5cba74babd8c2a96544012a53bad336344f7c0ebff30"
+    },
+    "data/annotations/camera/dense-index/part-shard-b434c89948a96cdea664220c5802729e5bfc46697500b63a0094bf1ab443b803.parquet": {
+      "bytes": 41244,
+      "sha256": "38cbca940dfae3e5af14356610ac5bb8d2c69125a763d23cc79259af0771a373"
+    },
+    "data/annotations/camera/dense-index/part-shard-be9de14f5153d3dac7a56d6a9637cad3604cf03c55115f5965b05997dcdbf2b3.parquet": {
+      "bytes": 45493,
+      "sha256": "56729f0e5b8fed123cc06865d3a2ac8826625c51768821685f8a78a3b7df6daa"
+    },
+    "data/annotations/camera/dense-index/part-shard-c240099aa5c3752924d416eafc2b05b14b204a0ba645252ec6757f3d10cc5273.parquet": {
+      "bytes": 40821,
+      "sha256": "084991d12bb431f43b68c70d5d9307d0f34c2d72318e3b704a7e2e805e398b14"
+    },
+    "data/annotations/camera/dense-index/part-shard-c3b43569de81210e30a5aec9d06910362e730aef087a0e6962da05b6833cdf50.parquet": {
+      "bytes": 44846,
+      "sha256": "214c851be8fd5eee5f025c1479524325ba9a906af381479ae268028aecdd3e4e"
+    },
+    "data/annotations/camera/dense-index/part-shard-c980522560a0d946062b81a0868637173ab521678fdf22dab93c5a4c929e0dc0.parquet": {
+      "bytes": 41063,
+      "sha256": "aeea11072c8291212b6cd9cd8da73b8e5195a245dd5089b8049c2ad7f3a0687d"
+    },
+    "data/annotations/camera/dense-index/part-shard-c9926319ba2312d6f12006b5cb88225032f2a22371b173de6aaa2b354db55f98.parquet": {
+      "bytes": 41382,
+      "sha256": "64f4a4e7135fae8ccf6e31e4c747e989c25a27ca2d2f9c93092fdbf216265892"
+    },
+    "data/annotations/camera/dense-index/part-shard-ca96ec20dc452e2d430babe676eeff7a383e013aa722c9a9ba50936899310b1f.parquet": {
+      "bytes": 42695,
+      "sha256": "c0205b7ac42eacce52626fb7c9fb1d7c9a6cac68e6f4d5defd66ecee57711376"
+    },
+    "data/annotations/camera/dense-index/part-shard-d1c2d602bfbd69461568dd7fd4e225d1c366741520a1a7ef9845fabd341a429b.parquet": {
+      "bytes": 41453,
+      "sha256": "b81685a891d8be404963d91396ad68c7613e695fabb0423f57e80f9902c7cdad"
+    },
+    "data/annotations/camera/dense-index/part-shard-d27bea6ae09b66e27d06ccd1dd25f20d8891c01a7229ca633415f0babd416d30.parquet": {
+      "bytes": 41034,
+      "sha256": "6b6d06b0f4641013ad3d9031430c4bdd296e603a033d6f1b233252f975a85acc"
+    },
+    "data/annotations/camera/dense-index/part-shard-d28ddbf345ac77bbab146f579d2095167503b765528a84b854e3a37b8c68f028.parquet": {
+      "bytes": 41958,
+      "sha256": "b7a0193c0b748c58c2dfc13953f1aba641cd594b6ea5d71a2eabb8e205ec8b19"
+    },
+    "data/annotations/camera/dense-index/part-shard-d91d72cbcf9fcbcbf66c68aa837cb66954bd1be4b4c202e28375b23f2c6b8c7c.parquet": {
+      "bytes": 42838,
+      "sha256": "50c89ed1fcce9af5a048e5bf23a8ce71a154927321fd68b84250711e6626d6ee"
+    },
+    "data/annotations/camera/dense-index/part-shard-da28b6a03408012be6e60928851d0f582d9d29f590c57969b37fff94e6299cbd.parquet": {
+      "bytes": 41614,
+      "sha256": "22a10899f1efe5da3c6564e20594abb44cdc4bfe6831ede4f45f528c140478df"
+    },
+    "data/annotations/camera/dense-index/part-shard-daec8bc7b819dfa695f2f1c5b51cf4f7327ee93ed9c6e091d074f43eadf09a28.parquet": {
+      "bytes": 42110,
+      "sha256": "9870ed0daf81e86fccfdf721d827ed2e58b67392ab624e48ffb800719f0718d9"
+    },
+    "data/annotations/camera/dense-index/part-shard-dc1482698fba41333c11114dbfef0306b98d65c3fd17e8b823dc77e9507c1357.parquet": {
+      "bytes": 41727,
+      "sha256": "e59b373cd68fe71cf543ecd43ad18265836a1ef4b05800ed01b9a616ceee4cd1"
+    },
+    "data/annotations/camera/dense-index/part-shard-dd1cd364247f829967a777878ff851a291a69141b52e4bd3e7c6d4a7232e85a5.parquet": {
+      "bytes": 22780,
+      "sha256": "e84f2daf730f665e86f4d037b09ed5bbf920c82c5ae659d65ae6f38a381ff497"
+    },
+    "data/annotations/camera/dense-index/part-shard-de30c8d6434254109ad3b6f33865823cf2caadf58b16e67534f38b68a1c3dd76.parquet": {
+      "bytes": 40819,
+      "sha256": "51e0b622f66a1fe635094adff686cf2a01310b417e0d3ff8e3bb5db674d42dbb"
+    },
+    "data/annotations/camera/dense-index/part-shard-e4580444198f37b99e2aa47c2c750a085802071fe9a8134c29c239e81848c085.parquet": {
+      "bytes": 41466,
+      "sha256": "db6f6616733b9bc7935c65185d2b8dd26787f25575516a7ca899a1c4a153c2b6"
+    },
+    "data/annotations/camera/dense-index/part-shard-ed01dd89f621410182e5f05c31ec077647bcc2cff2a99cdc5e59d09742ec0d42.parquet": {
+      "bytes": 40809,
+      "sha256": "5b61c68fe0e8b38bb1dac31bcd804e4d4892ad6218bd8a4e73a97b3165a10b03"
+    },
+    "data/annotations/camera/dense-index/part-shard-ef764b0d836d3dc4c15282e1341608df5bc409e2aa647f22b36a76f3560eccd7.parquet": {
+      "bytes": 41902,
+      "sha256": "bed6d9e88ad85987f7e23173c3a47a0d2fcf0b92df80becc028835dc50ccfe41"
+    },
+    "data/annotations/camera/dense-index/part-shard-f155d4a24c2c925352d5a91e99303a13f598da337158d372b0279afebd91b612.parquet": {
+      "bytes": 41623,
+      "sha256": "dc8b714b5b46b91bf543e28d09c7be70e2a180fefe1f6a2dae702d15585252b6"
+    },
+    "data/annotations/camera/dense-index/part-shard-f9daaa5154f79c1ad1549d98b1ba49d304fb2716180373e3b5cc792ed1a8ccb0.parquet": {
+      "bytes": 41520,
+      "sha256": "f60d416494d9a191d6e6cac45188a989ffaf0279c403abce0560e2b61826092d"
+    },
+    "data/annotations/camera/dense-index/part-shard-fb9ad267645db56ab95a48f464bd7d54816a579cb7cc4ca1faf28b304ea71ac8.parquet": {
+      "bytes": 41905,
+      "sha256": "476faa031b735770dbf3f03b21024a8559b200ec23265ae3659b6032a4d50783"
+    },
+    "data/manifests/video-integrity.jsonl": {
+      "bytes": 2559250,
+      "sha256": "d92a78404bbb76798579367c47dedb29d1bdca75dd638b1ad34ee7fcb51d0c09"
+    },
+    "data/manifests/video-privacy-release.json": {
+      "bytes": 2271,
+      "sha256": "87a5aba7f01f25eea9359743ddebcbdac2d3bc7eaeed50966e297d105e5495eb"
+    },
+    "data/metadata.jsonl": {
+      "bytes": 1765693,
+      "sha256": "0ff828c538fd3174f4569957239c9a9504d94d0d25ae20c22ae24e68c5cd8587"
+    },
+    "data/viewer/camera-annotations/part-00000.parquet": {
+      "bytes": 7800085,
+      "sha256": "251623606675eb3e90325db8630356f5e30553f1dcb01441e230e438bf221913"
+    },
+    "data/viewer/videos/part-00000.parquet": {
+      "bytes": 315986,
+      "sha256": "01c663ece8abcb604703575441069ded8d8106401abef72de2e0c09e28d44f77"
+    }
+  },
+  "coverage_csv_sha256": "0281b35c39b8cd21d53b0c2be3c3ac7fadc8cf506c4906f2649d5221c68cd573"
+}

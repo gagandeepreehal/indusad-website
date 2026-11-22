@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0",
+  "status": "owner-confirmed mounting geometry",
+  "owner_confirmation_date": "2026-10-22",
+  "coordinate_frame": {
+    "origin": "normal front camera (cam_front)",
+    "position_unit": "m",
+    "rotation_parameter_unit": "deg",
+    "Y": "forward",
+    "Z": "up",
+    "X": "source signs retained: named left cameras positive; named right cameras negative"
+  },
+  "camera_source_rebasing": {
+    "source_position_unit": "mm",
+    "scale_to_m": 0.001,
+    "subtract_after_scaling_m": [
+      0,
+      0,
+      1.546
+    ],
+    "formula": "position_m = source_position_mm * 0.001 - [0, 0, 1.546]"
+  },
+  "cameras": [
+    {
+      "name": "cam_front",
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "position_provenance": "owner-provided reference origin",
+      "source_rotation": {
+        "parameter": "reference_rotation",
+        "angle_deg": 0,
+        "provenance": "owner-provided normal-front reference"
+      }
+    },
+    {
+      "name": "cam_front_tilted",
+      "position_m": [
+        0,
+        0,
+        -0.046
+      ],
+      "position_provenance": "camera_source; mm-to-m conversion and rebasing",
+      "source_rotation": {
+        "parameter": "Rx",
+        "angle_deg": 5,
+        "provenance": "camera_source"
+      }
+    },
+    {
+      "name": "cam_front_right",
+      "position_m": [
+        -0.651,
+        -0.05,
+        0
+      ],
+      "position_provenance": "camera_source; mm-to-m conversion and rebasing",
+      "source_rotation": {
+        "parameter": "Rz",
+        "angle_deg": 62.5,
+        "provenance": "camera_source"
+      }
+    },
+    {
+      "name": "cam_front_left",
+      "position_m": [
+        0.651,
+        -0.05,
+        0
+      ],
+      "position_provenance": "camera_source; mm-to-m conversion and rebasing",
+      "source_rotation": {
+        "parameter": "Rz",
+        "angle_deg": -62.5,
+        "provenance": "camera_source"
+      }
+    },
+    {
+      "name": "cam_rear",
+      "position_m": [
+        0,
+        -2.133,
+        0
+      ],
+      "position_provenance": "camera_source; mm-to-m conversion and rebasing",
+      "source_rotation": {
+        "parameter": "Rz",
+        "angle_deg": 180,
+        "provenance": "camera_source"
+      }
+    },
+    {
+      "name": "cam_rear_left",
+      "position_m": [
+        0.651,
+        -0.09,
+        0
+      ],
+      "position_provenance": "camera_source; mm-to-m conversion and rebasing",
+      "source_rotation": {
+        "parameter": "Rz",
+        "angle_deg": -117.5,
+        "provenance": "camera_source"
+      }
+    },
+    {
+      "name": "cam_rear_right",
+      "position_m": [
+        -0.651,
+        -0.09,
+        0
+      ],
+      "position_provenance": "camera_source; mm-to-m conversion and rebasing",
+      "source_rotation": {
+        "parameter": "Rz",
+        "angle_deg": 118.5,
+        "provenance": "camera_source"
+      },
+      "source_rotation_alternatives": [
+        {
+          "parameter": "Rz",
+          "angle_deg": 117.5,
+          "provenance": "later owner-supplied alternative"
+        }
+      ],
+      "rotation_resolution": "Both source and later owner alternative retained; no selection made."
+    }
+  ],
+  "rig_imu": {
+    "position_m": [
+      0,
+      0,
+      0
+    ],
+    "position_provenance": "owner-provided co-origin with normal front camera",
+    "rotation": null,
+    "rotation_status": "unspecified"
+  },
+  "lidar": {
+    "model": "OS1-128",
+    "position_m": [
+      0,
+      -0.545,
+      0.334
+    ],
+    "position_provenance": "owner-supplied offsets and heights; X=0 explicitly owner-provided",
+    "pitch": {
+      "magnitude_deg": 4,
+      "approximate": true,
+      "sign": null,
+      "sign_status": "unspecified"
+    },
+    "relative_to_tilted_camera_m": [
+      0,
+      -0.545,
+      0.38
+    ]
+  },
+  "ground_heights_m": {
+    "cam_front": 1.546,
+    "cam_front_tilted": 1.5,
+    "lidar": 1.88
+  },
+  "height_derivations": {
+    "cam_front_tilted": "1.546 - 0.046 = 1.500 m",
+    "lidar": "1.500 + 0.380 = 1.880 m; 1.880 - 1.546 = 0.334 m"
+  },
+  "lidar_internal_transforms": {
+    "translation_unit": "mm",
+    "provenance": "embedded LiDAR internal transforms supplied by owner",
+    "scope": "internal sensor frames, not vehicle mounting transforms",
+    "transforms": [
+      {
+        "from": "beam",
+        "to": "lidar",
+        "R": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "t_mm": [
+          16.721,
+          0,
+          0
+        ]
+      },
+      {
+        "from": "lidar",
+        "to": "sensor",
+        "R": [
+          [
+            -1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "t_mm": [
+          0,
+          0,
+          38.195
+        ]
+      },
+      {
+        "from": "internal_imu",
+        "to": "sensor",
+        "R": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "t_mm": [
+          -2.441,
+          -9.725,
+          7.533
+        ]
+      }
+    ],
+    "imu_distinction": "LiDAR internal IMU is distinct from rig IMU at front-camera origin"
+  },
+  "interpretation": {
+    "rotations": "Source Rx/Rz parameters only; unspecified rotation components are not filled in.",
+    "projection": "Mounting coordinates are separate from camera optical-frame projection matrices. Establish axis mapping and transform direction before generating optical-frame matrices.",
+    "recorded_calibration": "Recorded calibration payloads are preserved; this reference does not replace them."
+  }
+}

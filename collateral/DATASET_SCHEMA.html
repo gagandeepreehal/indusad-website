@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dataset schema and annotation coverage — INDUS-AD</title><link rel="stylesheet" href="../styles.css"></head><body><main class="doc-page"><a href="../index.html#resources">Back to INDUS-AD resources</a><p class="doc-source">Publisher reference, retrieved 21 November 2026. Dataset source revision: <code>4b414d527a2971ee9baebe2745447f95ac1fc535</code>. <a href="DATASET_SCHEMA.md">Download Markdown</a>.</p><h1 id="dataset-schema-and-annotation-coverage">Dataset schema and annotation coverage</h1>
+<p>Observed 2026-10-16 using owner-authenticated Viewer first-row/schema and size endpoints. Configurations have different row meanings; their row counts must not be combined into a count of independent examples. The technical split name <code>train</code> is retained for API compatibility in all configurations and is not an authored benchmark partition.</p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Row meaning</th>
+<th style="text-align: right;">Reported rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>videos</td>
+<td>One recording with seven camera slots</td>
+<td style="text-align: right;">1,469</td>
+</tr>
+<tr>
+<td>camera_annotations</td>
+<td>One sampled camera frame with weak pseudo-labels</td>
+<td style="text-align: right;">34,306</td>
+</tr>
+<tr>
+<td>gnss</td>
+<td>One decoded GNSS message</td>
+<td style="text-align: right;">18,373,026</td>
+</tr>
+<tr>
+<td>semantic_depth</td>
+<td>One sampled frame with display previews</td>
+<td style="text-align: right;">34,306</td>
+</tr>
+</tbody>
+</table>
+<p>A control-file audit on 24 October 2026 checked all 34,306 camera-annotation Viewer rows and dense indexes: distinct frame IDs and camera/time and camera/frame-index keys are unique; no annotation refers to an absent video stream. Labels occur in 3,169 of 9,927 streams, leaving 6,758 without labels. Dense indexes contain 34,306 semantic and 34,306 depth references matched to the annotation identities. This is not a complete join audit against all source camera-frame tables or decoded videos. See <a href="annotation-coverage.csv">per-stream coverage</a> and <a href="annotation-coverage.json">summary with input hashes</a>. Semantic class IDs/fractions and the listed aggregate fraction fields are auxiliary machine-generated signals, not a human-verified ontology-coverage result. Weather scores are not validated probabilities, and metric-depth outputs are not measured depth ground truth.</p>
+<p>Camera annotation and semantic/depth configurations expose <code>recording_id</code>, <code>camera_name</code>, <code>selected_time_of_day_ns</code>, <code>recording_offset_ns</code>, <code>frame_index</code>, and <code>frame_id</code>. Use the dense index to resolve archive members; inspect uniqueness and missing joins before matching tables. No per-class accuracy, detector recall, or privacy QA score is asserted.</p>
+<p>The GNSS Viewer flattens coordinate fields. See <a href="SENSOR_AND_TIMING_CONVENTIONS.html">sensor conventions</a> for timestamp namespaces, per-recording local ENU, invalid rows with coordinates, and unresolved source-stream composition.</p>
+<h2 id="observed-viewer-columns">Observed Viewer columns</h2>
+<h3 id="gnss">gnss</h3>
+<p><code>recording_id</code>, <code>log_time_of_day_ns</code>, <code>log_time_offset_ns</code>, <code>publish_time_of_day_ns</code>, <code>publish_time_offset_ns</code>, <code>frame_id</code>, <code>is_valid</code>, <code>time_of_day_ns</code>, <code>time_offset_ns</code>, <code>utc_time_of_day_ns</code>, <code>utc_time_offset_ns</code>, <code>rec_frame_id</code>, <code>rec_time_of_day_ns</code>, <code>rec_time_offset_ns</code>, <code>local_enu_origin_offset_ns</code>, <code>global_east_m</code>, <code>global_north_m</code>, <code>global_up_m</code>, <code>global_ref_system_type</code>, <code>latitude_deg</code>, <code>longitude_deg</code>, <code>height_m</code>, <code>local_east_m</code>, <code>local_north_m</code>, <code>local_up_m</code>, <code>pitch_rad</code>, <code>roll_rad</code>, <code>yaw_rad</code>, <code>pitch_variance_rad2</code>, <code>roll_variance_rad2</code>, <code>yaw_variance_rad2</code>, <code>covariance_en</code>, <code>east_sigma_m</code>, <code>north_sigma_m</code>, <code>up_sigma_m</code>, <code>position_rms</code>, <code>hdop</code>, <code>pdop</code>, <code>vdop</code>, <code>correction_age_s</code>, <code>position_fix_type</code>, <code>rtk_condition</code>, <code>published_horizontal_resolution_m</code>, <code>re_init</code>, <code>vehicle_ref_pt</code>, <code>velocity_east_mps</code>, <code>velocity_north_mps</code>, <code>velocity_up_mps</code>.</p>
+<h3 id="camera_annotations">camera_annotations</h3>
+<p><code>recording_id</code>, <code>camera_name</code>, <code>selected_time_of_day_ns</code>, <code>recording_offset_ns</code>, <code>frame_index</code>, <code>frame_id</code>, <code>sample_kind</code>, <code>window_id</code>, <code>decoded_width</code>, <code>decoded_height</code>, <code>semantic_fractions</code>, <code>drivable_fraction</code>, <code>lane_marking_fraction</code>, <code>person_rider_fraction</code>, <code>two_wheeler_fraction</code>, <code>four_wheeler_fraction</code>, <code>building_fraction</code>, <code>vegetation_fraction</code>, <code>sky_fraction</code>, <code>depth_p10</code>, <code>depth_p50</code>, <code>depth_p90</code>, <code>weather_clear_probability</code>, <code>weather_overcast_probability</code>, <code>weather_rain_probability</code>, <code>weather_fog_probability</code>, <code>weather_low_light_probability</code>, <code>weather_uncertain_mixed_probability</code>, <code>weather_label</code>, <code>weather_confidence</code>, <code>weather_margin</code>, <code>weather_uncertain</code>, <code>luminance_mean</code>, <code>luminance_p05</code>, <code>luminance_p95</code>, <code>contrast_std</code>, <code>saturation_mean</code>, <code>laplacian_variance</code>, <code>dark_fraction</code>, <code>overexposed_fraction</code>.</p>
+<h3 id="semantic_depth">semantic_depth</h3>
+<p><code>recording_id</code>, <code>camera_name</code>, <code>selected_time_of_day_ns</code>, <code>recording_offset_ns</code>, <code>frame_index</code>, <code>frame_id</code>, <code>original_width</code>, <code>original_height</code>, <code>preview_width</code>, <code>preview_height</code>, <code>depth_min_m</code>, <code>depth_max_m</code>, <code>semantic_mask</code>, <code>depth_map</code>.</p>
+<h3 id="videos">videos</h3>
+<p><code>recording_id</code>, <code>cam_front_video</code>, <code>cam_front_left_video</code>, <code>cam_front_right_video</code>, <code>cam_front_tilted_video</code>, <code>cam_rear_video</code>, <code>cam_rear_left_video</code>, <code>cam_rear_right_video</code>, <code>cam_front_video_privacy_status</code>, <code>cam_front_left_video_privacy_status</code>, <code>cam_front_right_video_privacy_status</code>, <code>cam_front_tilted_video_privacy_status</code>, <code>cam_rear_video_privacy_status</code>, <code>cam_rear_left_video_privacy_status</code>, <code>cam_rear_right_video_privacy_status</code>.</p>
+<p>Column presence does not establish a populated value in every row. Image and video columns are Viewer representations; authoritative files remain in the published video tree and dense archives. Display preview dimensions do not establish native sensor resolution. Exact upstream model revisions, attribution and bounded license-review conclusions are published in <a href="THIRD_PARTY_NOTICES.html">third-party notices</a>.</p>
+<h2 id="source-tables-and-sampling-folders">Source tables and sampling folders</h2>
+<p>The <a href="TABLE_COLUMN_DICTIONARY.html">column dictionary</a> documents all normalized source-table families. Annotation folders now use <code>sample_group=</code>. The Parquet <code>split</code> column remains a legacy sampling-group field; Viewer technical <code>train</code> splits remain API-compatible. The <a href="sample-group-path-migration.json">path migration map</a> records content-preserving moves.</p>
+<p>GNSS source tables retain <code>channel</code> (<code>gnss</code> / <code>rec_gnss</code>); the existing flattened Viewer does not. Use source tables for channel-specific rate/trajectory analysis. Combined source-documentation counts are 15,317,896 and 3,055,130, respectively.</p>
+<h2 id="source-annotation-row-count-audit">Source annotation row-count audit</h2>
+<p>Metadata-only Parquet footer inspection at <code>473b9ea659064ac13f63b11b9d6b77829ded6b6d</code> counted 34,306 rows across all 1,469 source frame-label files. The Viewer reports 34,306 rows. Row counts are not a distinct-frame count or a guarantee of complete joins.</p>
+<h2 id="producer-confirmed-seven-camera-extrinsics">Producer-confirmed seven-camera extrinsics</h2>
+<p>Every existing camera row in <code>data/tables/calibrations/</code> adds the non-null <code>calibrated_extrinsics</code> struct. Original columns and source JSON remain unchanged. This includes explicit camera identity, signed yaw/tilt, rig and front-reference camera centres in millimetres, and row-major homogeneous transforms with named direction. The tilted front camera is +4 degrees downward. The rig axes are X left, Y forward, Z up; the front reference subtracts [0,0,1546] mm and is not an optical frame. See <a href="CAMERA_EXTRINSICS.html">the complete schema, equations, provenance and join rules</a>. Existing source <code>schema_version</code> values are retained; the additive model is identified by its own <code>calibration_id</code>.</p>
+<h2 id="devkit-camera-timing-and-partial-recordings">Devkit camera timing and partial recordings</h2>
+<p>For every recording, the devkit defaults to camera payload <code>rec_timestamp</code> (<code>rec_time_offset_ns</code>) for camera selection, synchronization and exported times, and main <code>gnss</code> payload <code>timestamp</code> (<code>time_offset_ns</code>) for GNSS. Untimed quality-flagged GNSS messages define excluded gaps; leading portions can be trimmed from an export without rejecting the whole recording. Raw table fields and annotation source identities are unchanged. See <a href="DEVKIT_TIMING_POLICY.html">exact fields and trimming policy</a>.</p></main></body></html>

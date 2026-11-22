@@ -1,0 +1,37 @@
+{
+  "checked_on": "2026-11-21",
+  "basis": "Existing INDUS-AD launch blog and current authenticated dataset cards, public preview assets, and GitHub devkit documentation",
+  "datasets": {
+    "indus-ad": {
+      "revision": "4b414d527a2971ee9baebe2745447f95ac1fc535",
+      "gated": "manual"
+    },
+    "indus-ad-monocam": {
+      "revision": "2944b41b060e699fc4fe68d66487089bb4aa985c",
+      "gated": "manual"
+    },
+    "indus-ad-3d": {
+      "revision": "b492b51c67a7f4a954d755367e765da2bfa78a4d",
+      "gated": "manual"
+    },
+    "indus-ad-sample": {
+      "revision": "c322b8646962f3ee5ff3cb1cc4e25ab99beaf79a",
+      "gated": "manual"
+    }
+  },
+  "public_assets_repo": "gagandeepreehal/indus-ad-assets",
+  "image_license": "CC BY-NC 4.0",
+  "local_collateral": "Website editions of dataset documentation.",
+  "files": {
+    "collateral/ASSET_SOURCES.md": "6619a436cb0b86c30c4c79c1b373efb63151af81e009f02f2b3a3198d915a644",
+    "collateral/CAMERA_EXTRINSICS.md": "d1986625f6a3eb166589a3204b34d67fec16b1d077002a0e1b41fd0c33770f83",
+    "collateral/CAMERA_INTRINSICS.md": "92e167abd4115224e99225e4e9b8bf131ec92c52fae6ab613661014bb3f18ab8",
+    "collateral/DATASET_PRIVACY_AND_TAKEDOWN.md": "7541bb885bb27da02db4d8a6c8fdf4c646dfc6e800fbd6bb9369d8a0d55a2607",
+    "collateral/DATASET_SCHEMA.md": "3d8b2a9fda4fd990609740e07ff2590463a24029615b78d2c0927e2ab015dcef",
+    "collateral/DEVKIT_TIMING_POLICY.md": "0e80e5b2e9e8032359fbfa7dd04aee8bb3372b73dc757f5eda759479d9107e8b",
+    "collateral/SENSOR_AND_TIMING_CONVENTIONS.md": "586d9a1c4671096d3ae05af7e6abf407451b864316d6cb71e1ed3b4317914b23",
+    "collateral/SENSOR_MOUNTING_GEOMETRY.md": "8aa26a93b3f16c35c2e04a426875f81f0d5d41ec8108e95a95c27e2689278ba5",
+    "collateral/TABLE_COLUMN_DICTIONARY.md": "72c55356d3b877cbd58fb7fab7c0ca8d9e6e817b6a0e23ce61e4f3dabc77dc18",
+    "collateral/THIRD_PARTY_NOTICES.md": "1c3e36c5b7dc076857ed2a6cfee017cadc456783c0fdc30f0f84c61c8687e3f1"
+  }
+}

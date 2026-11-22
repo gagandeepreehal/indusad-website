@@ -1,0 +1,1653 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Column dictionary for normalized source tables — INDUS-AD</title><link rel="stylesheet" href="../styles.css"></head><body><main class="doc-page"><a href="../index.html#resources">Back to INDUS-AD resources</a><p class="doc-source">Publisher reference, retrieved 21 November 2026. Dataset source revision: <code>4b414d527a2971ee9baebe2745447f95ac1fc535</code>. <a href="TABLE_COLUMN_DICTIONARY.md">Download Markdown</a>.</p><h1 id="column-dictionary-for-normalized-source-tables">Column dictionary for normalized source tables</h1>
+<p>Inspected representative Parquet footers at revision <code>473b9ea659064ac13f63b11b9d6b77829ded6b6d</code> on 16 October 2026. This dictionary covers all ten <code>data/tables/</code> families plus frame-label and dense-index tables. Per-file Arrow schemas remain authoritative where optional fields vary. Nullability means permitted by the inspected schema, not measured non-null coverage. JSON payloads preserve source-defined nested fields; they are not replaced with invented enumerations or units.</p>
+<p>Time-of-day fields are nanoseconds without capture date. Offset fields are recording-relative values in their own timestamp domain; do not assume different domains interchangeable. Exact joins require recording/camera/channel identity and compatible published timestamps. The frame-label <code>split</code> field is a legacy sampling-group label; its folders now use <code>sample_group=</code> and no benchmark split is asserted.</p>
+<h2 id="auxiliary-messages">auxiliary-messages</h2>
+<p>Example: <code>data/tables/auxiliary-messages/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>log_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the log namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>log_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the log timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>publish_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the publish namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>publish_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the publish timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original message topic; GNSS uses gnss or rec_gnss. Filter before computing rates or trajectories.</td>
+</tr>
+<tr>
+<td><code>schema_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source field schema name. Meaning must be interpreted within the associated record schema.</td>
+</tr>
+<tr>
+<td><code>schema_hash</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Opaque source-schema identity; not an accuracy or privacy score.</td>
+</tr>
+<tr>
+<td><code>sequence</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message sequence value; not a universal frame clock.</td>
+</tr>
+<tr>
+<td><code>fields_json</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>JSON-encoded source fields. GNSS includes pose/quality objects; calibration includes intrinsic/extrinsic. Inspect nested source metadata before geometric use.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="calibrations">calibrations</h2>
+<p>Example: <code>data/tables/calibrations/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source metadata/calibration record kind.</td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source metadata/calibration record key.</td>
+</tr>
+<tr>
+<td><code>time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; time of day. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; time offset. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>fields_json</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>JSON-encoded source fields. GNSS includes pose/quality objects; calibration includes intrinsic/extrinsic. Inspect nested source metadata before geometric use.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="camera-frames">camera-frames</h2>
+<p>Example: <code>data/tables/camera-frames/camera=cam_front/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>camera_index</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Source camera index; use source_camera_name for identity.</td>
+</tr>
+<tr>
+<td><code>source_camera_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Decoded camera identity; do not infer from array position.</td>
+</tr>
+<tr>
+<td><code>camera_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the camera namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>camera_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the camera timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>frame_id</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Published frame identifier in its source namespace.</td>
+</tr>
+<tr>
+<td><code>rec_frame_id</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recorded-path frame identifier; not interchangeable with frame_id.</td>
+</tr>
+<tr>
+<td><code>rec_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the rec namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>rec_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the rec timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>batch_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the batch namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>batch_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the batch timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>declared_camera_count</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Camera count declared by the producer message.</td>
+</tr>
+<tr>
+<td><code>full_batch</code></td>
+<td><code>bool</code></td>
+<td>yes</td>
+<td>Source flag for a full producer batch.</td>
+</tr>
+<tr>
+<td><code>log_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the log namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>log_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the log timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>publish_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the publish namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>publish_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the publish timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original message topic; GNSS uses gnss or rec_gnss. Filter before computing rates or trajectories.</td>
+</tr>
+<tr>
+<td><code>schema_hash</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Opaque source-schema identity; not an accuracy or privacy score.</td>
+</tr>
+<tr>
+<td><code>sequence</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message sequence value; not a universal frame clock.</td>
+</tr>
+<tr>
+<td><code>message_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message index within a recording.</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source encoded format identifier.</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Pixel width.</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Pixel height.</td>
+</tr>
+<tr>
+<td><code>file_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Published media path/reference; resolve relative to the documented dataset context.</td>
+</tr>
+<tr>
+<td><code>discontinuity_interval_id</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Identifier for a decoded discontinuity interval.</td>
+</tr>
+<tr>
+<td><code>packet_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Encoded packet/access-unit index.</td>
+</tr>
+<tr>
+<td><code>relative_pts_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; relative pts. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>relative_dts_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; relative dts. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>duration_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; duration. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>keyframe</code></td>
+<td><code>bool</code></td>
+<td>yes</td>
+<td>Encoded-frame keyframe indicator.</td>
+</tr>
+<tr>
+<td><code>access_unit_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+<tr>
+<td><code>nal_payload_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="camera-messages">camera-messages</h2>
+<p>Example: <code>data/tables/camera-messages/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>message_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message index within a recording.</td>
+</tr>
+<tr>
+<td><code>log_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the log namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>log_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the log timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>publish_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the publish namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>publish_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the publish timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original message topic; GNSS uses gnss or rec_gnss. Filter before computing rates or trajectories.</td>
+</tr>
+<tr>
+<td><code>sequence</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message sequence value; not a universal frame clock.</td>
+</tr>
+<tr>
+<td><code>schema_hash</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Opaque source-schema identity; not an accuracy or privacy score.</td>
+</tr>
+<tr>
+<td><code>declared_camera_count</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Camera count declared by the producer message.</td>
+</tr>
+<tr>
+<td><code>full_batch</code></td>
+<td><code>bool</code></td>
+<td>yes</td>
+<td>Source flag for a full producer batch.</td>
+</tr>
+<tr>
+<td><code>fields_json</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>JSON-encoded source fields. GNSS includes pose/quality objects; calibration includes intrinsic/extrinsic. Inspect nested source metadata before geometric use.</td>
+</tr>
+<tr>
+<td><code>access_unit_sha256_json</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+<tr>
+<td><code>nal_payload_sha256_json</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gap-events">gap-events</h2>
+<p>Example: <code>data/tables/gap-events/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Gap-event scope.</td>
+</tr>
+<tr>
+<td><code>camera</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Camera identity associated with the gap, when populated.</td>
+</tr>
+<tr>
+<td><code>previous_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the previous namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>previous_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the previous timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>next_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the next namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>next_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the next timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>previous_frame_id</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source field previous frame id. Meaning must be interpreted within the associated record schema.</td>
+</tr>
+<tr>
+<td><code>next_frame_id</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source field next frame id. Meaning must be interpreted within the associated record schema.</td>
+</tr>
+<tr>
+<td><code>inferred_missing_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Count inferred missing from timing; not directly observed missing image content.</td>
+</tr>
+<tr>
+<td><code>gap_duration_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; gap duration. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>discontinuity_interval_id</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Identifier for a decoded discontinuity interval.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gnss">gnss</h2>
+<p>Example: <code>data/tables/gnss/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>log_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the log namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>log_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the log timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>publish_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the publish namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>publish_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the publish timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original message topic; GNSS uses gnss or rec_gnss. Filter before computing rates or trajectories.</td>
+</tr>
+<tr>
+<td><code>schema_hash</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Opaque source-schema identity; not an accuracy or privacy score.</td>
+</tr>
+<tr>
+<td><code>sequence</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message sequence value; not a universal frame clock.</td>
+</tr>
+<tr>
+<td><code>fields_json</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>JSON-encoded source fields. GNSS includes pose/quality objects; calibration includes intrinsic/extrinsic. Inspect nested source metadata before geometric use.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="keyframes">keyframes</h2>
+<p>Example: <code>data/tables/keyframes/camera=cam_front/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>camera_index</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Source camera index; use source_camera_name for identity.</td>
+</tr>
+<tr>
+<td><code>source_camera_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Decoded camera identity; do not infer from array position.</td>
+</tr>
+<tr>
+<td><code>camera_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the camera namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>camera_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the camera timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>frame_id</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Published frame identifier in its source namespace.</td>
+</tr>
+<tr>
+<td><code>rec_frame_id</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recorded-path frame identifier; not interchangeable with frame_id.</td>
+</tr>
+<tr>
+<td><code>rec_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the rec namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>rec_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the rec timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>batch_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the batch namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>batch_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the batch timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>declared_camera_count</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Camera count declared by the producer message.</td>
+</tr>
+<tr>
+<td><code>full_batch</code></td>
+<td><code>bool</code></td>
+<td>yes</td>
+<td>Source flag for a full producer batch.</td>
+</tr>
+<tr>
+<td><code>log_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the log namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>log_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the log timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>publish_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the publish namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>publish_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the publish timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original message topic; GNSS uses gnss or rec_gnss. Filter before computing rates or trajectories.</td>
+</tr>
+<tr>
+<td><code>schema_hash</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Opaque source-schema identity; not an accuracy or privacy score.</td>
+</tr>
+<tr>
+<td><code>sequence</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message sequence value; not a universal frame clock.</td>
+</tr>
+<tr>
+<td><code>message_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source message index within a recording.</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source encoded format identifier.</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Pixel width.</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Pixel height.</td>
+</tr>
+<tr>
+<td><code>file_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Published media path/reference; resolve relative to the documented dataset context.</td>
+</tr>
+<tr>
+<td><code>discontinuity_interval_id</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Identifier for a decoded discontinuity interval.</td>
+</tr>
+<tr>
+<td><code>packet_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Encoded packet/access-unit index.</td>
+</tr>
+<tr>
+<td><code>relative_pts_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; relative pts. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>relative_dts_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; relative dts. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>duration_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; duration. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>keyframe</code></td>
+<td><code>bool</code></td>
+<td>yes</td>
+<td>Encoded-frame keyframe indicator.</td>
+</tr>
+<tr>
+<td><code>access_unit_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+<tr>
+<td><code>nal_payload_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recording-metadata">recording-metadata</h2>
+<p>Example: <code>data/tables/recording-metadata/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source metadata/calibration record kind.</td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source metadata/calibration record key.</td>
+</tr>
+<tr>
+<td><code>time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; time of day. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; time offset. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>fields_json</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>JSON-encoded source fields. GNSS includes pose/quality objects; calibration includes intrinsic/extrinsic. Inspect nested source metadata before geometric use.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recording-quality-summary">recording-quality-summary</h2>
+<p>Example: <code>data/tables/recording-quality-summary/recording_quality_summary.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>recording_duration_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Longest camera-stream duration for the recording, in nanoseconds.</td>
+</tr>
+<tr>
+<td><code>available_camera_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Number of available camera streams.</td>
+</tr>
+<tr>
+<td><code>available_cameras</code></td>
+<td><code>list&lt;element: string&gt;</code></td>
+<td>yes</td>
+<td>Available camera identities.</td>
+</tr>
+<tr>
+<td><code>camera_frame_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Source counted camera frames.</td>
+</tr>
+<tr>
+<td><code>camera_inferred_missing_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Timing-inferred missing camera frames.</td>
+</tr>
+<tr>
+<td><code>camera_discontinuity_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Camera discontinuity count.</td>
+</tr>
+<tr>
+<td><code>camera_max_gap_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; camera max gap. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>gnss_sample_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Combined GNSS message count across source channels; not deduplicated positions.</td>
+</tr>
+<tr>
+<td><code>gnss_valid_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Combined messages marked valid by source quality fields.</td>
+</tr>
+<tr>
+<td><code>gnss_valid_known_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Messages with known source validity.</td>
+</tr>
+<tr>
+<td><code>gnss_valid_ratio</code></td>
+<td><code>double</code></td>
+<td>yes</td>
+<td>Valid fraction under the source summary definition.</td>
+</tr>
+<tr>
+<td><code>gnss_gaps_over_500ms_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Count of GNSS gaps above 500 milliseconds under the source summary.</td>
+</tr>
+<tr>
+<td><code>gnss_max_gap_ms</code></td>
+<td><code>double</code></td>
+<td>yes</td>
+<td>Milliseconds; gnss max gap.</td>
+</tr>
+<tr>
+<td><code>sync_group_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Number of decoded synchronization groups.</td>
+</tr>
+<tr>
+<td><code>sync_groups_over_20ms_count</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Groups whose observed timestamp spread exceeds 20 milliseconds.</td>
+</tr>
+<tr>
+<td><code>sync_median_skew_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; sync median skew. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>sync_p95_skew_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; sync p95 skew. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>sync_max_skew_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; sync max skew. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>source_dataset_revision</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Immutable source-representation provenance revision.</td>
+</tr>
+<tr>
+<td><code>decoded_dataset_revision</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Immutable decoded-representation provenance revision.</td>
+</tr>
+<tr>
+<td><code>quality_schema_version</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Version of the quality-summary schema.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sync-groups">sync-groups</h2>
+<p>Example: <code>data/tables/sync-groups/bucket=00/part-12-18-59.400-29e39d129f8745b535957b42fb1cc041.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int16</code></td>
+<td>yes</td>
+<td>Serialized table schema version.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>group_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Synchronization-group index.</td>
+</tr>
+<tr>
+<td><code>start_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the start namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>start_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the start timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>end_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the end namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>end_time_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative nanoseconds in the end timestamp namespace.</td>
+</tr>
+<tr>
+<td><code>nominal_period_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; nominal period. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>expected_cameras</code></td>
+<td><code>list&lt;element: string&gt;</code></td>
+<td>yes</td>
+<td>Expected camera identities for the group.</td>
+</tr>
+<tr>
+<td><code>available_cameras</code></td>
+<td><code>list&lt;element: string&gt;</code></td>
+<td>yes</td>
+<td>Available camera identities.</td>
+</tr>
+<tr>
+<td><code>late_start_cameras</code></td>
+<td><code>list&lt;element: string&gt;</code></td>
+<td>yes</td>
+<td>Cameras classified as starting late.</td>
+</tr>
+<tr>
+<td><code>early_end_cameras</code></td>
+<td><code>list&lt;element: string&gt;</code></td>
+<td>yes</td>
+<td>Cameras classified as ending early.</td>
+</tr>
+<tr>
+<td><code>observed_counts</code></td>
+<td><code>list&lt;element: int64&gt;</code></td>
+<td>yes</td>
+<td>Per-camera observed counts.</td>
+</tr>
+<tr>
+<td><code>missing_counts</code></td>
+<td><code>list&lt;element: int64&gt;</code></td>
+<td>yes</td>
+<td>Per-camera inferred missing counts.</td>
+</tr>
+<tr>
+<td><code>coverage_ratios</code></td>
+<td><code>list&lt;element: double&gt;</code></td>
+<td>yes</td>
+<td>Per-camera coverage fractions.</td>
+</tr>
+<tr>
+<td><code>maximum_skew_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Nanoseconds; maximum skew. Interpret in the associated source timing domain.</td>
+</tr>
+<tr>
+<td><code>complete_strict</code></td>
+<td><code>bool</code></td>
+<td>yes</td>
+<td>Strict completeness result under the source quality rule.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="annotationsframe-labels">annotations/frame-labels</h2>
+<p>Example: <code>data/annotations/camera/frame-labels/sample_group=test/part-0312a1165e8b12306b77174258fee89664bd3d54d1262e2c4554f20c14ee6e2a.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>no</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>camera_name</code></td>
+<td><code>string</code></td>
+<td>no</td>
+<td>Named camera identity.</td>
+</tr>
+<tr>
+<td><code>selected_time_of_day_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Time-of-day nanoseconds in the selected namespace; date removed.</td>
+</tr>
+<tr>
+<td><code>recording_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative timestamp, nanoseconds, for the sampled frame.</td>
+</tr>
+<tr>
+<td><code>frame_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Frame index in the referenced camera sequence.</td>
+</tr>
+<tr>
+<td><code>frame_id</code></td>
+<td><code>string</code></td>
+<td>no</td>
+<td>Published frame identifier in its source namespace.</td>
+</tr>
+<tr>
+<td><code>sample_kind</code></td>
+<td><code>string</code></td>
+<td>no</td>
+<td>Source annotation sampling-kind label.</td>
+</tr>
+<tr>
+<td><code>window_id</code></td>
+<td><code>string</code></td>
+<td>no</td>
+<td>Sampling-window identifier.</td>
+</tr>
+<tr>
+<td><code>split</code></td>
+<td><code>string</code></td>
+<td>no</td>
+<td>Legacy source sampling group (train/validation/test), not an authored benchmark partition.</td>
+</tr>
+<tr>
+<td><code>decoded_width</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Decoded pixel width.</td>
+</tr>
+<tr>
+<td><code>decoded_height</code></td>
+<td><code>int32</code></td>
+<td>yes</td>
+<td>Decoded pixel height.</td>
+</tr>
+<tr>
+<td><code>semantic_model_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>semantic_model_revision</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>semantic_checkpoint_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>semantic_fractions</code></td>
+<td><code>list&lt;element: struct&lt;class_id: int16, fraction: float&gt;&gt;</code></td>
+<td>yes</td>
+<td>List of class_id/fraction entries; machine-generated class-area fractions, not human truth.</td>
+</tr>
+<tr>
+<td><code>drivable_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>lane_marking_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>person_rider_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>two_wheeler_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>four_wheeler_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>building_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>vegetation_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>sky_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>depth_model_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>depth_model_revision</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>depth_checkpoint_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>depth_normalization_min</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source depth-map normalization bound; interpret with its encoding metadata.</td>
+</tr>
+<tr>
+<td><code>depth_normalization_max</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source depth-map normalization bound; interpret with its encoding metadata.</td>
+</tr>
+<tr>
+<td><code>depth_p10</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated metric-depth percentile, metres; not measured sensor depth.</td>
+</tr>
+<tr>
+<td><code>depth_p50</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated metric-depth percentile, metres; not measured sensor depth.</td>
+</tr>
+<tr>
+<td><code>depth_p90</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated metric-depth percentile, metres; not measured sensor depth.</td>
+</tr>
+<tr>
+<td><code>weather_model_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>weather_model_revision</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Retained source provenance/attribution metadata; not an evaluation result. Required licensing disclosures remain applicable.</td>
+</tr>
+<tr>
+<td><code>weather_clear_probability</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated condition score; not a validated calibrated probability.</td>
+</tr>
+<tr>
+<td><code>weather_overcast_probability</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated condition score; not a validated calibrated probability.</td>
+</tr>
+<tr>
+<td><code>weather_rain_probability</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated condition score; not a validated calibrated probability.</td>
+</tr>
+<tr>
+<td><code>weather_fog_probability</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated condition score; not a validated calibrated probability.</td>
+</tr>
+<tr>
+<td><code>weather_low_light_probability</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated condition score; not a validated calibrated probability.</td>
+</tr>
+<tr>
+<td><code>weather_uncertain_mixed_probability</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated condition score; not a validated calibrated probability.</td>
+</tr>
+<tr>
+<td><code>weather_label</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Weak condition label.</td>
+</tr>
+<tr>
+<td><code>weather_confidence</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source score for selected weak label; not calibrated accuracy.</td>
+</tr>
+<tr>
+<td><code>weather_margin</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source score separation; not calibrated uncertainty.</td>
+</tr>
+<tr>
+<td><code>weather_uncertain</code></td>
+<td><code>bool</code></td>
+<td>yes</td>
+<td>Source weak-label uncertainty flag.</td>
+</tr>
+<tr>
+<td><code>luminance_mean</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source image-quality statistic; scale/threshold follows the annotation schema, not a human quality label.</td>
+</tr>
+<tr>
+<td><code>luminance_p05</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source image-quality statistic; scale/threshold follows the annotation schema, not a human quality label.</td>
+</tr>
+<tr>
+<td><code>luminance_p95</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source image-quality statistic; scale/threshold follows the annotation schema, not a human quality label.</td>
+</tr>
+<tr>
+<td><code>contrast_std</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source image-quality statistic; scale/threshold follows the annotation schema, not a human quality label.</td>
+</tr>
+<tr>
+<td><code>saturation_mean</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source image-quality statistic; scale/threshold follows the annotation schema, not a human quality label.</td>
+</tr>
+<tr>
+<td><code>laplacian_variance</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Source image-quality statistic; scale/threshold follows the annotation schema, not a human quality label.</td>
+</tr>
+<tr>
+<td><code>dark_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>overexposed_fraction</code></td>
+<td><code>float</code></td>
+<td>yes</td>
+<td>Machine-generated class-area fraction; not human ground truth.</td>
+</tr>
+<tr>
+<td><code>semantic_file_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Referenced artifact file name/path in the source annotation record.</td>
+</tr>
+<tr>
+<td><code>semantic_byte_size</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Artifact byte count.</td>
+</tr>
+<tr>
+<td><code>semantic_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+<tr>
+<td><code>depth_file_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Referenced artifact file name/path in the source annotation record.</td>
+</tr>
+<tr>
+<td><code>depth_byte_size</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Artifact byte count.</td>
+</tr>
+<tr>
+<td><code>depth_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>no</td>
+<td>Source processing status; not privacy approval.</td>
+</tr>
+<tr>
+<td><code>error_type</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source processing error category, when present.</td>
+</tr>
+<tr>
+<td><code>error_message</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source processing diagnostic, when present.</td>
+</tr>
+<tr>
+<td><code>semantic_archive_path</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Published dense archive path.</td>
+</tr>
+<tr>
+<td><code>semantic_archive_member</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Member path inside the corresponding dense archive.</td>
+</tr>
+<tr>
+<td><code>depth_archive_path</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Published dense archive path.</td>
+</tr>
+<tr>
+<td><code>depth_archive_member</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Member path inside the corresponding dense archive.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="annotationsdense-index">annotations/dense-index</h2>
+<p>Example: <code>data/annotations/camera/dense-index/part-shard-0153c796105695e336f6f136046da2f002c09423d4f743e83ace14413215cb33.parquet</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Arrow type</th>
+<th>Nullable</th>
+<th>Meaning / unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>artifact_kind</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Dense artifact kind (semantic/depth as present).</td>
+</tr>
+<tr>
+<td><code>camera_name</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Named camera identity.</td>
+</tr>
+<tr>
+<td><code>dtype</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Dense member numeric encoding.</td>
+</tr>
+<tr>
+<td><code>frame_index</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Frame index in the referenced camera sequence.</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Pixel height.</td>
+</tr>
+<tr>
+<td><code>member_path</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Member path within a dense archive.</td>
+</tr>
+<tr>
+<td><code>payload_bytes</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Artifact byte count.</td>
+</tr>
+<tr>
+<td><code>payload_sha256</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>SHA-256 content identity (or JSON mapping of identities), not a quality metric.</td>
+</tr>
+<tr>
+<td><code>recording_id</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Date-free recording join key.</td>
+</tr>
+<tr>
+<td><code>recording_offset_ns</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Recording-relative timestamp, nanoseconds, for the sampled frame.</td>
+</tr>
+<tr>
+<td><code>shard_path</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Published dense archive path.</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td><code>int64</code></td>
+<td>yes</td>
+<td>Pixel width.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nested-calibration-and-gnss-fields">Nested calibration and GNSS fields</h2>
+<p>The inspected calibration <code>fields_json</code> contains <code>intrinsic</code> and <code>extrinsic</code>; obtain per-camera parameters and transforms there rather than substituting nominal lens specifications. GNSS <code>fields_json</code> contains the decoded pose fields; the flattened Viewer column dictionary in <a href="DATASET_SCHEMA.html">DATASET_SCHEMA.md</a> lists exposed position, velocity, orientation, validity, and RTK fields. It is a projection, not the normalized GNSS source schema.</p>
+<h2 id="producer-confirmed-seven-camera-extrinsics">Producer-confirmed seven-camera extrinsics</h2>
+<p>Every existing camera row in <code>data/tables/calibrations/</code> adds the non-null <code>calibrated_extrinsics</code> struct. Original columns and source JSON remain unchanged. This includes explicit camera identity, signed yaw/tilt, rig and front-reference camera centres in millimetres, and row-major homogeneous transforms with named direction. The tilted front camera is +4 degrees downward. The rig axes are X left, Y forward, Z up; the front reference subtracts [0,0,1546] mm and is not an optical frame. See <a href="CAMERA_EXTRINSICS.html">the complete schema, equations, provenance and join rules</a>. Existing source <code>schema_version</code> values are retained; the additive model is identified by its own <code>calibration_id</code>.</p>
+<h2 id="devkit-camera-timing-and-partial-recordings">Devkit camera timing and partial recordings</h2>
+<p>For every recording, the devkit defaults to camera payload <code>rec_timestamp</code> (<code>rec_time_offset_ns</code>) for camera selection, synchronization and exported times, and main <code>gnss</code> payload <code>timestamp</code> (<code>time_offset_ns</code>) for GNSS. Untimed quality-flagged GNSS messages define excluded gaps; leading portions can be trimmed from an export without rejecting the whole recording. Raw table fields and annotation source identities are unchanged. See <a href="DEVKIT_TIMING_POLICY.html">exact fields and trimming policy</a>.</p></main></body></html>

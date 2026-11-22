@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Camera and GNSS timing and trimming — INDUS-AD</title><link rel="stylesheet" href="../styles.css"></head><body><main class="doc-page"><a href="../index.html#resources">Back to INDUS-AD resources</a><p class="doc-source">Publisher reference, retrieved 21 November 2026. Dataset source revision: <code>4b414d527a2971ee9baebe2745447f95ac1fc535</code>. <a href="DEVKIT_TIMING_POLICY.md">Download Markdown</a>.</p><h1 id="camera-and-gnss-timing-and-trimming">Camera and GNSS timing and trimming</h1>
+<p>For every INDUS-AD recording, camera extraction, synchronization, frame selection, exported camera timestamps and ego-pose queries default to the camera payload <code>rec_timestamp</code>, published as <code>rec_time_offset_ns</code>. This policy also applies when the producer timestamp is present; it is not a fallback limited to missing producer timestamps. The main GNSS channel is <code>gnss</code>, using its payload <code>timestamp</code>, published as <code>time_offset_ns</code>. The devkit does not replace GNSS sensor time with logger time or combine <code>gnss</code> and <code>rec_gnss</code> into one trajectory.</p>
+<pre><code class="language-json">{
+  &quot;camera_batch_time_basis&quot;: &quot;rec_time_offset_ns&quot;,
+  &quot;gnss_channel&quot;: &quot;gnss&quot;,
+  &quot;gnss_time_basis&quot;: &quot;time_offset_ns&quot;
+}
+</code></pre>
+<p>Both offsets subtract the same recording anchor from their respective source fields. This preserves their original differences; subtraction does not calibrate clocks. Camera payload <code>timestamp</code> is a separate producer batch field. It can be zero while <code>rec_timestamp</code> is populated. Camera messages must have consistent recorded timestamps within the same source channel and message index. Per-camera source timestamps, raw tables and annotation source identities remain unchanged.</p>
+<h2 id="missing-gnss-messages">Missing GNSS messages</h2>
+<p>Some messages marked <code>is_valid=false</code> have no sensor timestamp, attitude or position. The reader does not reject an otherwise usable recording solely for these messages. It counts untimed messages in source order and marks the gap between the surrounding timestamped readings. It does not assign a logger timestamp, interpolate across that gap, invent a pose or assign a confidence value.</p>
+<p>Camera batches in an untimed GNSS gap are excluded from the exported target grid. A leading untimed portion before the first timestamped GNSS reading is trimmed from the exported selection; a trailing untimed portion after the last timestamped reading is treated similarly. Internal gaps remain excluded, while usable portions before and after them can be processed. Retained timestamps are not shifted to zero. Original videos and tables are not cut or rewritten. Excluded selected batches remain in the unused-batch audit, and GNSS samples retain untimed-message counts before and after them.</p>
+<p>Messages with a sensor timestamp but <code>is_valid=false</code> remain timed interpolation barriers under the existing quality policy. Missing diagnostics on these messages remain null. Valid messages still require the declared fields. Malformed identities, contradictory origins, nonmonotonic timed samples and other structural errors remain failures. A recording with no timestamped GNSS samples, or insufficient usable data for the requested scenes, cannot produce a valid export.</p>
+<h2 id="verified-affected-recordings">Verified affected recordings</h2>
+<p>The complete main-GNSS and recorded-GNSS tables were checked for both affected recordings:</p>
+<table>
+<thead>
+<tr>
+<th>Recording</th>
+<th style="text-align: right;">Main GNSS missing sensor time</th>
+<th style="text-align: right;">Recorded GNSS missing sensor and recorded time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>12-49-25.221-40d21e3d61dd406862e4a42a9f6de418</code></td>
+<td style="text-align: right;">326</td>
+<td style="text-align: right;">65</td>
+</tr>
+<tr>
+<td><code>11-46-51.922-ea6fa65e862f7b73626fb45a6400960f</code></td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+<p>The first recording has untimed messages near its beginning. The second has an internal gap near 3,750.50–3,752.08 seconds on the logger-relative timeline, with timed main-GNSS messages afterwards. These bounds locate the source messages; they are not substituted sensor timestamps. Switching to <code>rec_gnss</code> does not recover the missing information.</p>
+<p>Source checks matched the failing event in each of the 59 investigated recordings against its original immutable MCAP. This was a bounded event check, not a full decode of all source MCAPs. The 471 relevant camera/GNSS tables have identical Git objects across the retained history back to the October snapshot. Metadata acceptance, video-build acceptance and hardware synchronization accuracy are separate claims.</p>
+</main></body></html>

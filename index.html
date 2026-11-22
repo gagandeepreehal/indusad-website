@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=quickstart-contrast"></head>
+<body><a class="skip" href="#main">Skip to content</a><header class="wrap"><a class="brand" href="#" aria-label="INDUS-AD home"><span class="brand-symbol" aria-hidden="true"></span><span class="brand-text"><span class="brand-wordmark" aria-hidden="true"></span></span></a><nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#datasets">Datasets</a><a href="#devkit">Devkit</a><a href="#resources">Resources</a><a href="#contact">Contact</a></nav></header>
+
+<main id="main">
+<figure class="photo-banner"><a href="assets/banner-clean.png"><img src="assets/banner-clean.png" alt="Presentation collage of Bengaluru road views, adapted from publisher camera previews" width="2172" height="724"></a></figure>
+<section class="hero hero-banner-intro wrap"><h1>Indian roads.<br>Real-world complexity.</h1><div><p class="full-name">INDUS-AD: Indian Dataset of Unstructured Urban Scenes for Autonomous Driving</p><p class="hero-author">By Gagandeep Reehal</p><p class="dataset-positioning">The largest Indian autonomous driving dataset.</p><p class="lead">Multi-camera video, vehicle motion and scene signals from Bengaluru, India—connected for autonomous driving research.</p><div class="actions"><a class="button" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">Explore the dataset</a><a class="button outline" href="#get-started">Get started</a></div></div></section>
+<section class="stats" aria-label="Main dataset at a glance"><h2 class="main-metrics-heading">INDUS-AD <span>Multi-camera</span></h2><div><strong>1,469</strong><span>driving recordings</span></div><div><strong>9,927</strong><span>camera MP4s</span></div><div><strong>85.31 h</strong><span>recording timeline</span></div><div><strong>588.57 h</strong><span>summed camera-view time</span></div></section>
+<section class="companion-metrics" aria-label="Companion dataset metrics"><div class="companion-metric"><h2>INDUS-AD Monocam <span>Single-camera</span></h2><div class="companion-values"><div><strong>96</strong><span>single-camera recordings</span></div><div><strong>2.93 h</strong><span>indexed source-camera time</span></div><div><strong>105,692</strong><span>decoded camera frames</span></div></div></div><div class="companion-metric"><h2>INDUS-AD 3D <span>LiDAR</span></h2><div class="companion-values"><div><strong>8</strong><span>shared recordings</span></div><div><strong>76,052</strong><span>indexed LiDAR scans</span></div><div><strong>31</strong><span>LiDAR payload TAR shards</span></div></div></div></section>
+<p class="wrap stat-note">Figures from the published dataset cards. Camera-view time sums multiple perspectives on the same drives.</p>
+<nav class="contents wrap" aria-label="On this page"><a href="#overview">What is INDUS-AD?</a><a href="#sample-video">Watch sample</a><a href="#coverage">Roads &amp; cameras</a><a href="#data-schema">Data &amp; schema</a><a href="#layers">Inside the release</a><a href="#research">Research directions</a><a href="#datasets">Dataset family</a><a href="#comparison">Compare datasets</a><a href="#devkit">Devkit</a><a href="#resources">Documentation</a><a href="#access">Responsible access</a><a href="#licensing">Licensing</a></nav>
+<section id="overview" class="story wrap"><div><h2>Indian driving deserves direct study.</h2><p class="section-deck">A dataset for understanding how vehicles see and move through unstructured urban scenes.</p></div><div><p>A two-wheeler moves alongside a car. An auto-rickshaw enters the junction. Traffic negotiates space on a road where lane markings explain only part of what happens next. For anyone who has driven in Bengaluru, these interactions are familiar. For a model learning to understand driving, they are a demanding part of the world to represent.</p><p>The dataset brings together recorded camera video, timing and calibration tables, privacy-transformed GNSS/pose information, and sampled semantic and depth outputs. The aim is to give researchers a practical starting point for studying Indian traffic with data collected in that setting.</p><p>The main release contains approximately 4.006 TB in familiar MP4 and Parquet formats. Each recording has a stable <code>recording_id</code> connecting its different layers. You can explore a recording, choose the streams and time windows your experiment needs, and construct a task-specific subset without treating the entire collection as one download.</p><p>The audience includes researchers in autonomous driving, robotics, computer vision, video representation learning and data infrastructure. INDUS-AD provides observations and derived signals; researchers choose their own targets, filtering, synchronization and evaluation partitions.</p></div></section>
+<section id="sample-video" class="section video-section wrap"><div class="section-heading"><h2>One recording.<br>Six perspectives.</h2><p>Watch 15 seconds of Bengaluru driving across the six surround cameras. The views follow the same recorded frame IDs, with each camera labeled.</p></div><video controls playsinline preload="metadata" poster="assets/six-camera-poster.jpg" width="1920" height="720" aria-label="Fifteen-second INDUS-AD six-camera driving sample"><source src="assets/indus-ad-six-camera-sample.mp4" type="video/mp4">Your browser cannot play this video. <a href="assets/indus-ad-six-camera-sample.mp4">Download the six-camera sample.</a></video><div class="video-meta"><span>Front left · Front · Front right / Rear left · Rear · Rear right</span><div><a href="assets/indus-ad-six-camera-sample.mp4" download>Download video</a><a href="collateral/six-camera-video-provenance.json">Clip details</a></div></div></section>
+<section id="coverage" class="section wrap"><div class="section-heading"><h2>More than a view<br>through the windshield.</h2><p>A front camera tells only part of the story. A rider approaches from the side, a vehicle closes from behind, and a turn changes which view matters next.</p></div><div class="two-column"><div><h3>Six surround views, plus a tilted front view</h3><p>Front, front-left, front-right, rear, rear-left and rear-right video are present in all 1,469 main-release recordings. The additional tilted-front stream is available in 1,113 recordings; its absence in the remaining 356 is represented as missing data.</p><p>Multiple cameras provide complementary views of the same driving interval, supporting experiments that use the scene around the vehicle.</p></div><div class="table-scroll"><table><caption>Main-release camera availability</caption><thead><tr><th scope="col">Camera</th><th scope="col">Recordings</th></tr></thead><tbody><tr><td>Front</td><td>1,469</td></tr><tr><td>Front left / front right</td><td>1,469 each</td></tr><tr><td>Rear / rear left / rear right</td><td>1,469 each</td></tr><tr><td>Tilted front</td><td>1,113</td></tr></tbody></table><p class="note">Source: main <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">dataset card</a>. Inspect individual recording metadata before selecting streams.</p></div></div>
+<div class="media-pair"><figure><a href="assets/coverage-map.png"><img src="assets/coverage-map.png" alt="Aggregated route-density map across Bengaluru and surrounding road corridors" loading="lazy" width="1600" height="1080"></a><figcaption>Bengaluru route density. Brighter areas show a greater concentration of recorded routes.</figcaption></figure><div><h3>One regional setting, explored in depth</h3><p>The recordings cover Bengaluru and its surrounding road network. They offer a setting for studying mixed traffic, road-user interactions, changing scene context and the practical difficulties of working with real sensor recordings.</p><p>Repeated routes and neighboring clips can share context. Evaluation partitions should account for recording identity, temporal adjacency and scene or trajectory overlap.</p></div></div>
+<figure class="wide-media"><a href="assets/driving-conditions.png"><img src="assets/driving-conditions.png" alt="Four recorded road examples showing clear, overcast, wet-road and low-light scenes" loading="lazy" width="1600" height="900"></a><figcaption>Examples of clear, overcast, wet-road and low-light conditions from the publisher’s research collateral.</figcaption></figure></section>
+<section id="data-schema" class="section wrap"><div class="section-heading"><h2>What data is included?</h2><p>A field guide to the main INDUS-AD release, from camera frames to vehicle motion and scene annotations.</p></div>
+<div class="comparison-scroll" role="region" aria-label="INDUS-AD data fields" tabindex="0"><table><caption>Published data and example schema fields</caption><thead><tr><th scope="col">Data</th><th scope="col">What you get</th><th scope="col">Example fields</th></tr></thead><tbody>
+<tr><th scope="row">Camera video</th><td>Six surround views, plus tilted front where available. HEVC video in MP4 at approximately 10 FPS. Cadence varies, so use frame timestamps for alignment.</td><td>Camera name, frame count, codec, width and height</td></tr>
+<tr><th scope="row">Camera timing and calibration</th><td>Frame timestamps, camera intrinsics, distortion and mounting geometry. The documented video pipeline resizes 1920 × 1080 to 1280 × 720.</td><td><code>recording_id</code>, <code>frame_id</code>, <code>rec_time_offset_ns</code></td></tr>
+<tr><th scope="row">GNSS position</th><td>Latitude, longitude, height and local east/north/up coordinates. Published global horizontal positions have approximately 1 m resolution.</td><td><code>latitude_deg</code>, <code>longitude_deg</code>, <code>height_m</code>, <code>local_east_m</code>, <code>local_north_m</code></td></tr>
+<tr><th scope="row">Velocity and orientation</th><td>East, north and up velocity in m/s, plus roll, pitch and yaw in radians. Derive horizontal speed as the square root of east velocity squared plus north velocity squared.</td><td><code>velocity_east_mps</code>, <code>velocity_north_mps</code>, <code>velocity_up_mps</code>, <code>yaw_rad</code></td></tr>
+<tr><th scope="row">GNSS quality</th><td>Validity, fix type, RTK status and accuracy indicators. Check the validity flag before using coordinates or motion.</td><td><code>is_valid</code>, <code>position_fix_type</code>, <code>rtk_condition</code>, <code>hdop</code>, <code>east_sigma_m</code></td></tr>
+<tr><th scope="row">Sampled annotations</th><td>Model-generated semantic masks, depth maps, weather scores and image quality measures for selected frames.</td><td><code>frame_index</code>, <code>semantic_mask</code>, <code>depth_map</code>, <code>weather_label</code></td></tr>
+</tbody></table></div><p class="note">Join streams by <code>recording_id</code> and their documented timestamps. Position, velocity and orientation fields do not provide steering, throttle or brake commands.</p><div class="actions"><a class="button" href="collateral/DATASET_SCHEMA.html">Read the full schema</a><a class="button outline" href="collateral/TABLE_COLUMN_DICTIONARY.html">Browse the column dictionary</a></div></section>
+<section id="layers" class="section wrap"><div class="section-heading"><h2>Video, motion and scene signals.<br>Connected by recording.</h2><p>Start from the layer your question needs, then join deliberately. File counts, message counts and sampled labels describe different units.</p></div><div class="two-column"><div><h3>Video and normalized sensor tables</h3><p>The main release contains 9,927 MP4 files and matching camera-frame tables, plus 1,469 GNSS recording tables. Camera timing, calibration, motion, orientation, validity and sensor-quality fields make it possible to inspect the relationships behind a clip.</p><p>Normalized GNSS tables include channel identity, motion and sensor-quality fields. See the sensor reference for stream-specific analysis.</p><h3>Sampled semantic and depth outputs</h3><p>The 34,306 sampled camera-annotation rows include semantic class fractions, depth summaries, weather scores and image-quality features. Dense indexes connect these samples to semantic masks and depth maps in TAR archives.</p><p>Browse semantic and depth previews in the Viewer, or use the indexed archives for full-resolution outputs.</p></div><figure><a href="assets/dataset-layers.png"><img src="assets/dataset-layers.png" alt="Video, GNSS and motion, pseudo-labels and dense outputs joined through recording_id" loading="lazy" width="1600" height="900"></a><figcaption>Video, motion and derived scene layers connected through recording identity.</figcaption></figure></div>
+<div class="annotation-note"><h3>Sampled, model-generated annotations</h3><p>Semantic, depth and weather outputs are sparse pseudo-labels rather than human-verified ground truth. Coverage varies by camera and recording; check the published coverage guide when selecting supervision.</p><a href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/main/docs/annotation-coverage.md">Read annotation coverage and exact-join examples</a></div>
+<div class="media-pair"><figure><a href="assets/sensor-layout.png"><img src="assets/sensor-layout.png" alt="Publisher illustration of seven camera positions and an Ouster OS1-128 LiDAR on a vehicle" loading="lazy"></a><figcaption>Seven-camera and LiDAR rig illustration. See the mounting geometry reference for current numerical parameters.</figcaption></figure><div><h3>Documented sensor geometry and timing</h3><p>The reference documents define camera mounting coordinates, optical projection parameters, coordinate frames, units and transform direction.</p><p>Camera and GNSS timing policies, calibration conventions and missing-data handling are documented alongside the release.</p><p><a href="collateral/SENSOR_AND_TIMING_CONVENTIONS.html">Sensor and timing reference</a> · <a href="collateral/SENSOR_MOUNTING_GEOMETRY.html">Mounting geometry</a></p></div></div></section>
+<section id="research" class="section wrap"><div class="section-heading"><h2>Different questions.<br>A shared starting point.</h2><p>Build task-specific experiments across video learning, motion, perception and robotics data infrastructure.</p></div><div class="research-topics"><article><h3>Video and world models</h3><p>Explore temporal representations, future visual prediction and self-supervised learning from driving sequences. Multiple views support questions about relationships across cameras, while real traffic supplies changing interactions and scene context. Choose clip duration and sampling frequency to match the hypothesis.</p></article><article><h3>Pose-derived trajectory research</h3><p>Use video and valid pose histories to investigate future-motion targets or trajectory-oriented imitation learning. Document timing, coordinate frames, gap handling and target construction.</p></article><article><h3>Perception and weak supervision</h3><p>Study multi-camera context, sparse semantic/depth outputs and ways to select useful frames from longer recordings. Evaluate pseudo-label quality for your chosen task.</p></article><article><h3>Localization and data tooling</h3><p>Investigate GNSS/camera association, missing streams, timing gaps, quality filters and reproducible data selection. Preserve channel identity and validity flags.</p></article></div><figure class="wide-media"><a href="assets/research-policy.png"><img src="assets/research-policy.png" alt="Published dataset layers feed a researcher-defined policy to create a versioned task dataset" loading="lazy" width="1600" height="900"></a><figcaption>Define and record the policy that turns published observations into your experiment’s data.</figcaption></figure></section>
+<section id="datasets" class="datasets section wrap"><h2>Choose your starting point.</h2><p class="section-deck">Explore the main multi-camera release and its single-camera, LiDAR and sample companions.</p>
+<article class="dataset-entry"><div><h3>INDUS-AD</h3><p class="dataset-kind">Multi-camera video, GNSS and derived perception layers</p></div><div><p>The main camera/GNSS release: 1,469 recordings, 9,927 MP4s, 85.31 timeline hours and approximately 4.006 TB. Choose it for surround-view experiments and access to the wider set of normalized tables, sampled labels and dense references.</p><p>Six surround cameras are available across the release, with an additional tilted-front stream in a subset. It contains no LiDAR payloads. Access requests are reviewed manually.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">Explore INDUS-AD</a></div></article>
+<article class="dataset-entry"><div><h3>INDUS-AD Monocam</h3><p class="dataset-kind">A separate single-camera release</p></div><div><p>Monocam contains 96 front-camera MP4s and 105,692 decoded frames, with normalized sensor tables, 10,608 sampled frame-label rows and semantic/depth archives. The decoded release is approximately 36.02 GB, including 22.85 GB of video.</p><p>A smaller entry point for monocular perception and video workflows. Download selected MP4s for local playback if your browser does not support HEVC.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam">Explore Monocam</a></div></article>
+<article class="dataset-entry"><div><h3>INDUS-AD 3D</h3><p class="dataset-kind">The decoded LiDAR companion</p></div><div><p>The 3D release provides 76,052 indexed LiDAR scans for eight recordings shared with the main dataset, distributed across 31 payload TAR shards with recording, scan and calibration indexes. Join by exact <code>recording_id</code>, then assess timing for your task.</p><p>Use the main release alongside this LiDAR companion for camera and GNSS data. The current devkit supports the camera/GNSS workflow; LiDAR access uses the companion’s scan indexes and archives.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-3d">Explore the LiDAR companion</a></div></article>
+<article class="dataset-entry"><div><h3>INDUS-AD Sample</h3><p class="dataset-kind">A smaller selection of the main release</p></div><div><p>Explore eight complete recordings and 55 camera videos—16 minutes 43.7 seconds of driving—with matching GNSS tables and sampled semantic/depth outputs. The complete selection is about 9.53 GB.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-sample">Explore the sample</a></div></article>
+<p class="note"><a href="https://huggingface.co/collections/gagandeepreehal/indus-ad-the-largest-indian-autonomous-driving-dataset-6a8f637b09378311848e9835">View the publisher’s Hugging Face collection</a>. Release-specific counts and access details above were checked against current cards and metadata on 21 November 2026.</p></section>
+<section id="comparison" class="section comparison-section wrap"><div class="section-heading"><h2>INDUS-AD in context.</h2><p>Compare the geography, released data, scale and access terms of major driving datasets.</p></div><div class="comparison-scroll" role="region" aria-label="Driving dataset comparison table" tabindex="0"><table class="comparison-table"><caption>Published driving datasets: scope, release scale and access</caption>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Geography/scope</th>
+<th>Released data and recording length</th>
+<th>Published size</th>
+<th>Access/license</th>
+<th>Comparison note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">INDUS-AD</a></strong></td>
+<td>Bengaluru, India</td>
+<td><strong>1,469 recordings; 85.31 h released timeline; 588.57 summed camera-view h</strong></td>
+<td><strong>About 4.006 TB encoded release</strong></td>
+<td>Manual gate; CC BY-NC 4.0</td>
+<td>9,927 camera MP4s and normalized GNSS/calibration tables. Source and decoded representations overlap and must not be added.</td>
+</tr>
+<tr>
+<td><a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Autonomous-Vehicles">NVIDIA PhysicalAI Autonomous Vehicles</a></td>
+<td>Global, 25 countries</td>
+<td>1,700 h; 306,152 20-second clips</td>
+<td>133 TB</td>
+<td>Gated; NVIDIA AV Dataset License</td>
+<td>Multimodal clips, not India-focused.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenDriveLab/DriveAGI#opendv-2k">OpenDV-2K / OpenDV-YouTube</a></td>
+<td>Global, 244+ cities</td>
+<td>More than 1,700 h in reproducible YouTube component</td>
+<td>About 3 TB video; about 24 TB processed images</td>
+<td>Source-reproducible; underlying source terms</td>
+<td>Website video list; full-suite collection and reproducible component are distinct.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/motional/nuplan-devkit">nuPlan</a></td>
+<td>Four international cities</td>
+<td>More than 1,300 h; 15,000+ logs</td>
+<td>No single directly comparable total stated in cited overview</td>
+<td>Registration; dataset terms</td>
+<td>Planning logs and sensor packages have different scope.</td>
+</tr>
+<tr>
+<td><a href="https://bair.berkeley.edu/blog/2018/05/30/bdd/">BDD100K</a></td>
+<td>United States</td>
+<td>100,000 approximately 40-second videos; more than 1,000 h</td>
+<td>Not stated in cited overview</td>
+<td>Dataset terms</td>
+<td>Independent videos; not India-focused.</td>
+</tr>
+<tr>
+<td><a href="https://waymo.com/open/about/">Waymo Open Motion</a></td>
+<td>United States</td>
+<td>574 scenario-hours; 103,354 20-second segments</td>
+<td>Not stated in cited overview</td>
+<td>Dataset license</td>
+<td>Scenario time, not continuous road-coverage time.</td>
+</tr>
+<tr>
+<td><a href="https://argoverse.github.io/user-guide/datasets/sensor.html">Argoverse 2 Sensor</a></td>
+<td>United States</td>
+<td>4.2 h; 1,000 approximately 15-second scenes</td>
+<td>1 TB extracted</td>
+<td>CC BY-NC-SA 4.0</td>
+<td>Selected multimodal scenes.</td>
+</tr>
+<tr>
+<td><a href="https://idd3d.github.io/">IDD-3D</a></td>
+<td>Hyderabad, India</td>
+<td>Publisher reports over 5 h; 12,000 annotated LiDAR frames</td>
+<td><a href="https://insaan.iiit.ac.in/">236 GB</a></td>
+<td>Project access; dataset terms</td>
+<td>Camera/LiDAR corpus; annotated-frame count is separate from recording length.</td>
+</tr>
+<tr>
+<td><a href="https://huggingface.co/datasets/thirdeyelabs/indian-road-dataset">ThirdEye Indian Road Dataset</a></td>
+<td>Delhi NCR, India</td>
+<td>645,714 annotated keyframes; released continuous video duration not stated</td>
+<td>About 210 GB</td>
+<td>CC BY 4.0</td>
+<td>Image/mask/annotation TARs and GPS; continuous video is not listed.</td>
+</tr>
+<tr>
+<td>METEOR</td>
+<td>India</td>
+<td>1,250 one-minute videos; approximately 20.83 h</td>
+<td>Approximately 100 GB reported</td>
+<td>Dataset terms</td>
+<td>Annotated traffic videos with GPS trajectories and traffic-behaviour labels.</td>
+</tr>
+<tr>
+<td><a href="https://insaan.iiit.ac.in/">India Driving Dataset / IDD</a></td>
+<td>India</td>
+<td>117K-image portal release; continuous video duration not stated</td>
+<td>72 GB for IDD 117K</td>
+<td>Registration; research terms</td>
+<td>Image-centric subsets; raw collection time is not a released-video duration.</td>
+</tr>
+<tr>
+<td><a href="https://tihan.iith.ac.in/TiAND.html">DriveIndia / TiHAN camera release</a></td>
+<td>India</td>
+<td>66,986 annotated images reported; 120+ h describes collection, not verified released continuous footage</td>
+<td>Not stated</td>
+<td>EULA and access request</td>
+<td><a href="https://its.papercept.net/conferences/scripts/abstract.pl?ConfID=91&amp;Number=397">Official conference abstract</a> separates selected images from 120+ collection hours.</td>
+</tr>
+<tr>
+<td><a href="https://tihan.iith.ac.in/TiAND.html">TIAND / TiHAN multimodal</a></td>
+<td>India</td>
+<td>Download request offered for 2–4-minute scenes; complete released duration not stated</td>
+<td><a href="https://github.com/kumpati-aravind77/TIAND-Multimodal-Autonomous-Driving-Dataset-for-Complex-Indian-Traffic">Author repository</a> describes a roughly 37 GB sample</td>
+<td>Usage agreement and approval</td>
+<td><a href="https://tihan.iith.ac.in/ground-vehicles.html">60 TB is advertised as collection size</a>; complete released duration is unspecified.</td>
+</tr>
+</tbody>
+</table></div><p class="note">Reproduced from the <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">INDUS-AD dataset card</a>; source comparison checked 16 October 2026. Released timeline, summed camera-hours, scenario-hours and image counts describe different units. Unknown released durations remain unranked.</p></section>
+<section id="get-started" class="section wrap"><div class="section-heading"><h2>Start with one recording.<br>Scale when the workflow works.</h2><p>A multi-terabyte release does not require a multi-terabyte first experiment.</p></div><ol class="steps"><li><h3>Pick the release and review access</h3><p>Choose a dataset card, review its license and request access where required.</p></li><li><h3>Inspect the layers separately</h3><p>Browse recordings, camera annotations, GNSS and semantic/depth previews in the Viewer, or work directly with the published files.</p></li><li><h3>Pin a revision and download selectively</h3><p>Choose a recording, pin its dataset revision and download the videos, tables or dense layers your experiment needs.</p></li><li><h3>Define and validate your experiment</h3><p>Set your sampling and evaluation policy, inspect the selected output, then expand to a larger subset.</p></li></ol><figure class="wide-media"><a href="assets/explore-layers.png"><img src="assets/explore-layers.png" alt="Four access routes: Dataset Viewer, camera MP4s, normalized tables and dense semantic/depth layers" loading="lazy" width="1600" height="900"></a><figcaption>Choose an access path suited to your experiment rather than downloading every layer at once.</figcaption></figure></section>
+<section id="devkit" class="devkit"><div class="wrap"><h2>From recordings to reproducible subsets.</h2><p>The INDUS-AD devkit selects frames and scenes, interpolates GNSS poses, applies filters and scenario quotas, and exports validated train/test subsets with provenance in a nuScenes-compatible structure.</p><div class="actions"><a class="button light" href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/main/docs/quickstart-release.md">Run the devkit quickstart</a><a class="button dark-outline" href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/main/examples/indus_ad_v21_config.json">View example configuration</a><a class="button dark-outline" href="https://github.com/gagandeepreehal/indus-ad-devkit/releases/tag/v0.1.2">Get v0.1.2 alpha</a></div><div id="quickstart" class="quickstart-panel"><h3>Quickstart code</h3><p>Use Python 3.12 on Linux or macOS and sign in with a Hugging Face account approved for INDUS-AD. The example downloads about 209 MB of dataset files and needs about 2 GiB of working space plus the Python environment.</p><div class="citation-toolbar"><span>Bash</span><button type="button" data-copy-code="quickstart-code">Copy code</button></div><pre class="citation-code"><code id="quickstart-code">git clone https://github.com/gagandeepreehal/indus-ad-devkit.git
+cd indus-ad-devkit
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+hf auth login
+cp examples/indus_ad_v21_config.json dataset_config.json
+cp examples/indus_ad_annotations.jsonl annotations.jsonl
+indus-ad build --config dataset_config.json
+indus-ad validate --dataroot var/indus-ad-datasets/v1.0-trainval --version v1.0-trainval
+indus-ad inspect --dataroot var/indus-ad-datasets/v1.0-trainval --version v1.0-trainval</code></pre><span class="quickstart-status" role="status"></span></div><div class="devkit-details"><div><h3>A practical first build</h3><p>The six-camera quickstart selects approximately 209 MB of source artifacts and produces one scene, 48 samples and 288 images. Follow the quickstart guide for setup and working-space requirements.</p></div><div><h3>What compatibility means</h3><p>Exports follow the nuScenes file structure and supported loader behavior. This format compatibility does not add nuScenes annotations, maps or benchmark partitions.</p><p>Use Python 3.12 on Linux or macOS. The devkit supports camera/GNSS data; LiDAR ingestion is not included. Software and dataset licenses are listed in their respective repositories.</p></div></div><p class="fine"><a href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/main/docs/launch-validation.md">Production validation</a> · <a href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/main/docs/source-compatibility.md">Source compatibility</a> · <a href="https://github.com/gagandeepreehal/indus-ad-devkit/blob/main/docs/troubleshooting.md">Troubleshooting</a></p></div></section>
+<section id="resources" class="section wrap"><div class="section-heading"><h2>The details behind the data.</h2><p>Schemas, sensor conventions, calibration references and practical guidance for working with the data.</p></div><div class="doc-list">
+<a href="collateral/DATASET_SCHEMA.html"><strong>Dataset schema</strong><span>Viewer configurations, fields, publication layout and annotation coverage.</span></a>
+<a href="collateral/TABLE_COLUMN_DICTIONARY.html"><strong>Table column dictionary</strong><span>Source-table fields, timing, validity and interpretation guidance.</span></a>
+<a href="collateral/SENSOR_AND_TIMING_CONVENTIONS.html"><strong>Sensor &amp; timing conventions</strong><span>Camera identity, clock fields, sensor metadata and known limits.</span></a>
+<a href="collateral/DEVKIT_TIMING_POLICY.html"><strong>Devkit timing policy</strong><span>Recorded-camera timing, GNSS defaults, trimming and excluded gaps.</span></a>
+<a href="collateral/SENSOR_MOUNTING_GEOMETRY.html"><strong>Sensor mounting geometry</strong><span>Owner-confirmed positions, coordinate conventions and provenance.</span></a>
+<a href="collateral/CAMERA_EXTRINSICS.html"><strong>Camera extrinsics</strong><span>Rig and reference frames, signed angles and transform direction.</span></a>
+<a href="collateral/CAMERA_INTRINSICS.html"><strong>Camera intrinsics</strong><span>Projection parameters and the documented image-resize convention.</span></a>
+<a href="collateral/THIRD_PARTY_NOTICES.html"><strong>Third-party notices</strong><span>Model attribution, pinned references and upstream licensing notes.</span></a>
+<a href="collateral/DATASET_PRIVACY_AND_TAKEDOWN.html"><strong>Privacy &amp; takedown policy</strong><span>Published privacy scope, private reporting and recording withdrawals.</span></a></div><p class="note">Reference pages and downloadable files are available here.</p></section>
+<section id="access" class="access wrap"><div><h2>Research use.<br>Responsible access.</h2><p class="section-deck">Useful data needs clear limits, traceable sources and a route for concerns.</p></div><div><h3>Licensing and access</h3><p>Published dataset releases use CC BY-NC 4.0 for non-commercial use, subject to their individual access requirements. Attribute the source and identify the release used. For raw recordings or commercial use, <a href="#licensing">contact the author about a separate license</a>.</p><h3>Privacy transformations and residual risk</h3><p>Published videos use automated face and plate blur, and GNSS publication reduces global position precision while retaining local motion geometry. These transformations do not guarantee anonymity. Do not re-identify or track people or expose sensitive locations.</p><h3>Report concerns privately</h3><p>Send privacy or takedown concerns privately to <a href="mailto:indus-ad@gagandeepreehal.com?subject=Dataset%20privacy%20or%20takedown%20request">indus-ad@gagandeepreehal.com</a>, including the recording ID or artifact path when known.</p><h3>Evaluation and deployment limits</h3><p>Researchers define their own train, validation and test partitions; Viewer split names are publication labels. The releases are intended for research, not validated production driving or safety decisions.</p><a class="text-link" href="collateral/DATASET_PRIVACY_AND_TAKEDOWN.html">Read the complete privacy and takedown policy</a></div></section>
+<section id="licensing" class="licensing-section"><div class="wrap licensing-content"><div><h2>Raw recordings &amp;<br>commercial licensing.</h2><p>Need raw source recordings for an appropriate use case, or a commercial license for your product or research programme? Contact Gagandeep Reehal to discuss licensing options.</p><p>Share your organisation, intended use, data requirements and preferred scope. Availability, permitted uses and pricing are agreed case by case under a separate license.</p></div><div class="licensing-action"><a class="button" href="mailto:indus-ad@gagandeepreehal.com?subject=INDUS-AD%20raw%20recordings%20or%20commercial%20licensing">Enquire about licensing</a><a href="mailto:indus-ad@gagandeepreehal.com">indus-ad@gagandeepreehal.com</a></div></div></section>
+<section id="contact" class="contact-section wrap"><div><h2>Get in touch.</h2><p class="section-deck">Questions about the data, research collaborations or feedback on the tools? Contact the author.</p></div><div class="contact-details"><h3>Gagandeep Reehal</h3><p>Author and publisher of INDUS-AD</p><a class="contact-email" href="mailto:indus-ad@gagandeepreehal.com">indus-ad@gagandeepreehal.com</a><p>For privacy or takedown requests, email the same address privately with the recording ID or artifact path.</p><div class="contact-links"><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad/discussions">Dataset questions</a><a href="https://github.com/gagandeepreehal/indus-ad-devkit/issues">Devkit issues &amp; feedback</a><a href="https://github.com/gagandeepreehal">GitHub</a></div></div></section>
+<section id="citation" class="citation wrap"><h2>Cite the resources you use.</h2><p>Use the citation for each dataset release used in your work, and cite the devkit separately when using its software.</p><h3 class="citation-title">INDUS-AD</h3><p>Gagandeep Reehal. 2026. <em>INDUS-AD: Indian Dataset of Unstructured Urban Scenes for Autonomous Driving.</em> <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">Hugging Face dataset</a>.</p><div class="citation-toolbar"><span>BibTeX</span><div><a href="collateral/indus-ad.bib" download>Download .bib</a><button type="button" id="copy-citation" data-citation="citation-bibtex" data-status="citation-status">Copy citation</button></div></div><pre class="citation-code"><code id="citation-bibtex">@dataset{indus_ad_2026,
+  author    = {Gagandeep Reehal},
+  title     = {INDUS-AD: Indian Dataset of Unstructured Urban Scenes for Autonomous Driving},
+  year      = {2026},
+  publisher = {Gagandeep Reehal},
+  url       = {https://huggingface.co/datasets/gagandeepreehal/indus-ad}
+}</code></pre><p id="citation-status" class="citation-status" role="status" aria-live="polite"></p><div class="citation-entry"><h3 class="citation-title">INDUS-AD 3D</h3><p>Gagandeep Reehal. 2026. <em>INDUS-AD 3D: LiDAR companion to INDUS-AD.</em> <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-3d">Hugging Face dataset</a>.</p><div class="citation-toolbar"><span>BibTeX</span><div><a href="collateral/indus-ad-3d.bib" download>Download .bib</a><button type="button" data-citation="citation-3d" data-status="status-3d" aria-label="Copy INDUS-AD 3D citation">Copy citation</button></div></div><pre class="citation-code"><code id="citation-3d">@dataset{indus_ad_3d_2026,
+  author    = {Gagandeep Reehal},
+  title     = {INDUS-AD 3D: LiDAR companion to INDUS-AD},
+  year      = {2026},
+  publisher = {Gagandeep Reehal},
+  url       = {https://huggingface.co/datasets/gagandeepreehal/indus-ad-3d}
+}</code></pre><p id="status-3d" class="citation-status" role="status" aria-live="polite"></p></div><div class="citation-entry"><h3 class="citation-title">INDUS-AD Monocam</h3><p>Gagandeep Reehal. 2026. <em>INDUS-AD Monocam: Decoded Single-Camera Driving Dataset.</em> <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam">Hugging Face dataset</a>.</p><div class="citation-toolbar"><span>BibTeX</span><div><a href="collateral/indus-ad-monocam.bib" download>Download .bib</a><button type="button" data-citation="citation-monocam" data-status="status-monocam" aria-label="Copy INDUS-AD Monocam citation">Copy citation</button></div></div><pre class="citation-code"><code id="citation-monocam">@dataset{indus_ad_monocam_2026,
+  author    = {Gagandeep Reehal},
+  title     = {INDUS-AD Monocam: Decoded Single-Camera Driving Dataset},
+  year      = {2026},
+  publisher = {Gagandeep Reehal},
+  url       = {https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam}
+}</code></pre><p id="status-monocam" class="citation-status" role="status" aria-live="polite"></p></div><div class="citation-entry"><h3 class="citation-title">INDUS-AD Devkit</h3><p>Gagandeep Reehal. 2026. <em>INDUS-AD Devkit.</em> Version 0.1.2. <a href="https://github.com/gagandeepreehal/indus-ad-devkit">GitHub software</a>.</p><div class="citation-toolbar"><span>BibTeX</span><div><a href="collateral/indus-ad-devkit.bib" download>Download .bib</a><button type="button" data-citation="citation-devkit" data-status="status-devkit" aria-label="Copy INDUS-AD Devkit citation">Copy citation</button></div></div><pre class="citation-code"><code id="citation-devkit">@software{indus_ad_devkit_2026,
+  author    = {Gagandeep Reehal},
+  title     = {INDUS-AD Devkit},
+  year      = {2026},
+  version   = {0.1.2},
+  url       = {https://github.com/gagandeepreehal/indus-ad-devkit}
+}</code></pre><p id="status-devkit" class="citation-status" role="status" aria-live="polite"></p></div><p class="note">Include the dataset revision and any devkit version used in your experiment.</p></section></main>
+<footer class="wrap"><div><strong>INDUS-AD</strong><p>Indian Dataset of Unstructured Urban Scenes for Autonomous Driving</p><p>Author and publisher: Gagandeep Reehal.</p><p>Preview images © Gagandeep Reehal · <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>. Public imagery is provided through the <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-assets">separate assets repository</a>. <a href="collateral/ASSET_SOURCES.html">Image sources and attribution</a>.</p><p>Dataset information checked 21 November 2026.</p></div><nav aria-label="Footer"><a href="https://huggingface.co/collections/gagandeepreehal/indus-ad-the-largest-indian-autonomous-driving-dataset-6a8f637b09378311848e9835">Dataset collection</a><a href="collateral/DATASET_PRIVACY_AND_TAKEDOWN.html">Privacy &amp; takedown</a><a href="#contact">Contact</a></nav></footer><script src="site.js" defer></script></body></html>
