@@ -108,3 +108,15 @@
   .distribution-row dd { grid-template-columns: minmax(1.2rem, 1fr) max-content; gap: 5px; }
   .distribution-value { grid-template-columns: 2.8rem 2.5rem; gap: 3px; }
 }
+
+/* Paired series for the obstacle distribution charts. */
+.obstacle-series, .obstacle-downloads { display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px; }
+.obstacle-series { margin: 10px 0 0; font-size: .87rem; color: var(--muted); }
+.obstacle-series span { display: inline-flex; align-items: center; gap: 7px; }
+.obstacle-series i { width: 10px; height: 10px; border-radius: 50%; background: #087d7a; }
+.obstacle-series span:nth-child(2) i { background: #4056a1; }
+.obstacle-grid .distribution-row dd { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+.obstacle-bar { display: grid; grid-template-columns: minmax(0, 1fr) 3.35rem; gap: 8px; align-items: center; }
+.obstacle-bar strong { font-size: .86rem; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.obstacle-bar .distribution-track > span { background: #087d7a; }
+.obstacle-bar + .obstacle-bar .distribution-track > span { background: #4056a1; }

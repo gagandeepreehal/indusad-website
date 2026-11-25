@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=distributions-v2"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=obstacle-charts-v1"></head>
 <body><a class="skip" href="#main">Skip to content</a><header class="wrap"><a class="brand" href="#" aria-label="INDUS-AD home"><span class="brand-symbol" aria-hidden="true"></span><span class="brand-text"><span class="brand-wordmark" aria-hidden="true"></span></span></a><nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#datasets">Datasets</a><a href="#devkit">Devkit</a><a href="#resources">Resources</a><a href="#contact">Contact</a></nav></header>
 
 <main id="main">
@@ -79,14 +79,59 @@
     </div>
   </section>
 
-  <article id="obstacle-types-and-depth" class="distribution-card" aria-labelledby="obstacle-types-depth-heading">
-    <h4 id="obstacle-types-depth-heading">Obstacle types and distance</h4>
-    <p class="distribution-card-note">Obstacles estimated to be under 10 m cover an average of <strong>6.95% of the Multicam image</strong> and <strong>0.78% of the Monocam image</strong>. Barriers and bins account for 16.2% and 5.0% of obstacle pixels, respectively.</p>
-    <p class="distribution-card-note">The distance bands use model-estimated depth. The chart shows the share of obstacle pixels in each type and distance band.</p>
-    <a href="assets/distribution/obstacle-type-and-distance.png"><img src="assets/distribution/obstacle-type-and-distance.png" alt="Bar charts comparing obstacle pixel shares by type and distance in Multicam and Monocam" width="1980" height="1008" style="display:block;width:100%;height:auto" loading="lazy"></a>
-    <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad/tree/main/data/annotations/scenario/depth-aware/v1">Multicam tables</a>
-    <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam/tree/main/data/annotations/scenario/depth-aware/v1">Monocam tables</a>
-  </article>
+  <section id="obstacle-types-and-depth" class="distribution-group" aria-labelledby="obstacle-types-depth-heading">
+    <h3 id="obstacle-types-depth-heading">What fills the camera view?</h3>
+    <p class="distribution-sample">Both charts show shares of obstacle-labelled pixels in sampled frames.</p>
+    <p class="obstacle-series"><span><i aria-hidden="true"></i><strong>Multicam</strong> · 34,306 frames</span><span><i aria-hidden="true"></i><strong>Monocam</strong> · 10,608 front-camera frames</span></p>
+    <div class="distribution-grid obstacle-grid">
+      <article class="distribution-card" aria-labelledby="obstacle-by-type">
+        <h4 id="obstacle-by-type">By obstacle type</h4>
+        <p class="distribution-card-note">Barriers and bins account for 16.2% of obstacle pixels in Multicam and 5.0% in Monocam.</p>
+        <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Vehicles</dt><dd>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:77.82632%"></span></span><strong>77.8%</strong></div>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:83.28733%"></span></span><strong>83.3%</strong></div>
+        </dd></div>
+        <div class="distribution-row"><dt>People and riders</dt><dd>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:5.93345%"></span></span><strong>5.9%</strong></div>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:11.03241%"></span></span><strong>11.0%</strong></div>
+        </dd></div>
+        <div class="distribution-row"><dt>Barriers and bins</dt><dd>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:16.21736%"></span></span><strong>16.2%</strong></div>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:5.04893%"></span></span><strong>5.0%</strong></div>
+        </dd></div>
+        <div class="distribution-row"><dt>Animals</dt><dd>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.02288%"></span></span><strong>&lt;0.1%</strong></div>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.63132%"></span></span><strong>0.6%</strong></div>
+        </dd></div>
+        </dl>
+      </article>
+      <article class="distribution-card" aria-labelledby="obstacle-by-distance">
+        <h4 id="obstacle-by-distance">By estimated distance</h4>
+        <p class="distribution-card-note">Obstacles under 10 m cover 6.95% of the <strong>full Multicam image</strong> and 0.78% of the <strong>full Monocam image</strong> on average.</p>
+        <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Under 10 m</dt><dd>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:46.74202%"></span></span><strong>46.7%</strong></div>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:31.69017%"></span></span><strong>31.7%</strong></div>
+        </dd></div>
+        <div class="distribution-row"><dt>10 to under 25 m</dt><dd>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:39.11504%"></span></span><strong>39.1%</strong></div>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:43.42928%"></span></span><strong>43.4%</strong></div>
+        </dd></div>
+        <div class="distribution-row"><dt>25 m or farther</dt><dd>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:14.14294%"></span></span><strong>14.1%</strong></div>
+          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:24.88055%"></span></span><strong>24.9%</strong></div>
+        </dd></div>
+        </dl>
+      </article>
+    </div>
+    <p class="distribution-footnote">Distances come from model-estimated depth. The samples differ in camera views and framing.</p>
+    <div class="obstacle-downloads">
+      <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad/tree/main/data/annotations/scenario/depth-aware/v1">Multicam tables</a>
+      <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam/tree/main/data/annotations/scenario/depth-aware/v1">Monocam tables</a>
+      <a class="distribution-download" href="assets/distribution/obstacle-type-and-distance.png">View chart image</a>
+    </div>
+  </section>
 
   <section class="distribution-group" aria-labelledby="distribution-gnss">
     <h3 id="distribution-gnss">When, where, and how the vehicle moved</h3>
