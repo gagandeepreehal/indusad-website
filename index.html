@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=quickstart-contrast"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=distributions-v2"></head>
 <body><a class="skip" href="#main">Skip to content</a><header class="wrap"><a class="brand" href="#" aria-label="INDUS-AD home"><span class="brand-symbol" aria-hidden="true"></span><span class="brand-text"><span class="brand-wordmark" aria-hidden="true"></span></span></a><nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#datasets">Datasets</a><a href="#devkit">Devkit</a><a href="#resources">Resources</a><a href="#contact">Contact</a></nav></header>
 
 <main id="main">
@@ -14,10 +14,123 @@
 <section id="coverage" class="section wrap"><div class="section-heading"><h2>More than a view<br>through the windshield.</h2><p>A front camera tells only part of the story. A rider approaches from the side, a vehicle closes from behind, and a turn changes which view matters next.</p></div><div class="two-column"><div><h3>Six surround views, plus a tilted front view</h3><p>Front, front-left, front-right, rear, rear-left and rear-right video are present in all 1,469 main-release recordings. The additional tilted-front stream is available in 1,113 recordings; its absence in the remaining 356 is represented as missing data.</p><p>Multiple cameras provide complementary views of the same driving interval, supporting experiments that use the scene around the vehicle.</p></div><div class="table-scroll"><table><caption>Main-release camera availability</caption><thead><tr><th scope="col">Camera</th><th scope="col">Recordings</th></tr></thead><tbody><tr><td>Front</td><td>1,469</td></tr><tr><td>Front left / front right</td><td>1,469 each</td></tr><tr><td>Rear / rear left / rear right</td><td>1,469 each</td></tr><tr><td>Tilted front</td><td>1,113</td></tr></tbody></table><p class="note">Source: main <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">dataset card</a>. Inspect individual recording metadata before selecting streams.</p></div></div>
 <div class="media-pair"><figure><a href="assets/coverage-map.png"><img src="assets/coverage-map.png" alt="Aggregated route-density map across Bengaluru and surrounding road corridors" loading="lazy" width="1600" height="1080"></a><figcaption>Bengaluru route density. Brighter areas show a greater concentration of recorded routes.</figcaption></figure><div><h3>One regional setting, explored in depth</h3><p>The recordings cover Bengaluru and its surrounding road network. They offer a setting for studying mixed traffic, road-user interactions, changing scene context and the practical difficulties of working with real sensor recordings.</p><p>Repeated routes and neighboring clips can share context. Evaluation partitions should account for recording identity, temporal adjacency and scene or trajectory overlap.</p></div></div>
 <figure class="wide-media"><a href="assets/driving-conditions.png"><img src="assets/driving-conditions.png" alt="Four recorded road examples showing clear, overcast, wet-road and low-light scenes" loading="lazy" width="1600" height="900"></a><figcaption>Examples of clear, overcast, wet-road and low-light conditions from the publisher’s research collateral.</figcaption></figure></section>
-<section id="data-distributions" class="section wrap"><div class="section-heading"><h2>Data distributions.</h2><p>See the balance of recording lengths, conditions, roads, time of day, and vehicle motion. Each chart identifies the sampling unit.</p></div>
-<div class="media-pair"><figure><a href="assets/distribution/indus-ad-recording-duration.png"><img src="assets/distribution/indus-ad-recording-duration.png" alt="Recording duration across 1,469 recordings, using the longest camera stream per recording" width="1120" height="665" loading="lazy"></a><figcaption>Most recordings are under a minute. The release also includes 87 recordings of at least ten minutes.</figcaption></figure><figure><a href="assets/distribution/indus-ad-camera-conditions.png"><img src="assets/distribution/indus-ad-camera-conditions.png" alt="Camera-condition labels across 34,306 sampled frames, with clear and overcast most common" width="1120" height="665" loading="lazy"></a><figcaption>Camera conditions are machine-generated labels for sampled frames.</figcaption></figure></div>
-<div class="media-pair"><figure><a href="assets/distribution/indus-ad-road-context.png"><img src="assets/distribution/indus-ad-road-context.png" alt="Mapped road context in 31,464 GNSS windows, including 4,853 unmatched windows" width="1120" height="665" loading="lazy"></a><figcaption>Road groups come from matches to OpenStreetMap. Unmatched windows are shown. Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>.</figcaption></figure><figure><a href="assets/distribution/indus-ad-time-of-day.png"><img src="assets/distribution/indus-ad-time-of-day.png" alt="Time of day across 31,464 GNSS windows, with 73.8 percent in the afternoon and 1.0 percent at night" width="1120" height="665" loading="lazy"></a><figcaption>The GNSS sample is concentrated in the afternoon, with 318 night windows.</figcaption></figure></div>
-<div class="media-pair"><figure><a href="assets/distribution/indus-ad-gnss-motion.png"><img src="assets/distribution/indus-ad-gnss-motion.png" alt="Primary vehicle-motion labels in 31,464 GNSS windows, with cruising the most common label" width="1120" height="665" loading="lazy"></a><figcaption>Motion labels come from rules applied to GNSS traces. Unknown motion is shown explicitly.</figcaption></figure><figure><a href="assets/distribution/indus-ad-traffic-density.png"><img src="assets/distribution/indus-ad-traffic-density.png" alt="Visible vehicle area across 34,306 sampled frames, grouped into four area bins" width="1120" height="665" loading="lazy"></a><figcaption>The traffic-density proxy measures the share of sampled image pixels occupied by vehicles.</figcaption></figure></div>
+<section id="data-distributions" class="section wrap distribution-section" aria-labelledby="distribution-heading">
+  <div class="section-heading">
+    <h2 id="distribution-heading">Data distributions.</h2>
+    <p>INDUS-AD has many short recordings and a much smaller set of long drives. The longer recordings account for most of the timeline.</p>
+  </div>
+
+  <section class="distribution-duration" aria-labelledby="distribution-length">
+    <div class="distribution-duration-header">
+      <div><h3 id="distribution-length">Most driving time comes from 87 recordings.</h3><p>Recordings of ten minutes or more make up 5.9% of the collection by count and provide 61.9 hours of footage.</p></div>
+      <a class="distribution-download" href="assets/distribution/indus-ad-recording-duration.png">View chart image<span class="distribution-visually-hidden"> for recording length</span></a>
+    </div>
+<div class="distribution-grid distribution-length-grid">
+    <article class="distribution-card"><h4>Share of recordings</h4><p class="distribution-card-note">1,469 recordings</p>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Under 1 min</dt><dd><span class="distribution-track is-count is-highlighted" aria-hidden="true"><span style="--share:74.2001%"></span></span><span class="distribution-value"><strong>74.2%</strong><span>1,090</span></span></dd></div>
+        <div class="distribution-row"><dt>1 to &lt;2 min</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:10.8918%"></span></span><span class="distribution-value"><strong>10.9%</strong><span>160</span></span></dd></div>
+        <div class="distribution-row"><dt>2 to &lt;5 min</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:5.4459%"></span></span><span class="distribution-value"><strong>5.4%</strong><span>80</span></span></dd></div>
+        <div class="distribution-row"><dt>5 to &lt;10 min</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:3.5398%"></span></span><span class="distribution-value"><strong>3.5%</strong><span>52</span></span></dd></div>
+        <div class="distribution-row"><dt>10 min or more</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:5.9224%"></span></span><span class="distribution-value"><strong>5.9%</strong><span>87</span></span></dd></div>
+      </dl>
+    </article>
+    <article class="distribution-card"><h4>Share of driving time</h4><p class="distribution-card-note">85.31 hours</p>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Under 1 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:11.0241%"></span></span><span class="distribution-value"><strong>11.0%</strong><span>9.4 h</span></span></dd></div>
+        <div class="distribution-row"><dt>1 to &lt;2 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:4.4006%"></span></span><span class="distribution-value"><strong>4.4%</strong><span>3.8 h</span></span></dd></div>
+        <div class="distribution-row"><dt>2 to &lt;5 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:4.8939%"></span></span><span class="distribution-value"><strong>4.9%</strong><span>4.2 h</span></span></dd></div>
+        <div class="distribution-row"><dt>5 to &lt;10 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:7.1203%"></span></span><span class="distribution-value"><strong>7.1%</strong><span>6.1 h</span></span></dd></div>
+        <div class="distribution-row"><dt>10 min or more</dt><dd><span class="distribution-track is-time is-highlighted" aria-hidden="true"><span style="--share:72.5611%"></span></span><span class="distribution-value"><strong>72.6%</strong><span>61.9 h</span></span></dd></div>
+      </dl>
+    </article>
+    </div>
+    <p class="distribution-footnote">Timeline uses the longest camera stream in each recording, so time recorded by simultaneous views is counted once.</p>
+  </section>
+
+  <section class="distribution-group" aria-labelledby="distribution-camera">
+    <h3 id="distribution-camera">What the cameras saw</h3>
+    <p class="distribution-sample"><strong>34,306 sampled frames.</strong> The standard front camera supplies 91.6% of the sample. Both charts use model-generated labels.</p>
+    <div class="distribution-grid">
+    <article class="distribution-card" aria-labelledby="indus-ad-camera-conditions">
+      <h4 id="indus-ad-camera-conditions">Weather and visibility</h4>
+      <p class="distribution-card-note">Clear and overcast together account for 81.1% of the labels. Low light / night is an image label.</p>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Clear</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:48.9506%"></span></span><span class="distribution-value"><strong>49.0%</strong><span>16,793</span></span></dd></div>
+        <div class="distribution-row"><dt>Overcast</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:32.1431%"></span></span><span class="distribution-value"><strong>32.1%</strong><span>11,027</span></span></dd></div>
+        <div class="distribution-row"><dt>Uncertain / mixed</dt><dd><span class="distribution-track is-unknown" aria-hidden="true"><span style="--share:8.8906%"></span></span><span class="distribution-value"><strong>8.9%</strong><span>3,050</span></span></dd></div>
+        <div class="distribution-row"><dt>Low light / night</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:5.5413%"></span></span><span class="distribution-value"><strong>5.5%</strong><span>1,901</span></span></dd></div>
+        <div class="distribution-row"><dt>Rain / wet road</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:2.8071%"></span></span><span class="distribution-value"><strong>2.8%</strong><span>963</span></span></dd></div>
+        <div class="distribution-row"><dt>Fog / haze</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:1.6673%"></span></span><span class="distribution-value"><strong>1.7%</strong><span>572</span></span></dd></div>
+      </dl>
+      <a class="distribution-download" href="assets/distribution/indus-ad-camera-conditions.png">View chart image<span class="distribution-visually-hidden"> for weather and visibility</span></a>
+    </article>
+    <article class="distribution-card" aria-labelledby="indus-ad-traffic-density">
+      <h4 id="indus-ad-traffic-density">Traffic density</h4>
+      <p class="distribution-card-note">Rows group frames by the percentage of vehicle pixels. The values on the right show each group’s share and frame count.</p>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>&lt;0.5%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:4.1742%"></span></span><span class="distribution-value"><strong>4.2%</strong><span>1,432</span></span></dd></div>
+        <div class="distribution-row"><dt>0.5% to &lt;3%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:11.9367%"></span></span><span class="distribution-value"><strong>11.9%</strong><span>4,095</span></span></dd></div>
+        <div class="distribution-row"><dt>3% to &lt;8%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:27.6103%"></span></span><span class="distribution-value"><strong>27.6%</strong><span>9,472</span></span></dd></div>
+        <div class="distribution-row"><dt>8% or more</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:56.2788%"></span></span><span class="distribution-value"><strong>56.3%</strong><span>19,307</span></span></dd></div>
+      </dl>
+      <a class="distribution-download" href="assets/distribution/indus-ad-traffic-density.png">View chart image<span class="distribution-visually-hidden"> for traffic density</span></a>
+    </article>
+    </div>
+  </section>
+
+  <section class="distribution-group" aria-labelledby="distribution-gnss">
+    <h3 id="distribution-gnss">When, where, and how the vehicle moved</h3>
+    <p class="distribution-sample"><strong>31,464 nominal ten-second GNSS windows.</strong> Each chart uses these same windows. Shares describe the analysed recordings.</p>
+    <div class="distribution-grid distribution-grid-three">
+    <article class="distribution-card" aria-labelledby="indus-ad-time-of-day">
+      <h4 id="indus-ad-time-of-day">Time of day</h4>
+      <p class="distribution-card-note">Times are local to Bengaluru. All 318 night windows come from nine recordings across two dates.</p>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Morning</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:10.0432%"></span></span><span class="distribution-value"><strong>10.0%</strong><span>3,160</span></span></dd></div>
+        <div class="distribution-row"><dt>Afternoon</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:73.8082%"></span></span><span class="distribution-value"><strong>73.8%</strong><span>23,223</span></span></dd></div>
+        <div class="distribution-row"><dt>Evening</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:15.1379%"></span></span><span class="distribution-value"><strong>15.1%</strong><span>4,763</span></span></dd></div>
+        <div class="distribution-row"><dt>Night</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:1.0107%"></span></span><span class="distribution-value"><strong>1.0%</strong><span>318</span></span></dd></div>
+      </dl>
+      <a class="distribution-download" href="assets/distribution/indus-ad-time-of-day.png">View chart image<span class="distribution-visually-hidden"> for time of day</span></a>
+    </article>
+    <article class="distribution-card" aria-labelledby="indus-ad-road-context">
+      <h4 id="indus-ad-road-context">Road types</h4>
+      <p class="distribution-card-note">Main roads include major through roads and highways. No map match means we could not assign a road type.</p>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Main roads</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:59.3281%"></span></span><span class="distribution-value"><strong>59.3%</strong><span>18,667</span></span></dd></div>
+        <div class="distribution-row"><dt>Local streets</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:15.6528%"></span></span><span class="distribution-value"><strong>15.7%</strong><span>4,925</span></span></dd></div>
+        <div class="distribution-row"><dt>Connecting roads</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:8.8673%"></span></span><span class="distribution-value"><strong>8.9%</strong><span>2,790</span></span></dd></div>
+        <div class="distribution-row"><dt>Several road types</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.7278%"></span></span><span class="distribution-value"><strong>0.7%</strong><span>229</span></span></dd></div>
+        <div class="distribution-row"><dt>No map match</dt><dd><span class="distribution-track is-unknown" aria-hidden="true"><span style="--share:15.4240%"></span></span><span class="distribution-value"><strong>15.4%</strong><span>4,853</span></span></dd></div>
+      </dl>
+      <a class="distribution-download" href="assets/distribution/indus-ad-road-context.png">View chart image<span class="distribution-visually-hidden"> for road types</span></a>
+    </article>
+    <article class="distribution-card" aria-labelledby="indus-ad-gnss-motion">
+      <h4 id="indus-ad-gnss-motion">Vehicle motion</h4>
+      <p class="distribution-card-note">Rules applied to GNSS traces assign motion labels. Unknown motion stays visible.</p>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Cruising</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:31.7601%"></span></span><span class="distribution-value"><strong>31.8%</strong><span>9,993</span></span></dd></div>
+        <div class="distribution-row"><dt>Stopped</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:17.3118%"></span></span><span class="distribution-value"><strong>17.3%</strong><span>5,447</span></span></dd></div>
+        <div class="distribution-row"><dt>Accelerating</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:10.7774%"></span></span><span class="distribution-value"><strong>10.8%</strong><span>3,391</span></span></dd></div>
+        <div class="distribution-row"><dt>Slowing down</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:10.2625%"></span></span><span class="distribution-value"><strong>10.3%</strong><span>3,229</span></span></dd></div>
+        <div class="distribution-row"><dt>Unknown motion</dt><dd><span class="distribution-track is-unknown" aria-hidden="true"><span style="--share:23.0072%"></span></span><span class="distribution-value"><strong>23.0%</strong><span>7,239</span></span></dd></div>
+      </dl>
+      <details class="distribution-details"><summary>Additional motion categories</summary>
+      <dl class="distribution-plot">
+        <div class="distribution-row"><dt>Other motion</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:2.8445%"></span></span><span class="distribution-value"><strong>2.8%</strong><span>895</span></span></dd></div>
+        <div class="distribution-row"><dt>Stopping</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:2.2534%"></span></span><span class="distribution-value"><strong>2.3%</strong><span>709</span></span></dd></div>
+        <div class="distribution-row"><dt>Starting</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:1.6686%"></span></span><span class="distribution-value"><strong>1.7%</strong><span>525</span></span></dd></div>
+        <div class="distribution-row"><dt>Left turn</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.0604%"></span></span><span class="distribution-value"><strong>0.1%</strong><span>19</span></span></dd></div>
+        <div class="distribution-row"><dt>Right turn</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.0509%"></span></span><span class="distribution-value"><strong>0.1%</strong><span>16</span></span></dd></div>
+        <div class="distribution-row"><dt>U-turn</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.0032%"></span></span><span class="distribution-value"><strong>&lt;0.1%</strong><span>1</span></span></dd></div>
+      </dl>
+      </details>
+      <a class="distribution-download" href="assets/distribution/indus-ad-gnss-motion.png">View chart image<span class="distribution-visually-hidden"> for vehicle motion</span></a>
+    </article>
+    </div>
+    <p class="distribution-footnote">Road types are based on map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>.</p>
+  </section>
 </section>
 <section id="data-schema" class="section wrap"><div class="section-heading"><h2>What data is included?</h2><p>A field guide to the main INDUS-AD release, from camera frames to vehicle motion and scene annotations.</p></div>
 <div class="comparison-scroll" role="region" aria-label="INDUS-AD data fields" tabindex="0"><table><caption>Published data and example schema fields</caption><thead><tr><th scope="col">Data</th><th scope="col">What you get</th><th scope="col">Example fields</th></tr></thead><tbody>
