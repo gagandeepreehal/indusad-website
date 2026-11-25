@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=obstacle-charts-v1"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=distributions-page-v1"></head>
 <body><a class="skip" href="#main">Skip to content</a><header class="wrap"><a class="brand" href="#" aria-label="INDUS-AD home"><span class="brand-symbol" aria-hidden="true"></span><span class="brand-text"><span class="brand-wordmark" aria-hidden="true"></span></span></a><nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#datasets">Datasets</a><a href="#devkit">Devkit</a><a href="#resources">Resources</a><a href="#contact">Contact</a></nav></header>
 
 <main id="main">
@@ -14,268 +14,20 @@
 <section id="coverage" class="section wrap"><div class="section-heading"><h2>More than a view<br>through the windshield.</h2><p>A front camera tells only part of the story. A rider approaches from the side, a vehicle closes from behind, and a turn changes which view matters next.</p></div><div class="two-column"><div><h3>Six surround views, plus a tilted front view</h3><p>Front, front-left, front-right, rear, rear-left and rear-right video are present in all 1,469 main-release recordings. The additional tilted-front stream is available in 1,113 recordings; its absence in the remaining 356 is represented as missing data.</p><p>Multiple cameras provide complementary views of the same driving interval, supporting experiments that use the scene around the vehicle.</p></div><div class="table-scroll"><table><caption>Main-release camera availability</caption><thead><tr><th scope="col">Camera</th><th scope="col">Recordings</th></tr></thead><tbody><tr><td>Front</td><td>1,469</td></tr><tr><td>Front left / front right</td><td>1,469 each</td></tr><tr><td>Rear / rear left / rear right</td><td>1,469 each</td></tr><tr><td>Tilted front</td><td>1,113</td></tr></tbody></table><p class="note">Source: main <a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">dataset card</a>. Inspect individual recording metadata before selecting streams.</p></div></div>
 <div class="media-pair"><figure><a href="assets/coverage-map.png"><img src="assets/coverage-map.png" alt="Aggregated route-density map across Bengaluru and surrounding road corridors" loading="lazy" width="1600" height="1080"></a><figcaption>Bengaluru route density. Brighter areas show a greater concentration of recorded routes.</figcaption></figure><div><h3>One regional setting, explored in depth</h3><p>The recordings cover Bengaluru and its surrounding road network. They offer a setting for studying mixed traffic, road-user interactions, changing scene context and the practical difficulties of working with real sensor recordings.</p><p>Repeated routes and neighboring clips can share context. Evaluation partitions should account for recording identity, temporal adjacency and scene or trajectory overlap.</p></div></div>
 <figure class="wide-media"><a href="assets/driving-conditions.png"><img src="assets/driving-conditions.png" alt="Four recorded road examples showing clear, overcast, wet-road and low-light scenes" loading="lazy" width="1600" height="900"></a><figcaption>Examples of clear, overcast, wet-road and low-light conditions from the publisher’s research collateral.</figcaption></figure></section>
-<section id="data-distributions" class="section wrap distribution-section" aria-labelledby="distribution-heading">
+<section id="data-distributions" class="section wrap distribution-section distribution-directory" aria-labelledby="distribution-heading">
   <div class="section-heading">
-    <h2 id="distribution-heading">Data distributions.</h2>
-    <p>INDUS-AD has many short recordings and a much smaller set of long drives. The longer recordings account for most of the timeline.</p>
+    <h2 id="distribution-heading">Data distributions</h2>
+    <p>Explore how the recordings are distributed by length, traffic, road type, and vehicle motion.</p>
   </div>
-
-  <section class="distribution-duration" aria-labelledby="distribution-length">
-    <div class="distribution-duration-header">
-      <div><h3 id="distribution-length">Most driving time comes from 87 recordings.</h3><p>Recordings of ten minutes or more make up 5.9% of the collection by count and provide 61.9 hours of footage.</p></div>
-      <a class="distribution-download" href="assets/distribution/indus-ad-recording-duration.png">View chart image<span class="distribution-visually-hidden"> for recording length</span></a>
-    </div>
-<div class="distribution-grid distribution-length-grid">
-    <article class="distribution-card"><h4>Share of recordings</h4><p class="distribution-card-note">1,469 recordings</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Under 1 min</dt><dd><span class="distribution-track is-count is-highlighted" aria-hidden="true"><span style="--share:74.2001%"></span></span><span class="distribution-value"><strong>74.2%</strong><span>1,090</span></span></dd></div>
-        <div class="distribution-row"><dt>1 to &lt;2 min</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:10.8918%"></span></span><span class="distribution-value"><strong>10.9%</strong><span>160</span></span></dd></div>
-        <div class="distribution-row"><dt>2 to &lt;5 min</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:5.4459%"></span></span><span class="distribution-value"><strong>5.4%</strong><span>80</span></span></dd></div>
-        <div class="distribution-row"><dt>5 to &lt;10 min</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:3.5398%"></span></span><span class="distribution-value"><strong>3.5%</strong><span>52</span></span></dd></div>
-        <div class="distribution-row"><dt>10 min or more</dt><dd><span class="distribution-track is-count" aria-hidden="true"><span style="--share:5.9224%"></span></span><span class="distribution-value"><strong>5.9%</strong><span>87</span></span></dd></div>
-      </dl>
-    </article>
-    <article class="distribution-card"><h4>Share of driving time</h4><p class="distribution-card-note">85.31 hours</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Under 1 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:11.0241%"></span></span><span class="distribution-value"><strong>11.0%</strong><span>9.4 h</span></span></dd></div>
-        <div class="distribution-row"><dt>1 to &lt;2 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:4.4006%"></span></span><span class="distribution-value"><strong>4.4%</strong><span>3.8 h</span></span></dd></div>
-        <div class="distribution-row"><dt>2 to &lt;5 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:4.8939%"></span></span><span class="distribution-value"><strong>4.9%</strong><span>4.2 h</span></span></dd></div>
-        <div class="distribution-row"><dt>5 to &lt;10 min</dt><dd><span class="distribution-track is-time" aria-hidden="true"><span style="--share:7.1203%"></span></span><span class="distribution-value"><strong>7.1%</strong><span>6.1 h</span></span></dd></div>
-        <div class="distribution-row"><dt>10 min or more</dt><dd><span class="distribution-track is-time is-highlighted" aria-hidden="true"><span style="--share:72.5611%"></span></span><span class="distribution-value"><strong>72.6%</strong><span>61.9 h</span></span></dd></div>
-      </dl>
-    </article>
-    </div>
-    <p class="distribution-footnote">Timeline uses the longest camera stream in each recording, so time recorded by simultaneous views is counted once.</p>
-  </section>
-
-  <section class="distribution-group" aria-labelledby="distribution-camera">
-    <h3 id="distribution-camera">What the cameras saw</h3>
-    <p class="distribution-sample"><strong>34,306 sampled frames.</strong> The standard front camera supplies 91.6% of the sample. Both charts use model-generated labels.</p>
-    <div class="distribution-grid">
-    <article class="distribution-card" aria-labelledby="indus-ad-camera-conditions">
-      <h4 id="indus-ad-camera-conditions">Weather and visibility</h4>
-      <p class="distribution-card-note">Clear and overcast together account for 81.1% of the labels. Low light / night is an image label.</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Clear</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:48.9506%"></span></span><span class="distribution-value"><strong>49.0%</strong><span>16,793</span></span></dd></div>
-        <div class="distribution-row"><dt>Overcast</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:32.1431%"></span></span><span class="distribution-value"><strong>32.1%</strong><span>11,027</span></span></dd></div>
-        <div class="distribution-row"><dt>Uncertain / mixed</dt><dd><span class="distribution-track is-unknown" aria-hidden="true"><span style="--share:8.8906%"></span></span><span class="distribution-value"><strong>8.9%</strong><span>3,050</span></span></dd></div>
-        <div class="distribution-row"><dt>Low light / night</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:5.5413%"></span></span><span class="distribution-value"><strong>5.5%</strong><span>1,901</span></span></dd></div>
-        <div class="distribution-row"><dt>Rain / wet road</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:2.8071%"></span></span><span class="distribution-value"><strong>2.8%</strong><span>963</span></span></dd></div>
-        <div class="distribution-row"><dt>Fog / haze</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:1.6673%"></span></span><span class="distribution-value"><strong>1.7%</strong><span>572</span></span></dd></div>
-      </dl>
-      <a class="distribution-download" href="assets/distribution/indus-ad-camera-conditions.png">View chart image<span class="distribution-visually-hidden"> for weather and visibility</span></a>
-    </article>
-    <article class="distribution-card" aria-labelledby="indus-ad-traffic-density">
-      <h4 id="indus-ad-traffic-density">Traffic density</h4>
-      <p class="distribution-card-note">Traffic density estimates the share of sampled image pixels labelled as vehicles, people and riders, animals, or selected street obstacles such as barriers and bins. In 24,061 of 34,306 sampled camera frames (70.1%), visible obstacles cover at least 8% of the image.</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>&lt;0.5%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:2.5039%"></span></span><span class="distribution-value"><strong>2.5%</strong><span>859</span></span></dd></div>
-        <div class="distribution-row"><dt>0.5% to &lt;3%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:7.4768%"></span></span><span class="distribution-value"><strong>7.5%</strong><span>2,565</span></span></dd></div>
-        <div class="distribution-row"><dt>3% to &lt;8%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:19.8828%"></span></span><span class="distribution-value"><strong>19.9%</strong><span>6,821</span></span></dd></div>
-        <div class="distribution-row"><dt>8% or more</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:70.1364%"></span></span><span class="distribution-value"><strong>70.1%</strong><span>24,061</span></span></dd></div>
-      </dl>
-      <a class="distribution-download" href="assets/distribution/indus-ad-traffic-density.png">View chart image<span class="distribution-visually-hidden"> for traffic density</span></a>
-    </article>
-    </div>
-  </section>
-
-  <section id="obstacle-types-and-depth" class="distribution-group" aria-labelledby="obstacle-types-depth-heading">
-    <h3 id="obstacle-types-depth-heading">What fills the camera view?</h3>
-    <p class="distribution-sample">Both charts show shares of obstacle-labelled pixels in sampled frames.</p>
-    <p class="obstacle-series"><span><i aria-hidden="true"></i><strong>Multicam</strong> · 34,306 frames</span><span><i aria-hidden="true"></i><strong>Monocam</strong> · 10,608 front-camera frames</span></p>
-    <div class="distribution-grid obstacle-grid">
-      <article class="distribution-card" aria-labelledby="obstacle-by-type">
-        <h4 id="obstacle-by-type">By obstacle type</h4>
-        <p class="distribution-card-note">Cars account for the largest share in both samples. Road barriers are the second-largest category in Multicam.</p>
-        <dl class="distribution-plot">
-          <div class="distribution-row"><dt>Cars</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:41.35824%"></span></span><strong>41.4%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:31.73736%"></span></span><strong>31.7%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Road barriers</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:15.95121%"></span></span><strong>16.0%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:3.79525%"></span></span><strong>3.8%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Trucks</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:13.11931%"></span></span><strong>13.1%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:24.47893%"></span></span><strong>24.5%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Other vehicles</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:8.53051%"></span></span><strong>8.5%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:9.27227%"></span></span><strong>9.3%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Buses</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:8.47245%"></span></span><strong>8.5%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:7.12486%"></span></span><strong>7.1%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Motorcycles</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:5.72978%"></span></span><strong>5.7%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:8.87307%"></span></span><strong>8.9%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Motorcycle riders</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:3.42785%"></span></span><strong>3.4%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:4.22198%"></span></span><strong>4.2%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Pedestrians</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:2.20844%"></span></span><strong>2.2%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:5.81329%"></span></span><strong>5.8%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Bicycles</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.42766%"></span></span><strong>0.4%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:1.33196%"></span></span><strong>1.3%</strong></div>
-          </dd></div>
-          <div class="distribution-row"><dt>Bins</dt><dd>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.26615%"></span></span><strong>0.3%</strong></div>
-            <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:1.25368%"></span></span><strong>1.3%</strong></div>
-          </dd></div>
-        </dl>
-        <details class="distribution-details">
-          <summary>8 more obstacle types</summary>
-          <dl class="distribution-plot">
-            <div class="distribution-row"><dt>Cyclists</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.21154%"></span></span><strong>0.2%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.90882%"></span></span><strong>0.9%</strong></div>
-            </dd></div>
-            <div class="distribution-row"><dt>Other riders</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.08562%"></span></span><strong>&lt;0.1%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.08832%"></span></span><strong>&lt;0.1%</strong></div>
-            </dd></div>
-            <div class="distribution-row"><dt>Slow wheeled vehicles</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.12474%"></span></span><strong>0.1%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.46331%"></span></span><strong>0.5%</strong></div>
-            </dd></div>
-            <div class="distribution-row"><dt>Ground animals</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.02039%"></span></span><strong>&lt;0.1%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.60222%"></span></span><strong>0.6%</strong></div>
-            </dd></div>
-            <div class="distribution-row"><dt>Birds</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.00249%"></span></span><strong>&lt;0.1%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.02910%"></span></span><strong>&lt;0.1%</strong></div>
-            </dd></div>
-            <div class="distribution-row"><dt>Caravans</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.03092%"></span></span><strong>&lt;0.1%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.00005%"></span></span><strong>&lt;0.1%</strong></div>
-            </dd></div>
-            <div class="distribution-row"><dt>Trailers</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.01275%"></span></span><strong>&lt;0.1%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.00470%"></span></span><strong>&lt;0.1%</strong></div>
-            </dd></div>
-            <div class="distribution-row"><dt>Rail vehicles</dt><dd>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.01996%"></span></span><strong>&lt;0.1%</strong></div>
-              <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:0.00082%"></span></span><strong>&lt;0.1%</strong></div>
-            </dd></div>
-          </dl>
-        </details>
-      </article>
-      <article class="distribution-card" aria-labelledby="obstacle-by-distance">
-        <h4 id="obstacle-by-distance">By estimated distance</h4>
-        <p class="distribution-card-note">Obstacles under 10 m cover 6.95% of the <strong>full Multicam image</strong> and 0.78% of the <strong>full Monocam image</strong> on average.</p>
-        <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Under 10 m</dt><dd>
-          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:46.74202%"></span></span><strong>46.7%</strong></div>
-          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:31.69017%"></span></span><strong>31.7%</strong></div>
-        </dd></div>
-        <div class="distribution-row"><dt>10 to under 25 m</dt><dd>
-          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:39.11504%"></span></span><strong>39.1%</strong></div>
-          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:43.42928%"></span></span><strong>43.4%</strong></div>
-        </dd></div>
-        <div class="distribution-row"><dt>25 m or farther</dt><dd>
-          <div class="obstacle-bar"><span class="distribution-visually-hidden">Multicam</span><span class="distribution-track" aria-hidden="true"><span style="--share:14.14294%"></span></span><strong>14.1%</strong></div>
-          <div class="obstacle-bar"><span class="distribution-visually-hidden">Monocam</span><span class="distribution-track" aria-hidden="true"><span style="--share:24.88055%"></span></span><strong>24.9%</strong></div>
-        </dd></div>
-        </dl>
-      </article>
-    </div>
-    <p class="distribution-footnote">Distances come from model-estimated depth. The samples differ in camera views and framing.</p>
-    <div class="obstacle-downloads">
-      <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad/tree/main/data/annotations/scenario/depth-aware/v1">Multicam tables</a>
-      <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam/tree/main/data/annotations/scenario/depth-aware/v1">Monocam tables</a>
-      <a class="distribution-download" href="assets/distribution/obstacle-type-and-distance.png">View summary chart image</a>
-    </div>
-  </section>
-
-  <section class="distribution-group" aria-labelledby="distribution-gnss">
-    <h3 id="distribution-gnss">When, where, and how the vehicle moved</h3>
-    <p class="distribution-sample"><strong>31,464 nominal ten-second GNSS windows.</strong> Each chart uses these same windows. Shares describe the analysed recordings.</p>
-    <div class="distribution-grid distribution-grid-three">
-    <article class="distribution-card" aria-labelledby="indus-ad-time-of-day">
-      <h4 id="indus-ad-time-of-day">Time of day</h4>
-      <p class="distribution-card-note">Times are local to Bengaluru. All 318 night windows come from nine recordings across two dates.</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Morning</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:10.0432%"></span></span><span class="distribution-value"><strong>10.0%</strong><span>3,160</span></span></dd></div>
-        <div class="distribution-row"><dt>Afternoon</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:73.8082%"></span></span><span class="distribution-value"><strong>73.8%</strong><span>23,223</span></span></dd></div>
-        <div class="distribution-row"><dt>Evening</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:15.1379%"></span></span><span class="distribution-value"><strong>15.1%</strong><span>4,763</span></span></dd></div>
-        <div class="distribution-row"><dt>Night</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:1.0107%"></span></span><span class="distribution-value"><strong>1.0%</strong><span>318</span></span></dd></div>
-      </dl>
-      <a class="distribution-download" href="assets/distribution/indus-ad-time-of-day.png">View chart image<span class="distribution-visually-hidden"> for time of day</span></a>
-    </article>
-    <article class="distribution-card" aria-labelledby="indus-ad-road-context">
-      <h4 id="indus-ad-road-context">Road types</h4>
-      <p class="distribution-card-note">Main roads include major through roads and highways. No map match means we could not assign a road type.</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Main roads</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:59.3281%"></span></span><span class="distribution-value"><strong>59.3%</strong><span>18,667</span></span></dd></div>
-        <div class="distribution-row"><dt>Local streets</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:15.6528%"></span></span><span class="distribution-value"><strong>15.7%</strong><span>4,925</span></span></dd></div>
-        <div class="distribution-row"><dt>Connecting roads</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:8.8673%"></span></span><span class="distribution-value"><strong>8.9%</strong><span>2,790</span></span></dd></div>
-        <div class="distribution-row"><dt>Several road types</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.7278%"></span></span><span class="distribution-value"><strong>0.7%</strong><span>229</span></span></dd></div>
-        <div class="distribution-row"><dt>No map match</dt><dd><span class="distribution-track is-unknown" aria-hidden="true"><span style="--share:15.4240%"></span></span><span class="distribution-value"><strong>15.4%</strong><span>4,853</span></span></dd></div>
-      </dl>
-      <a class="distribution-download" href="assets/distribution/indus-ad-road-context.png">View chart image<span class="distribution-visually-hidden"> for road types</span></a>
-    </article>
-    <article class="distribution-card" aria-labelledby="indus-ad-gnss-motion">
-      <h4 id="indus-ad-gnss-motion">Vehicle motion</h4>
-      <p class="distribution-card-note">Each label describes a ten-second window. A long stop can cover several stopped windows.</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Cruising</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:31.7601%"></span></span><span class="distribution-value"><strong>31.8%</strong><span>9,993</span></span></dd></div>
-        <div class="distribution-row"><dt>Stopped windows</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:17.3118%"></span></span><span class="distribution-value"><strong>17.3%</strong><span>5,447</span></span></dd></div>
-        <div class="distribution-row"><dt>Accelerating</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:10.7774%"></span></span><span class="distribution-value"><strong>10.8%</strong><span>3,391</span></span></dd></div>
-        <div class="distribution-row"><dt>Slowing down</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:10.2625%"></span></span><span class="distribution-value"><strong>10.3%</strong><span>3,229</span></span></dd></div>
-        <div class="distribution-row"><dt>Unknown motion</dt><dd><span class="distribution-track is-unknown" aria-hidden="true"><span style="--share:23.0072%"></span></span><span class="distribution-value"><strong>23.0%</strong><span>7,239</span></span></dd></div>
-      </dl>
-      <details class="distribution-details"><summary>Additional motion categories</summary>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>Other motion</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:2.8445%"></span></span><span class="distribution-value"><strong>2.8%</strong><span>895</span></span></dd></div>
-        <div class="distribution-row"><dt>Stopping windows</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:2.2534%"></span></span><span class="distribution-value"><strong>2.3%</strong><span>709</span></span></dd></div>
-        <div class="distribution-row"><dt>Starting</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:1.6686%"></span></span><span class="distribution-value"><strong>1.7%</strong><span>525</span></span></dd></div>
-        <div class="distribution-row"><dt>Left turn</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.0604%"></span></span><span class="distribution-value"><strong>0.1%</strong><span>19</span></span></dd></div>
-        <div class="distribution-row"><dt>Right turn</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.0509%"></span></span><span class="distribution-value"><strong>0.1%</strong><span>16</span></span></dd></div>
-        <div class="distribution-row"><dt>U-turn</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:0.0032%"></span></span><span class="distribution-value"><strong>&lt;0.1%</strong><span>1</span></span></dd></div>
-      </dl>
-      </details>
-      <a class="distribution-download" href="assets/distribution/indus-ad-gnss-motion.png">View chart image<span class="distribution-visually-hidden"> for vehicle motion</span></a>
-    </article>
-    </div>
-    <p class="distribution-footnote">Road types are based on map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>.</p>
-  </section>
-
-  <article id="multicam-stop-candidates" class="distribution-card" aria-labelledby="multicam-stops-heading">
-    <h4 id="multicam-stops-heading">Braking and sudden stops</h4>
-    <p class="distribution-card-note">INDUS-AD has <strong>1,670 braking-to-stop candidates across 805 recordings</strong>, including 101 sudden stops. The screen used 69.03 hours of speed intervals from 1,441 of 1,469 recordings.</p>
-    <p class="distribution-card-note">The 5,447 stopped windows describe time spent near stationary. Each braking-to-stop event counts one observed transition to near standstill. An event requires a speed of at least 7.2 km/h in the previous five seconds and at least one second near standstill. The approach speed has no upper limit.</p>
-    <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad#traffic-density-and-stop-candidates">Read the method and coverage</a>
-  </article>
-
-  <section id="monocam-distributions" class="distribution-group" aria-labelledby="distribution-monocam">
-    <h3 id="distribution-monocam">INDUS-AD Monocam</h3>
-    <p class="distribution-sample">Traffic density covers <strong>10,608 sampled front-camera frames</strong> across all 96 Monocam recordings.</p>
-    <div class="distribution-grid">
-    <article class="distribution-card" aria-labelledby="monocam-traffic-density">
-      <h4 id="monocam-traffic-density">Traffic density</h4>
-      <p class="distribution-card-note">In 8,068 of 10,608 sampled front-camera frames (76.1%), visible obstacles cover less than 3% of the image. The same obstacle classes and thresholds apply.</p>
-      <dl class="distribution-plot">
-        <div class="distribution-row"><dt>&lt;0.5%</dt><dd><span class="distribution-track is-highlighted" aria-hidden="true"><span style="--share:42.1192%"></span></span><span class="distribution-value"><strong>42.1%</strong><span>4,468</span></span></dd></div>
-        <div class="distribution-row"><dt>0.5% to &lt;3%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:33.9367%"></span></span><span class="distribution-value"><strong>33.9%</strong><span>3,600</span></span></dd></div>
-        <div class="distribution-row"><dt>3% to &lt;8%</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:15.7428%"></span></span><span class="distribution-value"><strong>15.7%</strong><span>1,670</span></span></dd></div>
-        <div class="distribution-row"><dt>8% or more</dt><dd><span class="distribution-track" aria-hidden="true"><span style="--share:8.2014%"></span></span><span class="distribution-value"><strong>8.2%</strong><span>870</span></span></dd></div>
-      </dl>
-      <a class="distribution-download" href="assets/distribution/indus-ad-monocam-traffic-density.png">View chart image<span class="distribution-visually-hidden"> for Monocam traffic density</span></a>
-    </article>
-    <article class="distribution-card" aria-labelledby="monocam-stops">
-      <h4 id="monocam-stops">Braking and sudden stops</h4>
-      <p class="distribution-card-note">Monocam has <strong>12 braking-to-stop candidates across 8 recordings</strong>, with zero sudden stops. The screen used 1.92 hours of speed intervals from 84 of 96 recordings. The other 12 had no GNSS rows marked valid.</p>
-      <a class="distribution-download" href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam#traffic-density-and-stop-candidates">Read the method and coverage</a>
-    </article>
-    </div>
-  </section>
+  <div class="distribution-grid distribution-grid-three">
+    <a id="distribution-length" class="distribution-card" href="distributions.html#distribution-length"><h3>Recording length</h3><p>Clip lengths and where most driving time comes from.</p></a>
+    <a id="distribution-camera" class="distribution-card" href="distributions.html#distribution-camera"><h3>Camera conditions and traffic</h3><p>Weather, visibility, and traffic density in sampled frames.</p></a>
+    <a id="obstacle-types-and-depth" class="distribution-card" href="distributions.html#obstacle-types-and-depth"><h3>Obstacle types and distance</h3><p>Compare 18 obstacle types and three distance bands.</p></a>
+    <a id="distribution-gnss" class="distribution-card" href="distributions.html#distribution-gnss"><h3>Roads, time and motion</h3><p>Road types, time of day, and how the vehicle moved.</p></a>
+    <a id="multicam-stop-candidates" class="distribution-card" href="distributions.html#multicam-stop-candidates"><h3>Braking and sudden stops</h3><p>Counts of observed braking-to-stop events.</p></a>
+    <a id="monocam-distributions" class="distribution-card" href="distributions.html#monocam-distributions"><h3>Monocam</h3><p>Front-camera traffic density and braking events.</p></a>
+  </div>
+  <a class="distribution-download" href="distributions.html">View all distributions</a>
 </section>
 <section id="data-schema" class="section wrap"><div class="section-heading"><h2>What data is included?</h2><p>A field guide to the main INDUS-AD release, from camera frames to vehicle motion and scene annotations.</p></div>
 <div class="comparison-scroll" role="region" aria-label="INDUS-AD data fields" tabindex="0"><table><caption>Published data and example schema fields</caption><thead><tr><th scope="col">Data</th><th scope="col">What you get</th><th scope="col">Example fields</th></tr></thead><tbody>
@@ -292,7 +44,7 @@
 <section id="research" class="section wrap"><div class="section-heading"><h2>Different questions.<br>A shared starting point.</h2><p>Build task-specific experiments across video learning, motion, perception and robotics data infrastructure.</p></div><div class="research-topics"><article><h3>Video and world models</h3><p>Explore temporal representations, future visual prediction and self-supervised learning from driving sequences. Multiple views support questions about relationships across cameras, while real traffic supplies changing interactions and scene context. Choose clip duration and sampling frequency to match the hypothesis.</p></article><article><h3>Pose-derived trajectory research</h3><p>Use video and valid pose histories to investigate future-motion targets or trajectory-oriented imitation learning. Document timing, coordinate frames, gap handling and target construction.</p></article><article><h3>Perception and weak supervision</h3><p>Study multi-camera context, sparse semantic/depth outputs and ways to select useful frames from longer recordings. Evaluate pseudo-label quality for your chosen task.</p></article><article><h3>Localization and data tooling</h3><p>Investigate GNSS/camera association, missing streams, timing gaps, quality filters and reproducible data selection. Preserve channel identity and validity flags.</p></article></div><figure class="wide-media"><a href="assets/research-policy.png"><img src="assets/research-policy.png" alt="Published dataset layers feed a researcher-defined policy to create a versioned task dataset" loading="lazy" width="1600" height="900"></a><figcaption>Define and record the policy that turns published observations into your experiment’s data.</figcaption></figure></section>
 <section id="datasets" class="datasets section wrap"><h2>Choose your starting point.</h2><p class="section-deck">Explore the main multi-camera release and its single-camera, LiDAR and sample companions.</p>
 <article class="dataset-entry"><div><h3>INDUS-AD</h3><p class="dataset-kind">Multi-camera video, GNSS and derived perception layers</p></div><div><p>The main camera/GNSS release: 1,469 recordings, 9,927 MP4s, 85.31 timeline hours and approximately 4.006 TB. Choose it for surround-view experiments and access to the wider set of normalized tables, sampled labels and dense references.</p><p>Six surround cameras are available across the release, with an additional tilted-front stream in a subset. It contains no LiDAR payloads. Access requests are reviewed manually.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad">Explore INDUS-AD</a></div></article>
-<article class="dataset-entry"><div><h3>INDUS-AD Monocam</h3><p class="dataset-kind">A separate single-camera release</p></div><div><p>Monocam contains 96 front-camera MP4s and 105,692 decoded frames, with normalized sensor tables, 10,608 sampled frame-label rows and semantic/depth archives. The decoded release is approximately 36.02 GB, including 22.85 GB of video.</p><p>A smaller entry point for monocular perception and video workflows. Download selected MP4s for local playback if your browser does not support HEVC.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam">Explore Monocam</a> · <a href="#monocam-distributions">See Monocam analysis</a></div></article>
+<article class="dataset-entry"><div><h3>INDUS-AD Monocam</h3><p class="dataset-kind">A separate single-camera release</p></div><div><p>Monocam contains 96 front-camera MP4s and 105,692 decoded frames, with normalized sensor tables, 10,608 sampled frame-label rows and semantic/depth archives. The decoded release is approximately 36.02 GB, including 22.85 GB of video.</p><p>A smaller entry point for monocular perception and video workflows. Download selected MP4s for local playback if your browser does not support HEVC.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-monocam">Explore Monocam</a> · <a href="distributions.html#monocam-distributions">See Monocam analysis</a></div></article>
 <article class="dataset-entry"><div><h3>INDUS-AD 3D</h3><p class="dataset-kind">The decoded LiDAR companion</p></div><div><p>The 3D release provides 76,052 indexed LiDAR scans for eight recordings shared with the main dataset, distributed across 31 payload TAR shards with recording, scan and calibration indexes. Join by exact <code>recording_id</code>, then assess timing for your task.</p><p>Use the main release alongside this LiDAR companion for camera and GNSS data. The current devkit supports the camera/GNSS workflow; LiDAR access uses the companion’s scan indexes and archives.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-3d">Explore the LiDAR companion</a></div></article>
 <article class="dataset-entry"><div><h3>INDUS-AD Sample</h3><p class="dataset-kind">A smaller selection of the main release</p></div><div><p>Explore eight complete recordings and 55 camera videos—16 minutes 43.7 seconds of driving—with matching GNSS tables and sampled semantic/depth outputs. The complete selection is about 9.53 GB.</p><a href="https://huggingface.co/datasets/gagandeepreehal/indus-ad-sample">Explore the sample</a></div></article>
 <p class="note"><a href="https://huggingface.co/collections/gagandeepreehal/indus-ad-the-largest-indian-autonomous-driving-dataset-6a8f637b09378311848e9835">View the publisher’s Hugging Face collection</a>. Release-specific counts and access details above were checked against current cards and metadata on 21 November 2026.</p></section>

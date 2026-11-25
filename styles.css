@@ -120,3 +120,16 @@
 .obstacle-bar strong { font-size: .86rem; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .obstacle-bar .distribution-track > span { background: #087d7a; }
 .obstacle-bar + .obstacle-bar .distribution-track > span { background: #4056a1; }
+
+.distribution-directory .section-heading { margin-bottom: 26px; }
+.distribution-directory .distribution-grid > a { display: block; text-decoration: none; }
+.distribution-directory .distribution-grid > a:hover { border-color: var(--blue); }
+.distribution-directory .distribution-grid > a:hover h3 { text-decoration: underline; text-underline-offset: .18em; }
+.distribution-directory .distribution-grid > a > p { margin: 8px 0 0; color: var(--muted); font-size: .92rem; }
+.distribution-directory .distribution-grid-three .distribution-card:last-child { grid-column: auto; }
+.distribution-page { padding-block: clamp(30px, 6vw, 72px); }
+.distribution-page .distribution-page-intro h1 { margin: 10px 0; font-size: clamp(2.4rem, 6vw, 4.4rem); }
+.distribution-page .distribution-page-intro p { color: var(--muted); }
+.distribution-page .distribution-page-intro .distribution-download { min-height: 36px; }
+.distribution-page .contents { margin-bottom: 28px; padding-block: 20px; }
+.distribution-page #multicam-stop-candidates { margin-top: 16px; }
