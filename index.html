@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=distributions-spacing-v1"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="INDUS-AD brings Indian roads into autonomous-driving research with multi-camera recordings, motion information and sampled scene signals from Bengaluru."><title>INDUS-AD — Indian roads. Real-world complexity.</title><link rel="stylesheet" href="styles.css?v=distributions-cards-v1"></head>
 <body><a class="skip" href="#main">Skip to content</a><header class="wrap"><a class="brand" href="#" aria-label="INDUS-AD home"><span class="brand-symbol" aria-hidden="true"></span><span class="brand-text"><span class="brand-wordmark" aria-hidden="true"></span></span></a><nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#datasets">Datasets</a><a href="#devkit">Devkit</a><a href="#resources">Resources</a><a href="#contact">Contact</a></nav></header>
 
 <main id="main">
@@ -16,18 +16,44 @@
 <figure class="wide-media"><a href="assets/driving-conditions.png"><img src="assets/driving-conditions.png" alt="Four recorded road examples showing clear, overcast, wet-road and low-light scenes" loading="lazy" width="1600" height="900"></a><figcaption>Examples of clear, overcast, wet-road and low-light conditions from the publisher’s research collateral.</figcaption></figure></section>
 <section id="data-distributions" class="section wrap distribution-section distribution-directory" aria-labelledby="distribution-heading">
   <div class="section-heading">
-    <h2 id="distribution-heading">Data distributions</h2>
-    <p>Explore how the recordings are distributed by length, traffic, road type, and vehicle motion.</p>
+    <div class="distribution-directory-intro">
+      <h2 id="distribution-heading">Data distributions</h2>
+      <p>Explore the sampled camera annotations and vehicle-motion data from Multicam and Monocam.</p>
+    </div>
+    <a class="button" href="distributions.html">Explore all charts <span aria-hidden="true">→</span></a>
   </div>
   <div class="distribution-grid distribution-grid-three">
-    <a id="distribution-length" class="distribution-card" href="distributions.html#distribution-length"><h3>Recording length</h3><p>Clip lengths and where most driving time comes from.</p></a>
-    <a id="distribution-camera" class="distribution-card" href="distributions.html#distribution-camera"><h3>Camera conditions and traffic</h3><p>Weather, visibility, and traffic density in sampled frames.</p></a>
-    <a id="obstacle-types-and-depth" class="distribution-card" href="distributions.html#obstacle-types-and-depth"><h3>Obstacle types and distance</h3><p>Compare 18 obstacle types and three distance bands.</p></a>
-    <a id="distribution-gnss" class="distribution-card" href="distributions.html#distribution-gnss"><h3>Roads, time and motion</h3><p>Road types, time of day, and how the vehicle moved.</p></a>
-    <a id="multicam-stop-candidates" class="distribution-card" href="distributions.html#multicam-stop-candidates"><h3>Braking and sudden stops</h3><p>Counts of observed braking-to-stop events.</p></a>
-    <a id="monocam-distributions" class="distribution-card" href="distributions.html#monocam-distributions"><h3>Monocam</h3><p>Front-camera traffic density and braking events.</p></a>
+    <a id="distribution-length" class="distribution-card" href="distributions.html#distribution-length">
+      <h3>Recording length</h3>
+      <p class="distribution-card-fact"><strong>61.9 h</strong><span>of driving time from 87 recordings of 10 minutes or more</span></p>
+      <span class="distribution-card-arrow" aria-hidden="true">→</span>
+    </a>
+    <a id="distribution-camera" class="distribution-card" href="distributions.html#distribution-camera">
+      <h3>Camera conditions and traffic</h3>
+      <p class="distribution-card-fact"><strong>70.1%</strong><span>of sampled Multicam frames had obstacles covering at least 8% of the image</span></p>
+      <span class="distribution-card-arrow" aria-hidden="true">→</span>
+    </a>
+    <a id="obstacle-types-and-depth" class="distribution-card" href="distributions.html#obstacle-types-and-depth">
+      <h3>Obstacle types and distance</h3>
+      <p class="distribution-card-fact"><strong>18 types</strong><span>of obstacles, from motorcycles and riders to barriers and bins</span></p>
+      <span class="distribution-card-arrow" aria-hidden="true">→</span>
+    </a>
+    <a id="distribution-gnss" class="distribution-card" href="distributions.html#distribution-gnss">
+      <h3>Roads, time and motion</h3>
+      <p class="distribution-card-fact"><strong>31,464</strong><span>GNSS windows summarised by road type, time of day, and motion</span></p>
+      <span class="distribution-card-arrow" aria-hidden="true">→</span>
+    </a>
+    <a id="multicam-stop-candidates" class="distribution-card" href="distributions.html#multicam-stop-candidates">
+      <h3>Braking and sudden stops</h3>
+      <p class="distribution-card-fact"><strong>101</strong><span>sudden-stop candidates in the Multicam recordings</span></p>
+      <span class="distribution-card-arrow" aria-hidden="true">→</span>
+    </a>
+    <a id="monocam-distributions" class="distribution-card" href="distributions.html#monocam-distributions">
+      <h3>Monocam</h3>
+      <p class="distribution-card-fact"><strong>10,608</strong><span>front-camera frames sampled across 96 recordings</span></p>
+      <span class="distribution-card-arrow" aria-hidden="true">→</span>
+    </a>
   </div>
-  <a class="distribution-download" href="distributions.html">View all distributions</a>
 </section>
 <section id="data-schema" class="section wrap"><div class="section-heading"><h2>What data is included?</h2><p>A field guide to the main INDUS-AD release, from camera frames to vehicle motion and scene annotations.</p></div>
 <div class="comparison-scroll" role="region" aria-label="INDUS-AD data fields" tabindex="0"><table><caption>Published data and example schema fields</caption><thead><tr><th scope="col">Data</th><th scope="col">What you get</th><th scope="col">Example fields</th></tr></thead><tbody>

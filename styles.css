@@ -139,7 +139,6 @@
 .distribution-directory .distribution-grid > a > h3 { font-size: clamp(1.05rem, 1.65vw, 1.25rem); line-height: 1.3; }
 .distribution-directory .distribution-grid > a > p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; line-height: 1.45; }
 .distribution-directory .distribution-grid-three .distribution-card:last-child { grid-column: auto; }
-.distribution-directory > .distribution-download { margin-top: 10px; }
 .distribution-page { padding-block: clamp(30px, 6vw, 72px); }
 .distribution-page .distribution-page-intro h1 { margin: 10px 0; font-size: clamp(2.4rem, 6vw, 4.4rem); }
 .distribution-page .distribution-page-intro p { color: var(--muted); }
@@ -155,3 +154,66 @@
 .distribution-page .distribution-grid > .distribution-card { display: flex; flex-direction: column; }
 .distribution-page .distribution-grid > .distribution-card > .distribution-download { margin-top: auto; padding-top: 4px; }
 .distribution-page #multicam-stop-candidates { margin-top: var(--distribution-gap); }
+
+.distribution-directory .section-heading { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 14px 24px; }
+.distribution-directory .section-heading > .button { display: inline-flex; align-items: center; min-height: 44px; gap: 12px; }
+.distribution-directory-intro p { margin: 8px 0 0; color: var(--muted); font-size: 1.08rem; max-width: 54ch; }
+.distribution-directory .distribution-grid > a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  background: #f7faff;
+  border-color: #d8e5f7;
+  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.distribution-directory .distribution-grid > a:hover,
+.distribution-directory .distribution-grid > a:focus-visible {
+  background: #fff;
+  border-color: #647fb9;
+  box-shadow: 0 6px 20px #244e8512;
+}
+.distribution-directory .distribution-grid > a > h3 { padding-right: 2.25rem; }
+.distribution-directory .distribution-grid > a > .distribution-card-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font-size: .91rem;
+  line-height: 1.4;
+}
+.distribution-card-fact strong { color: #1745a0; font-size: clamp(1.6rem, 3vw, 2.1rem); line-height: 1.12; letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+.distribution-card-arrow {
+  position: absolute;
+  top: var(--distribution-padding);
+  right: var(--distribution-padding);
+  display: grid;
+  width: 1.8rem;
+  height: 1.8rem;
+  place-items: center;
+  border: 1px solid #cddcf3;
+  border-radius: 50%;
+  background: #fff;
+  color: #1745a0;
+}
+.distribution-directory .distribution-grid > a:hover .distribution-card-arrow,
+.distribution-directory .distribution-grid > a:focus-visible .distribution-card-arrow { background: #1745a0; color: #fff; }
+.distribution-directory a:focus-visible, .distribution-page .contents a:focus-visible { outline: 2px solid #1745a0; outline-offset: 3px; }
+.distribution-page .contents { gap: 8px; }
+.distribution-page .contents a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 6px 12px;
+  border: 1px solid #d6e2f5;
+  border-radius: 8px;
+  background: #f7faff;
+  color: #1745a0;
+  font-size: .88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.distribution-page .contents a:hover, .distribution-page .contents a:focus-visible { background: #eaf1ff; }
+@media (prefers-reduced-motion: reduce) {
+  .distribution-directory .distribution-grid > a { transition: none; }
+}
