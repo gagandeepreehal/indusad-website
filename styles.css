@@ -121,15 +121,37 @@
 .obstacle-bar .distribution-track > span { background: #087d7a; }
 .obstacle-bar + .obstacle-bar .distribution-track > span { background: #4056a1; }
 
-.distribution-directory .section-heading { margin-bottom: 26px; }
-.distribution-directory .distribution-grid > a { display: block; text-decoration: none; }
+.distribution-directory, .distribution-page {
+  --distribution-gap: clamp(12px, 1.4vw, 16px);
+  --distribution-padding: clamp(16px, 2.1vw, 24px);
+}
+.distribution-directory { padding-block: clamp(32px, 5vw, 60px); }
+.distribution-directory .section-heading { margin-bottom: clamp(16px, 2.4vw, 26px); }
+.distribution-directory .distribution-grid {
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+  gap: var(--distribution-gap);
+  margin-top: 0;
+}
+.distribution-directory .distribution-grid > a { display: block; padding: var(--distribution-padding); text-decoration: none; }
 .distribution-directory .distribution-grid > a:hover { border-color: var(--blue); }
 .distribution-directory .distribution-grid > a:hover h3 { text-decoration: underline; text-underline-offset: .18em; }
-.distribution-directory .distribution-grid > a > p { margin: 8px 0 0; color: var(--muted); font-size: .92rem; }
+.distribution-directory .distribution-grid > a > h3 { font-size: clamp(1.05rem, 1.65vw, 1.25rem); line-height: 1.3; }
+.distribution-directory .distribution-grid > a > p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; line-height: 1.45; }
 .distribution-directory .distribution-grid-three .distribution-card:last-child { grid-column: auto; }
+.distribution-directory > .distribution-download { margin-top: 10px; }
 .distribution-page { padding-block: clamp(30px, 6vw, 72px); }
 .distribution-page .distribution-page-intro h1 { margin: 10px 0; font-size: clamp(2.4rem, 6vw, 4.4rem); }
 .distribution-page .distribution-page-intro p { color: var(--muted); }
 .distribution-page .distribution-page-intro .distribution-download { min-height: 36px; }
-.distribution-page .contents { margin-bottom: 28px; padding-block: 20px; }
-.distribution-page #multicam-stop-candidates { margin-top: 16px; }
+.distribution-page .contents { margin-bottom: clamp(18px, 2.5vw, 28px); padding-block: 16px; }
+.distribution-page .distribution-duration { padding: clamp(12px, 2.5vw, 28px); }
+.distribution-page .distribution-group { margin-top: clamp(26px, 4vw, 48px); }
+.distribution-page .distribution-grid { gap: var(--distribution-gap); }
+.distribution-page .distribution-card { padding: var(--distribution-padding); }
+.distribution-page .distribution-length-grid,
+.distribution-page [aria-labelledby="distribution-camera"] .distribution-grid,
+.distribution-page #monocam-distributions .distribution-grid { align-items: stretch; }
+.distribution-page .distribution-grid > .distribution-card { display: flex; flex-direction: column; }
+.distribution-page .distribution-grid > .distribution-card > .distribution-download { margin-top: auto; padding-top: 4px; }
+.distribution-page #multicam-stop-candidates { margin-top: var(--distribution-gap); }
